@@ -13,8 +13,8 @@ import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ListItems, { Props } from './ListItems';
-import Copyright from '../components/Copyright';
-import AccountMenu from '../components/AccountMenu';
+import Copyright from './Copyright';
+import AccountMenu from './AccountMenu';
 
 
 const drawerWidth = 240;
