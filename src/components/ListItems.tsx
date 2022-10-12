@@ -1,53 +1,41 @@
 import React from 'react';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import CloudIcon from '@mui/icons-material/Cloud';
-import PeopleIcon from '@mui/icons-material/People';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import QuizIcon from '@mui/icons-material/Quiz';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Stack from '@mui/material/Stack';
+import { NavLink } from 'react-router-dom';
+import { styled } from "@mui/system";
 
 
 export interface Props {
   selectedItem: 'Dashboard' | 'Problems'
 }
 
-const ListItems: React.FC<Props> = (props) => {
+const NavbarLink = styled(NavLink)({
+  color: "inherit",
+  textDecoration: "none",
+  textTransform: "none",
+});
+
+export const ListItems: React.FC<Props> = (props) => {
+  // TODO: underline current page by props.selectedItem
   return (
-    <React.Fragment>
-      <ListItemButton href='/Dashboard' selected={props.selectedItem === "Dashboard"}>
-        <ListItemIcon>
-          <DashboardIcon />
-        </ListItemIcon>
-        <ListItemText primary="Dashboard" />
-      </ListItemButton>
-      <ListItemButton href='/Problems' selected={props.selectedItem === "Problems"}>
-        <ListItemIcon>
-          <QuizIcon />
-        </ListItemIcon>
-        <ListItemText primary="Problems" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <PeopleIcon />
-        </ListItemIcon>
-        <ListItemText primary="Users" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Reports" />
-      </ListItemButton>
-      <ListItemButton>
-        <ListItemIcon>
-          <CloudIcon />
-        </ListItemIcon>
-        <ListItemText primary="Machines" />
-      </ListItemButton>
-    </React.Fragment>
+    <List component={Stack} direction='row'>
+      <ListItem button>
+        <NavbarLink to='/Dashboard'>
+          Dashboard
+        </NavbarLink>
+      </ListItem>
+      <ListItem button>
+        <NavbarLink to='/Problems'>
+          Problems
+        </NavbarLink>
+      </ListItem>
+      <ListItem button>
+        <NavbarLink to='/Status'>
+          Status
+        </NavbarLink>
+      </ListItem>
+    </List>
   );
 }
 
-export default ListItems;

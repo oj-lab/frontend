@@ -22,7 +22,7 @@ const AccountMenu: React.FC = () => {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', ml: 'auto' }}>
         <Tooltip title="Account">
           <IconButton
             onClick={handleClick}
