@@ -1,6 +1,6 @@
 import React from 'react';
-import { AuthAndFrame } from './AuthAndFrame';
-import { NavProps } from './ListItems';
+import { AuthAndFrame } from '../components/AuthAndFrame';
+import { NavProps } from '../components/ListItems';
 
 const Dashboard: React.FC<NavProps> = (props) => {
   return (

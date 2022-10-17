@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import SignInSide from '../pages/SignInSide';
-import Dashboard from '../components/Dashboard';
+import Dashboard from '../pages/Dashboard';
 
 
 const PageRouter: React.FC = () => {

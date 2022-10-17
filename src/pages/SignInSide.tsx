@@ -15,7 +15,7 @@ import Copyright from '../components/Copyright';
 const theme = createTheme();
 
 const SignInSide: React.FC = () => {
-    // TODO: implement login
+    // TODO: implement login and redirect
     const handleSubmit = (event: React.FormEvent) => { };
 
     return (
