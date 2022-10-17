@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { styled } from "@mui/system";
 
 
-export interface Props {
+export interface NavProps {
   selectedItem: 'Dashboard' | 'Problems'
 }
 
@@ -16,7 +16,7 @@ const NavbarLink = styled(NavLink)({
   textTransform: "none",
 });
 
-export const ListItems: React.FC<Props> = (props) => {
+export const ListItems: React.FC<NavProps> = (props) => {
   // TODO: underline current page by props.selectedItem
   return (
     <List component={Stack} direction='row'>

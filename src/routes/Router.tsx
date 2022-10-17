@@ -9,7 +9,7 @@ const PageRouter: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate replace to="/Dashboard" />} />
-        <Route path="/SignIn" element={<SignInSide />} />
+        <Route path="/login" element={<SignInSide />} />
         <Route path="/Dashboard" element={<Dashboard selectedItem="Dashboard" />} />
       </Routes>
     </Router>
