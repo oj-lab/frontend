@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { signIn, signOut, authSelector } from "../store/reducers/Auth";
+import { signIn, signOut, authSelector } from "../store/auth/authSlice";
 import RequireAuth from './RequireAuth';
 import Footer from './Footer';
 import Navbar from './Navbar';

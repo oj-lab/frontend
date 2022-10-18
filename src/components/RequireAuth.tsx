@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, useLocation } from "react-router";
 import { useSelector } from "react-redux";
-import { authSelector } from "../store/reducers/Auth";
+import { authSelector } from "../store/auth/authSlice";
 import { embedRedirect } from '../utils/redirect';
 
 export interface RequireAuthProps {

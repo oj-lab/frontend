@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from ".."; // 在 store/index.ts 中声明的类型
+import { AppDispatch, RootState } from "..";
 
 const authSlice = createSlice({
   name: 'auth',
