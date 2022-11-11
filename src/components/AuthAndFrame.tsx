@@ -1,13 +1,12 @@
-import React from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signIn, signOut, authSelector } from "../store/auth/authSlice";
-import RequireAuth from './RequireAuth';
-import Footer from './Footer';
-import Navbar from './Navbar';
-import { NavProps } from './ListItems';
+import RequireAuth from "./RequireAuth";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
+import { NavProps } from "./ListItems";
 
 interface AuthAndFrameProps extends NavProps {
-  children: JSX.Element
+  children: JSX.Element;
 }
 
 export const AuthAndFrame: React.FC<AuthAndFrameProps> = (props) => {
@@ -18,7 +17,8 @@ export const AuthAndFrame: React.FC<AuthAndFrameProps> = (props) => {
 
   // TODO: Get user session.
   React.useEffect(() => {
-    if (currentUser === null) { }
+    if (currentUser === null) {
+    }
   });
 
   return (
@@ -29,6 +29,5 @@ export const AuthAndFrame: React.FC<AuthAndFrameProps> = (props) => {
         <Footer />
       </div>
     </RequireAuth>
-  )
-}
-
+  );
+};
