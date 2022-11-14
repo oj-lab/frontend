@@ -1,8 +1,12 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import SignInSide from '../pages/SignInSide';
-import Dashboard from '../pages/Dashboard';
-
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import SignInSide from "../pages/SignInSide";
+import Dashboard from "../pages/Dashboard";
 
 const PageRouter: React.FC = () => {
   return (
@@ -10,10 +14,13 @@ const PageRouter: React.FC = () => {
       <Routes>
         <Route path="/" element={<Navigate replace to="/Dashboard" />} />
         <Route path="/login" element={<SignInSide />} />
-        <Route path="/Dashboard" element={<Dashboard selectedItem="Dashboard" />} />
+        <Route
+          path="/dashboard"
+          element={<Dashboard selectedItem="Dashboard" />}
+        />
       </Routes>
     </Router>
   );
-}
+};
 
 export default PageRouter;
