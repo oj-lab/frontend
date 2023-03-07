@@ -13,13 +13,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../components/Copyright";
 import { useDispatch } from "react-redux";
 import { setUserState, userSignIn, UserState } from "../store/auth/authSlice";
+import { login } from "../services/login";
 
 const theme = createTheme();
 
 const SignInSide: React.FC = () => {
   const dispatch = useDispatch();
+  const [account, setAccount] = React.useState("");
+  const [password, setPassword] = React.useState("");
   // TODO: implement login and redirect
   const handleSubmit = (event: React.FormEvent) => {
+    login(account, password);
     dispatch(userSignIn());
   };
 
@@ -73,6 +77,8 @@ const SignInSide: React.FC = () => {
                 label="Account"
                 name="account"
                 autoComplete="account"
+                value={account}
+                onChange={(e) => setAccount(e.target.value)}
                 autoFocus
               />
               <TextField
@@ -83,6 +89,8 @@ const SignInSide: React.FC = () => {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
               />
               <Button
