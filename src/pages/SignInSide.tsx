@@ -23,8 +23,7 @@ const SignInSide: React.FC = () => {
   const dispatch = useDispatch();
   const [account, setAccount] = React.useState("");
   const [password, setPassword] = React.useState("");
-  // TODO: implement login and redirect
-  const location = useLocation();
+
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -32,9 +31,8 @@ const SignInSide: React.FC = () => {
       if(token !== "")
       {
         dispatch(userSignIn());
-        const target = retrieveRedirect(location.pathname);
-        console.log('ready to redirect to', target);
-        navigate(target);
+        const redirectURL = retrieveRedirect(window.location.search);
+        navigate(redirectURL);
       }
     });
   };
