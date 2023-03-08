@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { setUserState, userSignIn, UserState } from "../store/auth/authSlice";
 import { login } from "../services/login";
 import { retrieveRedirect } from "../utils/redirect";
+import { getCurrentUser } from "../services/login";
 
 const theme = createTheme();
 
@@ -36,6 +37,12 @@ const SignInSide: React.FC = () => {
       }
     });
   };
+
+  getCurrentUser().then(username => {
+    dispatch(userSignIn());
+    const redirectURL = retrieveRedirect(window.location.search);
+    navigate(redirectURL);
+  }).catch(err => {});
 
   return (
     <ThemeProvider theme={theme}>
