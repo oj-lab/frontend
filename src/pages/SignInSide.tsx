@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,6 +15,7 @@ import Copyright from "../components/Copyright";
 import { useDispatch } from "react-redux";
 import { setUserState, userSignIn, UserState } from "../store/auth/authSlice";
 import { login } from "../services/login";
+import { retrieveRedirect } from "../utils/redirect";
 
 const theme = createTheme();
 
@@ -22,9 +24,19 @@ const SignInSide: React.FC = () => {
   const [account, setAccount] = React.useState("");
   const [password, setPassword] = React.useState("");
   // TODO: implement login and redirect
+  const location = useLocation();
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent) => {
-    login(account, password);
-    dispatch(userSignIn());
+    event.preventDefault();
+    login(account, password).then(token => {
+      if(token !== "")
+      {
+        dispatch(userSignIn());
+        const target = retrieveRedirect(location.pathname);
+        console.log('ready to redirect to', target);
+        navigate(target);
+      }
+    });
   };
 
   return (
