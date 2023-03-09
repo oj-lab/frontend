@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,15 +14,35 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../components/Copyright";
 import { useDispatch } from "react-redux";
 import { setUserState, userSignIn, UserState } from "../store/auth/authSlice";
+import { login } from "../services/login";
+import { retrieveRedirect } from "../utils/redirect";
+import { getCurrentUser } from "../services/login";
 
 const theme = createTheme();
 
 const SignInSide: React.FC = () => {
   const dispatch = useDispatch();
-  // TODO: implement login and redirect
+  const [account, setAccount] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent) => {
-    dispatch(userSignIn());
+    event.preventDefault();
+    login(account, password).then(token => {
+      if(token !== "")
+      {
+        dispatch(userSignIn());
+        const redirectURL = retrieveRedirect(window.location.search);
+        navigate(redirectURL);
+      }
+    });
   };
+
+  getCurrentUser().then(username => {
+    dispatch(userSignIn());
+    const redirectURL = retrieveRedirect(window.location.search);
+    navigate(redirectURL);
+  }).catch(err => {});
 
   return (
     <ThemeProvider theme={theme}>
@@ -73,6 +94,8 @@ const SignInSide: React.FC = () => {
                 label="Account"
                 name="account"
                 autoComplete="account"
+                value={account}
+                onChange={(e) => setAccount(e.target.value)}
                 autoFocus
               />
               <TextField
@@ -83,6 +106,8 @@ const SignInSide: React.FC = () => {
                 label="Password"
                 type="password"
                 id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
               />
               <Button

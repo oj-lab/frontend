@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import RequireAuth from "./RequireAuth";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { NavProps } from "./ListItems";
+import { getCurrentUser } from "../services/login";
 
 interface AuthAndFrameProps extends NavProps {
   children: JSX.Element;
@@ -11,13 +11,14 @@ interface AuthAndFrameProps extends NavProps {
 
 export const AuthAndFrame: React.FC<AuthAndFrameProps> = (props) => {
   const [currentUser, setCurrentUser] = React.useState<string | null>(null);
-  const dispatch = useDispatch();
 
-  // dispatch(signIn());
-
-  // TODO: Get user session.
   React.useEffect(() => {
     if (currentUser === null) {
+      getCurrentUser().then(username => {
+        setCurrentUser(username);
+      }).catch(err => {
+        console.log(err);
+      });
     }
   });
 
