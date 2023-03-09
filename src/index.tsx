@@ -4,8 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { worker } from './mocks/server';
-worker.start();
+if(process.env.NODE_ENV !== "production") {
+  console.log("Running in:", process.env.NODE_ENV);
+  const { worker } = require('./mocks/server');
+  worker.start();
+}
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

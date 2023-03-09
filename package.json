@@ -31,7 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "update": "npx msw init public --no-save",
+    "init-mock": "npx msw init public --no-save",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
