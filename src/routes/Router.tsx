@@ -19,7 +19,7 @@ const PageRouter: React.FC = () => {
           path="/dashboard"
           element={<Dashboard selectedItem="Dashboard" />}
         />
-        <Route path="/problem/:pid" element={<Problem />} />
+        <Route path="/problems/:pid" element={<Problem />} />
       </Routes>
     </Router>
   );
