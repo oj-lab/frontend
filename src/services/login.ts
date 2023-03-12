@@ -1,29 +1,28 @@
-import {client} from "./client";
+import { client } from "./client";
 
-interface LoginResponse {
-  token: string
-}
-
-interface UserResponse {
+export interface UserResponse {
   username: string,
   roles: string[]
 }
 
-export const login = async (account: string, password: string) => {
-  let res = await client.post<LoginResponse>('/login', {
+export async function login(account: string, password: string) {
+  let res = await client.post<void>('/login', {
     account: account,
     password: password
   });
-  let token = res.data.token;
-  return token;
+  if (res.status !== 200) {
+    throw Error('failed to login')
+  }
 }
 
-export const getCurrentUser = async () => {
+export async function getCurrentUser(): Promise<UserResponse> {
   let res = await client.get<UserResponse>('/user/current');
-  return res.data.username
+  if (res.status !== 200) {
+    throw Error('failed to get current user')
+  }
+  return {
+    username: res.data.username,
+    roles: res.data.roles,
+  }
 }
 
-export const getCurrentRole = async () => {
-  let res = await client.get<UserResponse>('/user/current');
-  return res.data.roles
-}

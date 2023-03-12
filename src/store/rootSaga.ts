@@ -1,8 +1,8 @@
-import { all, call, spawn } from "redux-saga/effects";
-import { watchUserSignIn } from "./auth/authSaga";
+import { all, call, ForkEffect, spawn } from "redux-saga/effects";
+import { watchGetCurrentUser, watchUserSignIn } from "./auth/authSaga";
 
 export default function* rootSaga() {
-  const sagas = [watchUserSignIn];
+  let sagas = [watchUserSignIn, watchGetCurrentUser];
 
   // Spawn a detached generater for each 'watcher' saga, that is meant to stay alive for the entire app life-time
   // Will catch any otherwise uncaught errors in sagas, and restart those crashed sagas.
