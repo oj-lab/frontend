@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import SignInSide from "../pages/SignInSide";
 import Dashboard from "../pages/Dashboard";
+import Problem from "../pages/Problem";
 
 const PageRouter: React.FC = () => {
   return (
@@ -18,6 +19,7 @@ const PageRouter: React.FC = () => {
           path="/dashboard"
           element={<Dashboard selectedItem="Dashboard" />}
         />
+        <Route path="/problem/:pid" element={<Problem />} />
       </Routes>
     </Router>
   );
