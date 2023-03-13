@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Typography, Divider } from '@mui/material';
+import { Container, Typography, Grid, Box, Button } from '@mui/material';
 import { AuthAndFrame } from "../components/AuthAndFrame";
 import { useParams } from "react-router-dom";
 import { CodeEditor } from "../components/CodeEditor";
@@ -29,17 +29,28 @@ const ProblemDetail: React.FC<ProblemId> = (props) => {
   }];
   return (
     <Container>
-      <Typography variant="h3" paragraph={true}>
-        <MdRender text={pname}/>
-      </Typography>
-      <Typography variant="body1" paragraph={true}>
-        Time Limit: {timeLimit} sec <br></br>
-        Memory Limit: {MemLimit} MB
-      </Typography>
-
-      <Divider sx={{margin: 1,}}/>
-
-      <Container>
+      <Box sx={{
+          boxShadow: 1,
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+          p:1,
+          mb:3,
+        }}
+      >
+        <Typography variant="h4" paragraph={true}>
+          <MdRender text={pname} inline={true} />
+        </Typography>
+        <Typography variant="body1" paragraph={true}>
+          Time Limit: {timeLimit} sec <br></br>
+          Memory Limit: {MemLimit} MB
+        </Typography>
+      </Box>
+      <Box sx={{
+          boxShadow: 1,
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+          p:1,
+          mb:3,
+        }}
+      >
         <Typography variant="h5">
           Problem Statement
         </Typography>
@@ -47,11 +58,8 @@ const ProblemDetail: React.FC<ProblemId> = (props) => {
         <Typography variant="h5">
           Constraints
         </Typography>
-        <MdRender text={Constraint}/>
-        
-      </Container>
+        <MdRender text={Constraint} />
 
-      <Container>
         <Typography variant="h5">
           Input
         </Typography>
@@ -68,7 +76,40 @@ const ProblemDetail: React.FC<ProblemId> = (props) => {
             <MdRender text={output_format} inline={true}/>
           </code>
         </pre>
-      </Container>
+      </Box>
+    </Container>
+  )
+}
+
+const EditorBlock: React.FC<ProblemId> = (props) => {
+  return (
+    <Container>
+      <Box sx={{
+        boxShadow: 1,
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+        p:1,
+        mb:3,
+      }}
+      >
+        <CodeEditor />
+        <Button variant="contained" style={{margin:12}} onClick={()=>{console.log("submitted")}}>Submit</Button>
+      </Box>
+    </Container>
+  )
+}
+
+const OtherInfo: React.FC = () => {
+  return (
+    <Container>
+      <Box sx={{
+        boxShadow: 1,
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
+        p:1,
+        mb:3,
+      }}
+      >
+        {"some other info"}
+      </Box>
     </Container>
   )
 }
@@ -79,8 +120,15 @@ const ProblemPage: React.FC = () => {
     return (
       <AuthAndFrame selectedItem={"Problems"}>
         <Container sx={{ mt: 4, mb: 4 }}>
-          <ProblemDetail pid={pid}/>
-          <CodeEditor />
+          <Grid container spacing={1}>
+            <Grid item xs={9}>
+              <ProblemDetail pid={pid}/>
+              <EditorBlock pid={pid}/>
+            </Grid>
+            <Grid item xs={3}>
+              <OtherInfo />
+            </Grid>
+          </Grid>
         </Container >
       </AuthAndFrame>
     );

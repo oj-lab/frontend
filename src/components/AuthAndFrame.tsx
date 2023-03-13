@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { NavProps } from "./ListItems";
 import { getCurrentUser } from "../services/login";
+import "./frame.css";
 
 interface AuthAndFrameProps extends NavProps {
   children: JSX.Element;
