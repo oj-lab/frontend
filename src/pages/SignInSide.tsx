@@ -28,21 +28,10 @@ const SignInSide: React.FC = () => {
   const navigate = useNavigate();
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    login(account, password).then(token => {
-      if(token !== "")
-      {
-        dispatch(userSignIn());
-        const redirectURL = retrieveRedirect(window.location.search);
-        navigate(redirectURL);
-      }
-    });
-  };
-
-  getCurrentUser().then(username => {
-    dispatch(userSignIn());
+    dispatch(userSignIn({ account, password }));
     const redirectURL = retrieveRedirect(window.location.search);
     navigate(redirectURL);
-  }).catch(err => {});
+  };
 
   return (
     <ThemeProvider theme={theme}>
