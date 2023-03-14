@@ -1,4 +1,4 @@
-import { all, call, ForkEffect, spawn } from "redux-saga/effects";
+import { all, call, spawn } from "redux-saga/effects";
 import { watchGetCurrentUser, watchUserSignIn } from "./auth/authSaga";
 
 export default function* rootSaga() {

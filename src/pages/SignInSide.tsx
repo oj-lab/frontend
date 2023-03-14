@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,10 +13,8 @@ import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Copyright from "../components/Copyright";
 import { useDispatch } from "react-redux";
-import { setUserState, userSignIn, UserState } from "../store/auth/authSlice";
-import { login } from "../services/login";
+import { userSignIn } from "../store/auth/authSlice";
 import { retrieveRedirect } from "../utils/redirect";
-import { getCurrentUser } from "../services/login";
 
 const theme = createTheme();
 
