@@ -19,8 +19,5 @@ export const getCurrentUser = rest.get("/user/current", (req, res, ctx) => {
 });
 
 export const postLogin = rest.post("/login", (req, res, ctx) => {
-  return res(
-    ctx.status(200),
-    ctx.cookie("auth-token", "233"),
-  );
+  return res(ctx.status(200), ctx.cookie("auth-token", "233"));
 });

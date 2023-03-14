@@ -10,8 +10,8 @@ export enum UserState {
 }
 
 export interface User {
-  username: string,
-  roles: string[],
+  username: string;
+  roles: string[];
 }
 
 export interface AuthState {
@@ -34,7 +34,7 @@ const authSlice = createSlice({
     },
     setCurrentUser(state, action: PayloadAction<User | undefined>) {
       state.currentUser = action.payload;
-    }
+    },
   },
 });
 
@@ -46,6 +46,6 @@ export const currentUserSelector = (state: RootState): User | undefined =>
 export const { setUserState, setCurrentUser } = authSlice.actions;
 
 export const userSignIn = createAction<SignInPayload>(USER_SIGN_IN);
-export const getCurrentUser = createAction<void>(GET_CURRENT_USER)
+export const getCurrentUser = createAction<void>(GET_CURRENT_USER);
 
 export default authSlice.reducer;

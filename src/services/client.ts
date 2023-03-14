@@ -1,6 +1,6 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 export const client = axios.create({
-  baseURL: '',
+  baseURL: "",
   timeout: 5000,
 });
