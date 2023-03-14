@@ -72,6 +72,10 @@ jobs:
         with:
           category: "/language:${{matrix.language}}"
 
+      - name: Install
+        run: |
+          npm ci
+
       - name: Perform Prettier Check
         run: |
           npm run prettier:check
