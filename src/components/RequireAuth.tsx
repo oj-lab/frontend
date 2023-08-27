@@ -13,7 +13,7 @@ export interface RequireAuthProps {
 }
 
 const RequireAuth: React.FC<React.PropsWithChildren<RequireAuthProps>> = (
-  props
+  props,
 ) => {
   const location = useLocation();
   const dispatch = useDispatch();

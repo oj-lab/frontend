@@ -7,7 +7,7 @@
  */
 export const embedRedirect = (
   returnTo: string,
-  navigateTo = "/login"
+  navigateTo = "/login",
 ): string => `${navigateTo}?redirect=${encodeURIComponent(returnTo)}`;
 
 /**
