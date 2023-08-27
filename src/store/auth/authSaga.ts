@@ -1,7 +1,7 @@
 import { setCurrentUser, setUserState, UserState } from "./authSlice";
 import { put, takeEvery } from "redux-saga/effects";
 import { GET_CURRENT_USER, USER_SIGN_IN } from "../actions";
-import { login, getCurrentUser, UserResponse } from "../../services/login";
+import { login, getCurrentUser, UserResponse } from "../../api/login";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export interface SignInPayload {
