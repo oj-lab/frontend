@@ -13,8 +13,8 @@ const Problem: React.FC = () => {
           </h1>
         </div>
       </header>
-      <main className="flex flex-auto flex-col">
-        <div className="max-w-7xl flex-1 py-6 sm:px-6 lg:px-8">
+      <main className="flex w-full max-w-7xl flex-auto flex-col self-center">
+        <div className="max-w-7xl flex-1 py-6 sm:px-6 lg:px-8 ">
           <MarkdownRender
             content={`
 Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following
