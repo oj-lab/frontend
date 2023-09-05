@@ -33,7 +33,7 @@ function* getCurrentUserSaga() {
       setCurrentUser({
         username: response.username,
         roles: response.roles,
-      })
+      }),
     );
   } catch (err) {
     yield put(setUserState(UserState.SIGNED_OUT));

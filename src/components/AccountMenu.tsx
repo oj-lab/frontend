@@ -78,7 +78,7 @@ const AccountMenu: React.FC = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <ListItemButton href="/SignIn">
+          <ListItemButton href="/login">
             <ListItemIcon>
               <Logout fontSize="small" />
             </ListItemIcon>

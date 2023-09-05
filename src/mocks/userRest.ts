@@ -7,14 +7,14 @@ export const getCurrentUser = rest.get("/user/current", (req, res, ctx) => {
       ctx.json({
         username: "admin",
         roles: ["admin", "user"],
-      })
+      }),
     );
   }
   return res(
     ctx.status(403),
     ctx.json({
       message: "Failed to authenticate!",
-    })
+    }),
   );
 });
 
