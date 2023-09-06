@@ -1,3 +1,4 @@
-import { getCurrentUser, postLogin } from "./userRest";
+import { getProblemInfo } from "./rest/problem";
+import { getCurrentUser, postLogin } from "./rest/user";
 
-export const restHandlers = [getCurrentUser, postLogin];
+export const restHandlers = [getCurrentUser, postLogin, getProblemInfo];
