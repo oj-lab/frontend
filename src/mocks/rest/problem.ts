@@ -6,15 +6,33 @@ export const getProblemInfo = rest.get("/v1/problem/:slug", (req, res, ctx) => {
 
   const response: ProblemServiceModel.ProblemInfo = {
     slug: slug.toString(),
-    title: "Problem Title",
+    title: "Hello! { ... }",
     description: `
-Lift($L$) can be determined by Lift Coefficient ($C_L$) like the following
-equation.
+Output a string with format: \`Hello! %s\`.
 
-$$
-L = \\frac{1}{2} \\rho v^2 S C_L
-$$
-    `,
+**Input**
+
+- The first line contains a string \`s\`.
+
+**Output**
+
+- Output a string \`Hello! %s\`.
+
+**Example**
+
+Input:
+
+\`\`\`
+world!
+\`\`\`
+
+Output:
+
+\`\`\`
+Hello! world!
+\`\`\`
+
+`,
     tags: ["tag1", "tag2"],
   };
 

@@ -16,9 +16,9 @@ export const useProblem = (slug: string) => {
       });
   }, [slug]);
 
-  const getProblemInfo = () => {
+  function getProblemInfo() {
     return problemInfo;
-  };
+  }
 
   return { getProblemInfo };
 };

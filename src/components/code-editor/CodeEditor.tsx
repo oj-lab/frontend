@@ -20,10 +20,12 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
 
         editor = monaco.editor.create(monacoEl.current!, {
           value: props.value,
-          language: "typescript",
+          language: "cpp",
           theme: "vs-dark",
           automaticLayout: true,
         });
+
+        props.onChange(editor!.getValue());
 
         editor.onDidChangeModelContent(() => {
           props.onChange(editor!.getValue());
