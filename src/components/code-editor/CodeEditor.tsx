@@ -36,7 +36,9 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
     }
 
     return () => editor?.dispose();
-  }, [monacoEl.current]);
+    // !!! Cannot add props to the dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editor]);
 
   return (
     <div

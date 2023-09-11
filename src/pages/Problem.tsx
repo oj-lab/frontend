@@ -1,11 +1,4 @@
-import {
-  Button,
-  Table,
-  TableBody,
-  TableColumn,
-  TableHeader,
-  TableRow,
-} from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import CodeEditor from "../components/code-editor/CodeEditor";
 import MarkdownRender from "../components/markdown/MarkdownRender";
 import { useProblem } from "../hooks/problem";
@@ -32,7 +25,7 @@ const Problem: React.FC = () => {
 
   useEffect(() => {
     setSrcLanguage("Cpp");
-  }, []);
+  }, [setSrcLanguage]);
 
   return (
     <div className="relative flex h-[100vh] flex-col">
