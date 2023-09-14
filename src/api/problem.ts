@@ -11,4 +11,13 @@ export namespace ProblemService {
     }
     return res.data;
   }
+
+  export async function getProblemList() {
+    let res =
+      await client.get<ProblemServiceModel.ProblemInfo[]>(`/v1/problem`);
+    if (res.status !== 200) {
+      throw Error("failed to get problem list");
+    }
+    return res.data;
+  }
 }
