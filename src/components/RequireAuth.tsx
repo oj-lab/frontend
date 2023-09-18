@@ -1,11 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getCurrentUser,
-  UserState,
-  userStateSelector,
-} from "../store/auth/authSlice";
+import { useUser, UserState } from "../hooks/user";
 import { embedRedirect } from "../utils/redirect";
 
 export interface RequireAuthProps {
@@ -16,19 +11,14 @@ const RequireAuth: React.FC<React.PropsWithChildren<RequireAuthProps>> = (
   props,
 ) => {
   const location = useLocation();
-  const dispatch = useDispatch();
-  const authState = useSelector(userStateSelector);
+  const { getUserState } = useUser();
+  const userState = getUserState();
 
-  React.useEffect(() => {
-    dispatch(getCurrentUser());
-  }, [dispatch]);
-
-  console.log("Authing:", authState, location);
   const isHomePage = location.pathname === "/";
   const navigateTo = isHomePage ? "/login" : embedRedirect(location.pathname);
-  if (authState === UserState.SIGNED_OUT) {
+  if (userState === UserState.UserSignedOut) {
     return <Navigate to={navigateTo} state={{ isRedirect: !isHomePage }} />;
-  } else if (authState === UserState.SIGNED_IN) {
+  } else if (userState === UserState.UserSignedIn) {
     return props.children;
   } else {
     return <></>;

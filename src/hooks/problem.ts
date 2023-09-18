@@ -22,3 +22,25 @@ export const useProblem = (slug: string) => {
 
   return { getProblemInfo };
 };
+
+export const useProblemList = () => {
+  const [problemList, setProblemList] = useState<
+    ProblemServiceModel.ProblemInfo[]
+  >([]);
+
+  useEffect(() => {
+    ProblemService.getProblemList()
+      .then((res) => {
+        setProblemList(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
+  function getProblemList() {
+    return problemList;
+  }
+
+  return { getProblemList };
+};

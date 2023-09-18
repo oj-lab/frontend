@@ -38,3 +38,21 @@ Hello! world!
 
   return res(ctx.status(200), ctx.json(response));
 });
+
+export const getProblemList = rest.get("/v1/problem", (req, res, ctx) => {
+  const response: ProblemServiceModel.ProblemInfo[] = [
+    {
+      slug: "hello-world",
+      title: "Hello {...}",
+      description: "1",
+      tags: ["implementation", "system test"],
+    },
+    {
+      slug: "a+b-problem",
+      title: "A+B Problem",
+      description: "1",
+      tags: ["implementation"],
+    },
+  ];
+  return res(ctx.status(200), ctx.json(response));
+});
