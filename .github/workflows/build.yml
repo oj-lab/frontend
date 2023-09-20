@@ -1,4 +1,4 @@
-name: NodeJS with Webpack
+name: Build
 
 on:
   push:
@@ -26,6 +26,10 @@ jobs:
       run: |
         npm install
         npm run build
+    
+    - name: Install git
+      run: |
+        apt install git -y
         
     - name: Publish To Github
       uses: cedricbuild/gh-publish-branch@dev0
