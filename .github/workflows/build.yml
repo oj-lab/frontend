@@ -29,7 +29,7 @@ jobs:
     
     - name: Install git
       run: |
-        apt install git -y
+        sudo apt-get update && sudo apt-get install -y git
         
     - name: Publish To Github
       uses: cedricbuild/gh-publish-branch@dev0
