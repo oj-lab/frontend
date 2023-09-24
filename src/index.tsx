@@ -5,8 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { worker } from "./mocks/server";
 
-console.log("Running in:", process.env.NODE_ENV);
-if (process.env.NODE_ENV === "mock") {
+console.log("Running in:", import.meta.env.MODE);
+if (import.meta.env.MODE === "mock") {
   worker.start();
 }
 

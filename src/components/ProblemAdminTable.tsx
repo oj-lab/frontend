@@ -31,15 +31,13 @@ const ProblemAdminTable: React.FC<ProblemAdminTableProps> = (props) => {
             <TableCell>{item.slug}</TableCell>
             <TableCell>{item.title}</TableCell>
             <TableCell>
-              {item.tags.map((tag) => (
-                <Chip
-                  color={tag.title === "implementation" ? "default" : "primary"}
-                  variant="bordered"
-                  key={tag.id}
-                >
-                  {tag.title}
-                </Chip>
-              ))}
+              <div className="flex gap-1">
+                {item.tags.map((tag) => (
+                  <Chip variant="bordered" key={tag.id}>
+                    {tag.title}
+                  </Chip>
+                ))}
+              </div>
             </TableCell>
           </TableRow>
         )}

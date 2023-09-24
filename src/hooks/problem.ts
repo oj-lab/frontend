@@ -36,7 +36,7 @@ export const useProblemList = () => {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   function getProblemList() {
     return problemList;
