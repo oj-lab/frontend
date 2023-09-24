@@ -47,14 +47,14 @@ export default function Header() {
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
                   <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
+                    className="block h-14 w-auto lg:hidden"
+                    src="./OJ-lab-icon.svg"
+                    alt="OJ Lab"
                   />
                   <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Your Company"
+                    className="hidden h-14 w-auto lg:block"
+                    src="./OJ-lab-icon.svg"
+                    alt="OJ Lab"
                   />
                 </div>
                 <div className="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
