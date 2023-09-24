@@ -56,7 +56,9 @@ const Problem: React.FC = () => {
         </div>
       </div>
       {getVerdicts().length > 0 && (
-        <JudgeVerdictTable data={judgeVerdictListPipe(getVerdicts())} />
+        <div className="my-8">
+          <JudgeVerdictTable data={judgeVerdictListPipe(getVerdicts())} />
+        </div>
       )}
     </UserLayout>
   );

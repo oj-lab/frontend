@@ -10,23 +10,23 @@ export const getProblemInfo = rest.get("/v1/problem/:slug", (req, res, ctx) => {
     description: `
 Output a string with format: \`Hello! %s\`.
 
-**Input**
+## Input
 
 - The first line contains a string \`s\`.
 
-**Output**
+## Output
 
 - Output a string \`Hello! %s\`.
 
-**Example**
+## Example
 
-Input:
+### Input:
 
 \`\`\`
 world!
 \`\`\`
 
-Output:
+### Output:
 
 \`\`\`
 Hello! world!
