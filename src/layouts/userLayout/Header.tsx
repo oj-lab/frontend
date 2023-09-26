@@ -12,7 +12,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
-  imageUrl: "./avatars/male-avatar-1.svg",
+  imageUrl: "/avatars/male-avatar-1.svg",
 };
 const navigation = [
   {
@@ -48,12 +48,12 @@ export default function Header() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-14 w-auto lg:hidden"
-                    src="./OJ-lab-icon.svg"
+                    src="/OJ-lab-icon.svg"
                     alt="OJ Lab"
                   />
                   <img
                     className="hidden h-14 w-auto lg:block"
-                    src="./OJ-lab-icon.svg"
+                    src="/OJ-lab-icon.svg"
                     alt="OJ Lab"
                   />
                 </div>

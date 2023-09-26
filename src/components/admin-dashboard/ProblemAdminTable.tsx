@@ -8,7 +8,7 @@ import {
   Chip,
   Button,
 } from "@nextui-org/react";
-import { ProblemModel } from "../typings/problem";
+import { ProblemModel } from "../../typings/problem";
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 
 const columns = [

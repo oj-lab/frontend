@@ -7,15 +7,16 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
-  { name: "Problem", href: "#", icon: HomeIcon, current: true },
-  { name: "User", href: "#", icon: UsersIcon, current: false },
+  { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
+  { name: "User", href: "/admin/user", icon: UsersIcon, current: false },
 ];
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
-  imageUrl: "./avatars/male-avatar-1.svg",
+  imageUrl: "/avatars/male-avatar-1.svg",
 };
 const userNavigation = [
   { name: "Main Page", href: "/problem" },
@@ -32,6 +33,7 @@ interface SidebarProps {
 
 export default function Sidebar(props: SidebarProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -93,7 +95,7 @@ export default function Sidebar(props: SidebarProps) {
                     <div className="flex h-16 shrink-0 items-center">
                       <img
                         className="h-14 w-auto gap-4"
-                        src="./OJ-lab-icon.svg"
+                        src="/OJ-lab-icon.svg"
                         alt="OJ Lab"
                       />
                       <h1 className="text-xl font-bold text-white">
@@ -106,14 +108,14 @@ export default function Sidebar(props: SidebarProps) {
                           <ul className="-mx-2 space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
-                                <a
-                                  href={item.href}
+                                <div
                                   className={classNames(
                                     item.current
                                       ? "bg-indigo-700 text-white"
                                       : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )}
+                                  onClick={() => {}}
                                 >
                                   <item.icon
                                     className={classNames(
@@ -125,7 +127,7 @@ export default function Sidebar(props: SidebarProps) {
                                     aria-hidden="true"
                                   />
                                   {item.name}
-                                </a>
+                                </div>
                               </li>
                             ))}
                           </ul>
@@ -146,7 +148,7 @@ export default function Sidebar(props: SidebarProps) {
             <div className="flex h-16 shrink-0 items-center gap-4">
               <img
                 className="h-14 w-auto"
-                src="./OJ-lab-icon.svg"
+                src="/OJ-lab-icon.svg"
                 alt="OJ Lab"
               />
               <h1 className="text-xl font-bold text-white">OJ Lab Admin</h1>
@@ -185,7 +187,9 @@ export default function Sidebar(props: SidebarProps) {
             </nav>
           </div>
         </div>
+      </div>
 
+      <div>
         <div className="lg:pl-80">
           <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6">
             <button
@@ -234,15 +238,17 @@ export default function Sidebar(props: SidebarProps) {
                       {userNavigation.map((item) => (
                         <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href={item.href}
+                            <div
                               className={classNames(
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700",
+                                "block cursor-pointer px-4 py-2 text-sm text-gray-700",
                               )}
+                              onClick={() => {
+                                navigate(item.href);
+                              }}
                             >
                               {item.name}
-                            </a>
+                            </div>
                           )}
                         </Menu.Item>
                       ))}

@@ -1,22 +1,23 @@
-import React from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import React, { Suspense } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Problem from "../pages/Problem";
-import Admin from "../pages/Admin";
+import AdminProblem from "../pages/admin-dashboard/AdminProblem";
+import AdminLayout from "../layouts/adminLayout/AdminLayout";
 
 const PageRouter: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/problem" />} />
-        <Route path="/problem" element={<Problem />} />
-        <Route path="/admin" element={<Admin />} />
-      </Routes>
-    </Router>
+    <BrowserRouter>
+      <Suspense>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/problem" />} />
+          <Route path="/problem" element={<Problem />} />
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="problem" element={<AdminProblem />} />
+            <Route path="user" element={<div>user</div>} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 };
 
