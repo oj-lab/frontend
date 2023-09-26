@@ -6,13 +6,16 @@ import {
   TableRow,
   TableCell,
   Chip,
+  Button,
 } from "@nextui-org/react";
 import { ProblemModel } from "../typings/problem";
+import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 
 const columns = [
   { name: "SLUG", uid: "slug" },
   { name: "TITLE", uid: "title" },
   { name: "TAGS", uid: "tags" },
+  { name: "ACTIONS", uid: "actions" },
 ];
 
 export interface ProblemAdminTableProps {
@@ -38,6 +41,26 @@ const ProblemAdminTable: React.FC<ProblemAdminTableProps> = (props) => {
                   </Chip>
                 ))}
               </div>
+            </TableCell>
+            <TableCell className="flex gap-4">
+              <Button
+                className="min-w-7 min-h-7 h-7 w-7"
+                size="sm"
+                variant="light"
+                color="primary"
+                isIconOnly
+              >
+                <PencilSquareIcon className="h-5 w-5" />
+              </Button>
+              <Button
+                className="min-w-7 min-h-7 h-7 w-7"
+                size="sm"
+                variant="light"
+                color="danger"
+                isIconOnly
+              >
+                <TrashIcon className="h-5 w-5" />
+              </Button>
             </TableCell>
           </TableRow>
         )}
