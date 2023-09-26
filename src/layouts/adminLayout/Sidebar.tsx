@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const navigation = [
   { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
@@ -34,6 +35,7 @@ interface SidebarProps {
 export default function Sidebar(props: SidebarProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <>
@@ -126,7 +128,7 @@ export default function Sidebar(props: SidebarProps) {
                                     )}
                                     aria-hidden="true"
                                   />
-                                  {item.name}
+                                  {t(item.name)}
                                 </div>
                               </li>
                             ))}
@@ -177,7 +179,7 @@ export default function Sidebar(props: SidebarProps) {
                             )}
                             aria-hidden="true"
                           />
-                          {item.name}
+                          {t(item.name)}
                         </a>
                       </li>
                     ))}

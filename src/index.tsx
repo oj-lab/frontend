@@ -1,9 +1,11 @@
+import App from "./App";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { worker } from "./mocks/server";
+
+import "./i18n";
+import "./index.css";
 
 console.log("Running in:", import.meta.env.MODE);
 if (import.meta.env.MODE === "mock") {
