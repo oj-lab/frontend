@@ -5,6 +5,9 @@ const ZH_CN_TRANSLATIONS: Resource = {
     Problem: "问题",
     User: "用户",
     Contest: "竞赛",
+    "Admin page": "管理页",
+    "Main page": "首页",
+    "Sign out": "登出",
   },
 };
 

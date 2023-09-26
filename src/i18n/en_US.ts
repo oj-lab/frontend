@@ -5,6 +5,9 @@ const EN_US_TRANSLATIONS: Resource = {
     Problem: "Problem",
     User: "User",
     Contest: "Contest",
+    "Admin page": "Admin page",
+    "Main page": "Main page",
+    "Sign out": "Sign out",
   },
 };
 

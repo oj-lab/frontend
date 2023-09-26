@@ -1,14 +1,14 @@
 import { Fragment, useState } from "react";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   Bars3Icon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { joinClasses } from "../../utils/common";
+import UserMenu from "../UserMenu";
 
 const navigation = [
   { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
@@ -20,13 +20,9 @@ const user = {
   imageUrl: "/avatars/male-avatar-1.svg",
 };
 const userNavigation = [
-  { name: "Main Page", href: "/problem" },
+  { name: "Main page", href: "/problem" },
   { name: "Sign out", href: "#" },
 ];
-
-function classNames(...classes: any) {
-  return classes.filter(Boolean).join(" ");
-}
 
 interface SidebarProps {
   children: JSX.Element;
@@ -34,7 +30,6 @@ interface SidebarProps {
 
 export default function Sidebar(props: SidebarProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
@@ -111,7 +106,7 @@ export default function Sidebar(props: SidebarProps) {
                             {navigation.map((item) => (
                               <li key={item.name}>
                                 <div
-                                  className={classNames(
+                                  className={joinClasses(
                                     item.current
                                       ? "bg-indigo-700 text-white"
                                       : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
@@ -120,7 +115,7 @@ export default function Sidebar(props: SidebarProps) {
                                   onClick={() => {}}
                                 >
                                   <item.icon
-                                    className={classNames(
+                                    className={joinClasses(
                                       item.current
                                         ? "text-white"
                                         : "text-indigo-200 group-hover:text-white",
@@ -163,7 +158,7 @@ export default function Sidebar(props: SidebarProps) {
                       <li key={item.name}>
                         <a
                           href={item.href}
-                          className={classNames(
+                          className={joinClasses(
                             item.current
                               ? "bg-indigo-700 text-white"
                               : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
@@ -171,7 +166,7 @@ export default function Sidebar(props: SidebarProps) {
                           )}
                         >
                           <item.icon
-                            className={classNames(
+                            className={joinClasses(
                               item.current
                                 ? "text-white"
                                 : "text-indigo-200 group-hover:text-white",
@@ -206,57 +201,11 @@ export default function Sidebar(props: SidebarProps) {
             <div className="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
               <div className="flex items-center gap-x-4 lg:gap-x-6">
                 {/* Profile dropdown */}
-                <Menu as="div" className="relative">
-                  <Menu.Button className="-m-1.5 flex items-center p-1.5">
-                    <span className="sr-only">Open user menu</span>
-                    <img
-                      className="h-8 w-8 rounded-full bg-gray-50"
-                      src={user.imageUrl}
-                      alt=""
-                    />
-                    <span className="hidden lg:flex lg:items-center">
-                      <span
-                        className="ml-4 text-sm font-semibold leading-6 text-gray-900"
-                        aria-hidden="true"
-                      >
-                        {user.name}
-                      </span>
-                      <ChevronDownIcon
-                        className="ml-2 h-5 w-5 text-gray-400"
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </Menu.Button>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-200"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      {userNavigation.map((item) => (
-                        <Menu.Item key={item.name}>
-                          {({ active }) => (
-                            <div
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block cursor-pointer px-4 py-2 text-sm text-gray-700",
-                              )}
-                              onClick={() => {
-                                navigate(item.href);
-                              }}
-                            >
-                              {item.name}
-                            </div>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
+                <UserMenu
+                  avatarUrl={user.imageUrl}
+                  userName={user.name}
+                  navigation={userNavigation}
+                />
               </div>
             </div>
           </div>
