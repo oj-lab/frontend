@@ -7,6 +7,7 @@ import {
   TrophyIcon,
   ListBulletIcon,
 } from "@heroicons/react/24/outline";
+import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const user = {
   name: "Tom Cook",
@@ -28,8 +29,7 @@ const navigation = [
   },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  { name: "Admin Page", href: "/admin" },
   { name: "Sign out", href: "#" },
 ];
 
@@ -42,7 +42,7 @@ export default function Header() {
     <Disclosure as="nav" className="h-auto border-b border-gray-200 bg-white">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto px-4">
             <div className="flex h-16 justify-between">
               <div className="flex">
                 <div className="flex flex-shrink-0 items-center">
@@ -77,24 +77,28 @@ export default function Header() {
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                <button
-                  type="button"
-                  className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
-
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <Menu.Button className="-m-1.5 flex items-center p-1.5">
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
                         src={user.imageUrl}
                         alt=""
                       />
+                      <span className="hidden lg:flex lg:items-center">
+                        <span
+                          className="ml-4 text-sm font-semibold leading-6 text-gray-900"
+                          aria-hidden="true"
+                        >
+                          {user.name}
+                        </span>
+                        <ChevronDownIcon
+                          className="ml-2 h-5 w-5 text-gray-400"
+                          aria-hidden="true"
+                        />
+                      </span>
                     </Menu.Button>
                   </div>
                   <Transition
