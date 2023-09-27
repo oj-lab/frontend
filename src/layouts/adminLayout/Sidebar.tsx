@@ -1,46 +1,30 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import {
-  Bars3Icon,
-  HomeIcon,
-  UsersIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
 import { joinClasses } from "../../utils/common";
-import UserMenu from "../UserMenu";
-import LanguageMenu from "../LanguageMenu";
 
 const navigation = [
   { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
   { name: "User", href: "/admin/user", icon: UsersIcon, current: false },
 ];
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl: "/avatars/male-avatar-1.svg",
-};
-const userNavigation = [
-  { name: "Main page", href: "/problem" },
-  { name: "Sign out", href: "#" },
-];
 
 interface SidebarProps {
-  children: JSX.Element;
+  open: boolean;
+  onClose: () => void;
 }
 
 export default function Sidebar(props: SidebarProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const { t } = useTranslation();
 
   return (
     <>
       <div>
-        <Transition.Root show={sidebarOpen} as={Fragment}>
+        <Transition.Root show={props.open} as={Fragment}>
           <Dialog
             as="div"
             className="relative z-50 lg:hidden"
-            onClose={setSidebarOpen}
+            onClose={props.onClose}
           >
             <Transition.Child
               as={Fragment}
@@ -78,7 +62,7 @@ export default function Sidebar(props: SidebarProps) {
                       <button
                         type="button"
                         className="-m-2.5 p-2.5"
-                        onClick={() => setSidebarOpen(false)}
+                        onClick={props.onClose}
                       >
                         <span className="sr-only">Close sidebar</span>
                         <XMarkIcon
@@ -184,37 +168,6 @@ export default function Sidebar(props: SidebarProps) {
               </ul>
             </nav>
           </div>
-        </div>
-      </div>
-
-      <div>
-        <div className="lg:pl-80">
-          <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6">
-            <button
-              type="button"
-              className="-m-2.5 p-2.5 text-gray-700 lg:hidden"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <span className="sr-only">Open sidebar</span>
-              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-            </button>
-
-            <div className="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
-              <div className="flex flex-row items-center justify-center gap-2">
-                <LanguageMenu />
-                {/* Profile dropdown */}
-                <UserMenu
-                  userName={user.name}
-                  avatarUrl={user.imageUrl}
-                  navigation={userNavigation}
-                />
-              </div>
-            </div>
-          </div>
-
-          <main className="py-10">
-            <div className="px-4 sm:px-6 lg:px-8">{props.children}</div>
-          </main>
         </div>
       </div>
     </>
