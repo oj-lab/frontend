@@ -2,6 +2,8 @@ import { Resource } from "i18next";
 
 const ZH_CN_TRANSLATIONS: Resource = {
   translation: {
+    "English (US)": "英语 (美式)",
+    "Simple Chinese": "简体中文",
     Problem: "问题",
     User: "用户",
     Contest: "竞赛",

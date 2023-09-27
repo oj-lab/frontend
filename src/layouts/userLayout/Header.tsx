@@ -9,6 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import UserMenu from "../UserMenu";
 import { joinClasses } from "../../utils/common";
+import LanguageMenu from "../LanguageMenu";
+import { useTranslation } from "react-i18next";
 
 const user = {
   name: "Tom Cook",
@@ -35,6 +37,8 @@ const userNavigation = [
 ];
 
 export default function Header() {
+  const { t } = useTranslation();
+
   return (
     <Disclosure as="nav" className="h-auto border-b border-gray-200 bg-white">
       {({ open }) => (
@@ -68,18 +72,21 @@ export default function Header() {
                       aria-current={item.current ? "page" : undefined}
                     >
                       {item.icon}
-                      {item.name}
+                      {t(item.name)}
                     </a>
                   ))}
                 </div>
               </div>
               <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                {/* Profile dropdown */}
-                <UserMenu
-                  userName={user.name}
-                  avatarUrl={user.imageUrl}
-                  navigation={userNavigation}
-                />
+                <div className="flex flex-row items-center justify-center gap-2">
+                  <LanguageMenu />
+                  {/* Profile dropdown */}
+                  <UserMenu
+                    userName={user.name}
+                    avatarUrl={user.imageUrl}
+                    navigation={userNavigation}
+                  />
+                </div>
               </div>
               <div className="-mr-2 flex items-center sm:hidden">
                 {/* Mobile menu button */}
@@ -110,7 +117,7 @@ export default function Header() {
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
-                  {item.name}
+                  {t(item.name)}
                 </Disclosure.Button>
               ))}
             </div>

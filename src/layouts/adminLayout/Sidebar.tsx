@@ -9,6 +9,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { joinClasses } from "../../utils/common";
 import UserMenu from "../UserMenu";
+import LanguageMenu from "../LanguageMenu";
 
 const navigation = [
   { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
@@ -199,11 +200,12 @@ export default function Sidebar(props: SidebarProps) {
             </button>
 
             <div className="flex flex-1 justify-end gap-x-4 self-stretch lg:gap-x-6">
-              <div className="flex items-center gap-x-4 lg:gap-x-6">
+              <div className="flex flex-row items-center justify-center gap-2">
+                <LanguageMenu />
                 {/* Profile dropdown */}
                 <UserMenu
-                  avatarUrl={user.imageUrl}
                   userName={user.name}
+                  avatarUrl={user.imageUrl}
                   navigation={userNavigation}
                 />
               </div>

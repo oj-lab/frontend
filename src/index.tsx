@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { worker } from "./mocks/server";
 
-import "./i18n";
+import "./i18n/i18n";
 import "./index.css";
 
 console.log("Running in:", import.meta.env.MODE);

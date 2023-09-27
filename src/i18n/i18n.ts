@@ -1,7 +1,12 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import EN_US_TRANSLATIONS from "./i18n/en_US";
-import ZH_CN_TRANSLATIONS from "./i18n/zh_CN";
+import EN_US_TRANSLATIONS from "./en_US";
+import ZH_CN_TRANSLATIONS from "./zh_CN";
+
+export const LANGUAGE_SELECTIONS = [
+  { value: "en_US", label: "English (US)" },
+  { value: "zh_CN", label: "Simple Chinese" },
+];
 
 // the translations
 // (tip move them in a JSON file and import them,
