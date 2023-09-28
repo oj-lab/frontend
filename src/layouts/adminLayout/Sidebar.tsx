@@ -3,6 +3,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { HomeIcon, UsersIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
 import { joinClasses } from "../../utils/common";
+import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
@@ -15,6 +16,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar(props: SidebarProps) {
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
   return (
@@ -87,7 +89,7 @@ export default function Sidebar(props: SidebarProps) {
                     <nav className="flex flex-1 flex-col">
                       <ul className="flex flex-1 flex-col gap-y-7">
                         <li>
-                          <ul className="-mx-2 space-y-1">
+                          <ul className="-mx-2 cursor-pointer space-y-1">
                             {navigation.map((item) => (
                               <li key={item.name}>
                                 <div
@@ -97,7 +99,9 @@ export default function Sidebar(props: SidebarProps) {
                                       : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )}
-                                  onClick={() => {}}
+                                  onClick={() => {
+                                    navigate(item.href);
+                                  }}
                                 >
                                   <item.icon
                                     className={joinClasses(
@@ -141,14 +145,16 @@ export default function Sidebar(props: SidebarProps) {
                   <ul className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <a
-                          href={item.href}
+                        <div
                           className={joinClasses(
                             item.current
                               ? "bg-indigo-700 text-white"
                               : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )}
+                          onClick={() => {
+                            navigate(item.href);
+                          }}
                         >
                           <item.icon
                             className={joinClasses(
@@ -160,7 +166,7 @@ export default function Sidebar(props: SidebarProps) {
                             aria-hidden="true"
                           />
                           {t(item.name)}
-                        </a>
+                        </div>
                       </li>
                     ))}
                   </ul>
