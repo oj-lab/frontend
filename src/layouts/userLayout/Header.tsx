@@ -20,7 +20,7 @@ const user = {
 const navigation = [
   {
     name: "Problem",
-    href: "#",
+    href: "/problem",
     current: true,
     icon: <ListBulletIcon className="mr-2 h-4 w-4" aria-hidden="true" />,
   },

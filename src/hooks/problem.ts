@@ -3,33 +3,34 @@ import { ProblemServiceModel } from "../typings/problem";
 import { ProblemService } from "../api/problem";
 
 export const useProblem = (slug: string) => {
-  const [problemInfo, setProblemInfo] =
-    useState<ProblemServiceModel.ProblemInfo | null>(null);
+  const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
+    null,
+  );
 
   useEffect(() => {
-    ProblemService.getProblemInfo(slug)
+    ProblemService.getProblem(slug)
       .then((res) => {
-        setProblemInfo(res);
+        setProblem(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }, [slug]);
 
-  function getProblemInfo() {
-    return problemInfo;
+  function getProblem() {
+    return problem;
   }
 
-  return { getProblemInfo };
+  return { getProblem };
 };
 
-export const useProblemList = () => {
+export const useProblemInfoList = () => {
   const [problemList, setProblemList] = useState<
     ProblemServiceModel.ProblemInfo[]
   >([]);
 
   useEffect(() => {
-    ProblemService.getProblemList()
+    ProblemService.getProblemInfoList()
       .then((res) => {
         setProblemList(res);
       })
@@ -38,9 +39,9 @@ export const useProblemList = () => {
       });
   }, []);
 
-  function getProblemList() {
+  function getProblemInfoList() {
     return problemList;
   }
 
-  return { getProblemList };
+  return { getProblemInfoList };
 };

@@ -2,8 +2,8 @@ import { ProblemServiceModel } from "../typings/problem";
 import { client } from "./client";
 
 export namespace ProblemService {
-  export async function getProblemInfo(slug: string) {
-    let res = await client.get<ProblemServiceModel.ProblemInfo>(
+  export async function getProblem(slug: string) {
+    let res = await client.get<ProblemServiceModel.Problem>(
       `/v1/problem/${slug}`,
     );
     if (res.status !== 200) {
@@ -12,7 +12,7 @@ export namespace ProblemService {
     return res.data;
   }
 
-  export async function getProblemList() {
+  export async function getProblemInfoList() {
     let res =
       await client.get<ProblemServiceModel.ProblemInfo[]>(`/v1/problem`);
     if (res.status !== 200) {

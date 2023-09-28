@@ -19,7 +19,7 @@ int main() {
 }`;
 
 const Problem: React.FC = () => {
-  const { getProblemInfo } = useProblem("hello-world");
+  const { getProblem } = useProblem("hello-world");
   const { setSrc, setSrcLanguage, runJudge, getVerdicts } =
     useJudge("hello-world");
 
@@ -28,11 +28,11 @@ const Problem: React.FC = () => {
   }, [setSrcLanguage]);
 
   return (
-    <UserLayout title={getProblemInfo()?.title}>
+    <UserLayout title={getProblem()?.title}>
       <div className="flex">
         <div className="w-1/2 flex-1 ">
           <MarkdownRender
-            content={getProblemInfo()?.description || ""}
+            content={getProblem()?.description || ""}
             rehypePlugin="rehypeKatex"
           />
         </div>

@@ -8,6 +8,7 @@ const ZH_CN_TRANSLATIONS: Resource = {
     Create: "创建",
     Cancel: "取消",
     "Sign out": "登出",
+    "Show actions": "显示操作",
 
     Raw: "原始",
     Preview: "预览",
