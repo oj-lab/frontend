@@ -4,7 +4,7 @@ import { ProblemServiceModel } from "../../typings/problem";
 export const getProblemInfo = rest.get("/v1/problem/:slug", (req, res, ctx) => {
   const slug = req.params.slug;
 
-  const response: ProblemServiceModel.ProblemInfo = {
+  const response: ProblemServiceModel.Problem = {
     slug: slug.toString(),
     title: "Hello! { ... }",
     description: `
@@ -33,25 +33,26 @@ Hello! world!
 \`\`\`
 
 `,
-    tags: ["tag1", "tag2"],
+    tags: [{ slug: "primer", name: "Primer" }],
   };
 
   return res(ctx.status(200), ctx.json(response));
 });
 
-export const getProblemList = rest.get("/v1/problem", (req, res, ctx) => {
+export const getProblemInfoList = rest.get("/v1/problem", (req, res, ctx) => {
   const response: ProblemServiceModel.ProblemInfo[] = [
     {
       slug: "hello-world",
-      title: "Hello {...}",
-      description: "1",
-      tags: ["implementation", "system test"],
+      title: "Hello World",
+      tags: [{ slug: "primer", name: "Primer" }],
     },
     {
       slug: "a+b-problem",
       title: "A+B Problem",
-      description: "1",
-      tags: ["implementation"],
+      tags: [
+        { slug: "primer", name: "Primer" },
+        { slug: "math", name: "Math" },
+      ],
     },
   ];
   return res(ctx.status(200), ctx.json(response));

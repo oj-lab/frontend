@@ -1,7 +1,6 @@
 import { Button } from "@nextui-org/react";
 import ProblemAdminTable from "../../components/admin-dashboard/ProblemAdminTable";
 import { useProblemList } from "../../hooks/problem";
-import { problemListPipe } from "../../pipes/problem";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +22,7 @@ const Problem: React.FC = () => {
       >
         <PlusIcon className="h-6 w-6" />
       </Button>
-      <ProblemAdminTable data={problemListPipe(getProblemList())} />
+      <ProblemAdminTable data={getProblemList()} />
     </>
   );
 };

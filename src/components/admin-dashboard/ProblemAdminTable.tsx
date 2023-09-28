@@ -8,8 +8,8 @@ import {
   Chip,
   Button,
 } from "@nextui-org/react";
-import { ProblemModel } from "../../typings/problem";
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { ProblemServiceModel } from "../../typings/problem";
 
 const columns = [
   { name: "SLUG", uid: "slug" },
@@ -19,7 +19,7 @@ const columns = [
 ];
 
 export interface ProblemAdminTableProps {
-  data: ProblemModel.ProblemInfo[];
+  data: ProblemServiceModel.ProblemInfo[];
 }
 
 const ProblemAdminTable: React.FC<ProblemAdminTableProps> = (props) => {
@@ -30,14 +30,14 @@ const ProblemAdminTable: React.FC<ProblemAdminTableProps> = (props) => {
       </TableHeader>
       <TableBody items={props.data}>
         {(item) => (
-          <TableRow key={item.id}>
+          <TableRow key={item.slug}>
             <TableCell>{item.slug}</TableCell>
             <TableCell>{item.title}</TableCell>
             <TableCell>
               <div className="flex gap-1">
                 {item.tags.map((tag) => (
-                  <Chip variant="bordered" key={tag.id}>
-                    {tag.title}
+                  <Chip variant="bordered" key={tag.slug}>
+                    {tag.name}
                   </Chip>
                 ))}
               </div>

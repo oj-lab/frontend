@@ -1,21 +1,19 @@
 export namespace ProblemServiceModel {
-  export interface ProblemInfo {
+  export interface AlgorithmTag {
+    slug: string;
+    name: string;
+  }
+
+  export interface Problem {
     slug: string;
     title: string;
     description: string;
-    tags: string[];
+    tags: AlgorithmTag[];
   }
-}
 
-export namespace ProblemModel {
-  interface Tag {
-    id: string;
-    title: string;
-  }
   export interface ProblemInfo {
-    id: string;
     slug: string;
     title: string;
-    tags: Tag[];
+    tags: AlgorithmTag[];
   }
 }
