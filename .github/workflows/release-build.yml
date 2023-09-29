@@ -25,20 +25,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Read Release Info
-        id: read_release_info
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const fs = require('fs');
-            const yaml = require('js-yaml');
-
-            const releaseInfo = yaml.load(fs.readFileSync('RELEASE_INFO.yml', 'utf8'));
-
-            return releaseInfo;
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create Release
         if: github.event_name == 'push'
         id: create_release
@@ -46,9 +32,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.read_release_info.outputs.tag_name }}
-          release_name: ${{ steps.read_release_info.outputs.release_name }}
-          body: ${{ steps.read_release_info.outputs.description }}
+          tag_name: action-build
+          release_name: Action Build
 
       - name: Upload Release Asset
         if: github.event_name == 'push'
