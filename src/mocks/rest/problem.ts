@@ -48,7 +48,7 @@ export const getProblemInfoList = rest.get("/v1/problem", (req, res, ctx) => {
         tags: [{ slug: "primer", name: "Primer" }],
       },
       {
-        slug: "a+b-problem",
+        slug: "a-plus-b-problem",
         title: "A+B Problem",
         tags: [
           { slug: "primer", name: "Primer" },
