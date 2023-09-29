@@ -33,7 +33,7 @@ jobs:
             const fs = require('fs');
             const yaml = require('js-yaml');
 
-            const releaseInfo = yaml.load(fs.readFileSync('release.yaml', 'utf8'));
+            const releaseInfo = yaml.load(fs.readFileSync('RELEASE_INFO.yaml', 'utf8'));
 
             return releaseInfo;
         env:
