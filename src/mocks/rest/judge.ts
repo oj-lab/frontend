@@ -2,7 +2,7 @@ import { rest } from "msw";
 import { JudgeServiceModel } from "../../typings/judge";
 
 export const postJudge = rest.post(
-  "/v1/problem/:slug/judge",
+  "/api/v1/problem/:slug/judge",
   (_req, res, ctx) => {
     const response: JudgeServiceModel.JudgeVerdict[] = [
       {

@@ -14,7 +14,7 @@ export namespace JudgeService {
     let data = JSON.stringify(body);
 
     let res = await client.post<JudgeServiceModel.JudgeVerdict[]>(
-      `/v1/problem/${slug}/judge`,
+      `/api/v1/problem/${slug}/judge`,
       data,
     );
 
