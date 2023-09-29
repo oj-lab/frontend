@@ -14,7 +14,9 @@ export namespace ProblemService {
 
   export async function getProblemInfoList() {
     let res =
-      await client.get<ProblemServiceModel.ProblemInfo[]>(`/v1/problem`);
+      await client.get<ProblemServiceModel.GetProblemInfoResponse>(
+        `/v1/problem`,
+      );
     if (res.status !== 200) {
       throw Error("failed to get problem list");
     }

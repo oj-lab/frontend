@@ -32,7 +32,7 @@ export const useProblemInfoList = () => {
   useEffect(() => {
     ProblemService.getProblemInfoList()
       .then((res) => {
-        setProblemList(res);
+        setProblemList(res.list);
       })
       .catch((err) => {
         console.log(err);

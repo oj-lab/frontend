@@ -16,4 +16,8 @@ export namespace ProblemServiceModel {
     title: string;
     tags: AlgorithmTag[];
   }
+
+  export interface GetProblemInfoResponse {
+    list: ProblemInfo[];
+  }
 }

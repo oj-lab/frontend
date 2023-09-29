@@ -40,20 +40,22 @@ Hello! world!
 });
 
 export const getProblemInfoList = rest.get("/v1/problem", (req, res, ctx) => {
-  const response: ProblemServiceModel.ProblemInfo[] = [
-    {
-      slug: "hello-world",
-      title: "Hello World",
-      tags: [{ slug: "primer", name: "Primer" }],
-    },
-    {
-      slug: "a+b-problem",
-      title: "A+B Problem",
-      tags: [
-        { slug: "primer", name: "Primer" },
-        { slug: "math", name: "Math" },
-      ],
-    },
-  ];
+  const response: ProblemServiceModel.GetProblemInfoResponse = {
+    list: [
+      {
+        slug: "hello-world",
+        title: "Hello World",
+        tags: [{ slug: "primer", name: "Primer" }],
+      },
+      {
+        slug: "a+b-problem",
+        title: "A+B Problem",
+        tags: [
+          { slug: "primer", name: "Primer" },
+          { slug: "math", name: "Math" },
+        ],
+      },
+    ],
+  };
   return res(ctx.status(200), ctx.json(response));
 });
