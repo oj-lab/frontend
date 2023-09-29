@@ -12,6 +12,8 @@ import { joinClasses } from "../../utils/common";
 import LanguageMenu from "../LanguageMenu";
 import { useTranslation } from "react-i18next";
 
+const iconPath = "/images/oj-lab-icon.svg";
+
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
@@ -49,12 +51,12 @@ export default function Header() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-14 w-auto lg:hidden"
-                    src="/OJ-lab-icon.svg"
+                    src={iconPath}
                     alt="OJ Lab"
                   />
                   <img
                     className="hidden h-14 w-auto lg:block"
-                    src="/OJ-lab-icon.svg"
+                    src={iconPath}
                     alt="OJ Lab"
                   />
                 </div>
