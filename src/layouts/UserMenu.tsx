@@ -23,7 +23,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
   return (
     <>
       {/* Profile dropdown */}
-      <Menu as="div" className="relative">
+      <Menu as="div" className="relative z-50">
         <Menu.Button className="flex items-center p-1.5">
           <span className="sr-only">Open user menu</span>
           <img
