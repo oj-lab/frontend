@@ -43,7 +43,7 @@
     "start": "vite",
     "start-mock": "vite --mode mock",
     "build": "vite build",
-    "build-and-zip": "vite build && zip -f -r dist.zip dist",
+    "build-and-zip": "vite build && zip -u -r dist.zip dist",
     "init-mock": "npx msw init public --no-save",
     "prettier": "npx prettier --write \"src/**/*.{ts,tsx}\"",
     "prettier:check": "npx prettier --check \"src/**/*.{ts,tsx}\"",
