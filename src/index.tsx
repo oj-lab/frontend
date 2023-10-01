@@ -8,7 +8,7 @@ import "./i18n/i18n";
 import "./index.css";
 
 console.log("Running in:", import.meta.env.MODE);
-if (import.meta.env.MODE === "mock") {
+if (import.meta.env.MODE === "mock" || import.meta.env.MODE === "gh-pages") {
   worker.start();
 }
 

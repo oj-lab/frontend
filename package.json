@@ -43,7 +43,7 @@
     "start": "vite",
     "start-mock": "vite --mode mock",
     "build": "vite build",
-    "build-mock": "vite build --mode mock",
+    "build:gh-pages": "vite build --mode gh-pages",
     "build-and-zip": "vite build && ./script/zip-dist.sh",
     "init-mock": "npx msw init public --no-save",
     "prettier": "npx prettier --write \"src/**/*.{ts,tsx}\"",
