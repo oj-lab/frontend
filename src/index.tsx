@@ -8,8 +8,15 @@ import "./i18n/i18n";
 import "./index.css";
 
 console.log("Running in:", import.meta.env.MODE);
-if (import.meta.env.MODE === "mock" || import.meta.env.MODE === "gh-pages") {
+if (import.meta.env.MODE === "mock") {
   worker.start();
+}
+if (import.meta.env.MODE === "gh-pages") {
+  worker.start({
+    serviceWorker: {
+      url: "/oj-lab-front/mockServiceWorker.js",
+    },
+  });
 }
 
 const root = ReactDOM.createRoot(
