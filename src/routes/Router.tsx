@@ -8,7 +8,7 @@ import ProblemList from "../pages/ProblemList";
 
 const PageRouter: React.FC = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Suspense>
         <Routes>
           <Route path="/" element={<Navigate replace to="/problem" />} />
