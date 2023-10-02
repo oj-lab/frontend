@@ -13,6 +13,7 @@ if (import.meta.env.MODE === "mock") {
 }
 if (import.meta.env.MODE === "gh-pages") {
   worker.start({
+    onUnhandledRequest: "bypass",
     serviceWorker: {
       url: "/oj-lab-front/mockServiceWorker.js",
     },

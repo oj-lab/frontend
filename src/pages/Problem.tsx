@@ -42,7 +42,6 @@ const Problem: React.FC = () => {
             value={defaultCode}
             onChange={(value: string) => {
               setSrc(value);
-              console.log(value);
             }}
           />
           <Button

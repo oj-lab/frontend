@@ -50,7 +50,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
   );
 
   return (
-    <Table>
+    <Table aria-label="Problem Table">
       <TableHeader
         columns={columns.filter((col) => {
           if (!props.showActions) {
@@ -89,6 +89,7 @@ const Actions: React.FC = () => {
     <div className="flex gap-4">
       <Button
         className="min-w-7 min-h-7 h-7 w-7"
+        title="Edit"
         size="sm"
         variant="light"
         color="primary"
@@ -98,6 +99,7 @@ const Actions: React.FC = () => {
       </Button>
       <Button
         className="min-w-7 min-h-7 h-7 w-7"
+        title="Delete"
         size="sm"
         variant="light"
         color="danger"
