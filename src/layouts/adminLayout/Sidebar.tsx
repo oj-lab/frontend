@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { joinClasses } from "../../utils/common";
 import { useNavigate } from "react-router-dom";
 
-const iconPath = "/images/oj-lab-icon.svg";
+const iconPath = `${import.meta.env.BASE_URL}images/oj-lab-icon.svg`;
 
 const navigation = [
   { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },

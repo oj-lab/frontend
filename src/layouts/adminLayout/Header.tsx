@@ -6,7 +6,7 @@ import LanguageMenu from "../LanguageMenu";
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
-  imageUrl: "/avatars/male-avatar-1.svg",
+  imageUrl: `${import.meta.env.BASE_URL}avatars/male-avatar-1.svg`,
 };
 const userNavigation = [
   { name: "Main page", href: "/problem" },

@@ -12,12 +12,12 @@ import { joinClasses } from "../../utils/common";
 import LanguageMenu from "../LanguageMenu";
 import { useTranslation } from "react-i18next";
 
-const iconPath = "/images/oj-lab-icon.svg";
+const iconPath = `${import.meta.env.BASE_URL}images/oj-lab-icon.svg`;
 
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
-  imageUrl: "/avatars/male-avatar-1.svg",
+  imageUrl: `${import.meta.env.BASE_URL}avatars/male-avatar-1.svg`,
 };
 const navigation = [
   {
