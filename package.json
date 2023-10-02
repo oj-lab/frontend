@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "vite",
-    "start-mock": "vite --mode mock",
+    "start:mock": "vite --mode mock",
     "build": "vite build",
     "build:gh-pages": "vite build --mode gh-pages",
     "build-and-zip": "vite build && ./script/zip-dist.sh",
