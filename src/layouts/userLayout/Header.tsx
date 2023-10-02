@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { Disclosure } from "@headlessui/react";
 import {
   Bars3Icon,
-  BellIcon,
   XMarkIcon,
   TrophyIcon,
   ListBulletIcon,
@@ -12,6 +11,7 @@ import { joinClasses } from "../../utils/common";
 import LanguageMenu from "../LanguageMenu";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Divider } from "@nextui-org/react";
 
 const iconPath = `${import.meta.env.BASE_URL}images/oj-lab-icon.svg`;
 
@@ -108,24 +108,6 @@ export default function Header() {
           </div>
 
           <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  className={joinClasses(
-                    item.current
-                      ? "border-indigo-500 bg-indigo-50 text-indigo-700"
-                      : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
-                    "block cursor-pointer border-l-4 py-2 pl-3 pr-4 text-base font-medium",
-                  )}
-                  onClick={() => {
-                    navigate(item.href);
-                  }}
-                >
-                  {t(item.name)}
-                </Disclosure.Button>
-              ))}
-            </div>
             <div className="border-t border-gray-200 pb-3 pt-4">
               <div className="flex items-center px-4">
                 <div className="flex-shrink-0">
@@ -143,26 +125,40 @@ export default function Header() {
                     {user.email}
                   </div>
                 </div>
-                <button
-                  type="button"
-                  className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                <LanguageMenu className="ml-auto" />
               </div>
               <div className="mt-3 space-y-1">
                 {userNavigation.map((item) => (
                   <Disclosure.Button
                     key={item.name}
-                    as="a"
-                    href={item.href}
-                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                    className="block cursor-pointer px-4 py-2 text-base font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-800"
+                    onClick={() => {
+                      navigate(item.href);
+                    }}
                   >
                     {item.name}
                   </Disclosure.Button>
                 ))}
               </div>
+            </div>
+            <Divider />
+            <div className="space-y-1 pb-3 pt-2">
+              {navigation.map((item) => (
+                <Disclosure.Button
+                  key={item.name}
+                  className={joinClasses(
+                    item.current
+                      ? "border-indigo-500 bg-indigo-50 text-indigo-700"
+                      : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
+                    "block w-full cursor-pointer border-l-4 py-2 pl-3 pr-4 text-base font-medium",
+                  )}
+                  onClick={() => {
+                    navigate(item.href);
+                  }}
+                >
+                  {t(item.name)}
+                </Disclosure.Button>
+              ))}
             </div>
           </Disclosure.Panel>
         </>

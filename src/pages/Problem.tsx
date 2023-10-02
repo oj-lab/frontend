@@ -29,14 +29,14 @@ const Problem: React.FC = () => {
 
   return (
     <UserLayout title={getProblem()?.title}>
-      <div className="flex">
-        <div className="w-1/2 flex-1 ">
+      <div className="flex flex-col sm:flex-row">
+        <div className="w-full flex-1 sm:w-1/2">
           <MarkdownRender
             content={getProblem()?.description || ""}
             rehypePlugin="rehypeKatex"
           />
         </div>
-        <div className="flex w-1/2 flex-col gap-4">
+        <div className="flex w-full flex-col gap-4 sm:w-1/2">
           <CodeEditor
             className="h-96 w-full overflow-hidden"
             value={defaultCode}

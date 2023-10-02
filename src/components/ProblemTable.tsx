@@ -25,6 +25,7 @@ export interface ProblemTableProps {
   data: ProblemServiceModel.ProblemInfo[];
   showActions?: boolean;
   enableNavigation?: boolean;
+  className?: string;
 }
 
 const ProblemTable: React.FC<ProblemTableProps> = (props) => {
@@ -50,7 +51,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
   );
 
   return (
-    <Table aria-label="Problem Table">
+    <Table className={props.className} aria-label="Problem Table">
       <TableHeader
         columns={columns.filter((col) => {
           if (!props.showActions) {

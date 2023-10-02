@@ -8,15 +8,14 @@ const ProblemList: React.FC = () => {
 
   return (
     <UserLayout>
-      <div className="flex gap-8">
-        <div className="w-2/3">
-          <ProblemTable
-            data={getProblemInfoList()}
-            showActions={false}
-            enableNavigation
-          />
-        </div>
-        <div className="w-1/3">
+      <div className="flex w-full flex-auto flex-col gap-8 px-4 sm:flex-row">
+        <ProblemTable
+          data={getProblemInfoList()}
+          showActions={false}
+          enableNavigation
+          className="w-full sm:w-2/3"
+        />
+        <div className="w-full sm:w-1/3">
           <NewsCard />
         </div>
       </div>

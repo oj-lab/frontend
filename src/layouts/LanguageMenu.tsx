@@ -6,13 +6,17 @@ import { LanguageIcon } from "@heroicons/react/24/outline";
 import { changeLanguage } from "i18next";
 import { LANGUAGE_SELECTIONS } from "../i18n/i18n";
 
-const LanguageMenu: React.FC = () => {
+interface LanguageMenuProps {
+  className?: string;
+}
+
+const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
   const { t } = useTranslation();
 
   return (
     <>
       {/* Profile dropdown */}
-      <Menu as="div" className="relative">
+      <Menu as="div" className={joinClasses("relative", props.className)}>
         <Menu.Button className="flex items-center p-1.5">
           <span className="sr-only">Open user menu</span>
           <LanguageIcon className="h-5 w-5" />
