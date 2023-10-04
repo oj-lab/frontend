@@ -6,12 +6,13 @@ import { worker } from "./mocks/server";
 
 import "./i18n/i18n";
 import "./index.css";
+import { getMode, isGhPages, isMock } from "./utils/environment";
 
-console.log("Running in:", import.meta.env.MODE);
-if (import.meta.env.MODE === "mock") {
+console.log("Running in:", getMode());
+if (isMock()) {
   worker.start();
 }
-if (import.meta.env.MODE === "gh-pages") {
+if (isGhPages()) {
   worker.start({
     onUnhandledRequest: "bypass",
     serviceWorker: {
