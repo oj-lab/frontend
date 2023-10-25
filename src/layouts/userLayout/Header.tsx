@@ -5,6 +5,7 @@ import {
   XMarkIcon,
   TrophyIcon,
   ListBulletIcon,
+  RectangleStackIcon,
 } from "@heroicons/react/24/outline";
 import UserMenu from "../UserMenu";
 import { joinClasses } from "../../utils/common";
@@ -24,14 +25,17 @@ const navigation = [
   {
     name: "Problem",
     href: "/problem",
-    current: true,
     icon: <ListBulletIcon className="mr-2 h-4 w-4" aria-hidden="true" />,
   },
   {
     name: "Contest",
     href: "#",
-    current: false,
     icon: <TrophyIcon className="mr-2 h-4 w-4" aria-hidden="true" />,
+  },
+  {
+    name: "Submission",
+    href: "/submission",
+    icon: <RectangleStackIcon className="mr-2 h-4 w-4" aria-hidden="true" />,
   },
 ];
 const userNavigation = [
@@ -67,7 +71,7 @@ export default function Header() {
                     <div
                       key={item.name}
                       className={joinClasses(
-                        item.current
+                        item.href === window.location.pathname
                           ? "border-indigo-500 text-gray-900"
                           : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
                         "inline-flex cursor-pointer items-center border-b-2 px-1 pt-1 text-sm font-medium",
@@ -147,7 +151,7 @@ export default function Header() {
                 <Disclosure.Button
                   key={item.name}
                   className={joinClasses(
-                    item.current
+                    item.href === window.location.pathname
                       ? "border-indigo-500 bg-indigo-50 text-indigo-700"
                       : "border-transparent text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800",
                     "block w-full cursor-pointer border-l-4 py-2 pl-3 pr-4 text-base font-medium",

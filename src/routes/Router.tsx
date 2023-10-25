@@ -5,6 +5,7 @@ import { default as AdminProblem } from "../pages/admin-dashboard/Problem";
 import { default as AdminCreateProblem } from "../pages/admin-dashboard/CreateProblem";
 import AdminLayout from "../layouts/adminLayout/AdminLayout";
 import ProblemList from "../pages/ProblemList";
+import SubmissionList from "../pages/SubmissionList";
 
 const PageRouter: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const PageRouter: React.FC = () => {
             <Route path="new/problem" element={<AdminCreateProblem />} />
             <Route path="user" element={<div>user</div>} />
           </Route>
+          <Route path="/submission" element={<SubmissionList />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

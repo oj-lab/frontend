@@ -13,10 +13,10 @@ export namespace ProblemService {
   }
 
   export async function getProblemInfoList() {
-    let res =
-      await client.get<ProblemServiceModel.GetProblemInfoResponse>(
-        `/api/v1/problem`,
-      );
+    let res = await client.get<{
+      total: number;
+      list: ProblemServiceModel.ProblemInfo[];
+    }>(`/api/v1/problem`);
     if (res.status !== 200) {
       throw Error("failed to get problem list");
     }

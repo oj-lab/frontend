@@ -45,7 +45,11 @@ Hello! world!
 export const getProblemInfoList = rest.get(
   "/api/v1/problem",
   (req, res, ctx) => {
-    const response: ProblemServiceModel.GetProblemInfoResponse = {
+    const response: {
+      total: number;
+      list: ProblemServiceModel.ProblemInfo[];
+    } = {
+      total: 2,
       list: [
         {
           slug: "hello-world",
