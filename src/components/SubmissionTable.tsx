@@ -13,6 +13,8 @@ import { SubmissionServiceModel } from "../typings/submission";
 
 const columns = [
   { name: "PROBLEM", uid: "problem" },
+  { name: "USER", uid: "user" },
+  { name: "LANGUAGE", uid: "language" },
   { name: "STATUS", uid: "status" },
 ];
 
@@ -33,6 +35,12 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
     ) => {
       if (columnUid === "problem") {
         return submissionInfo.problem.title;
+      }
+      if (columnUid === "user") {
+        return submissionInfo.user.name;
+      }
+      if (columnUid === "language") {
+        return submissionInfo.language;
       }
       if (columnUid === "status") {
         return submissionInfo.status;
