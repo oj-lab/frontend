@@ -2,19 +2,19 @@ import { JudgeServiceModel } from "../typings/judge";
 import { client } from "./client";
 
 export namespace JudgeService {
-  export async function postJudge(
+  export async function postSubmission(
     slug: string,
-    src: string,
-    src_language: string,
+    code: string,
+    language: string,
   ) {
     let body: JudgeServiceModel.RunJudgeRequest = {
-      src,
-      src_language,
+      code,
+      language,
     };
     let data = JSON.stringify(body);
 
     let res = await client.post<JudgeServiceModel.JudgeVerdict[]>(
-      `/api/v1/problem/${slug}/judge`,
+      `/api/v1/problem/${slug}/submission`,
       data,
     );
 

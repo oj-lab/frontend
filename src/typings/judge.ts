@@ -1,7 +1,7 @@
 export namespace JudgeServiceModel {
   export interface RunJudgeRequest {
-    src: string;
-    src_language: string;
+    code: string;
+    language: string;
   }
 
   export interface JudgeTimeUsage {

@@ -11,7 +11,7 @@ export const useJudge = (slug: string) => {
   );
 
   function runJudge() {
-    JudgeService.postJudge(slug, src, src_language)
+    JudgeService.postSubmission(slug, src, src_language)
       .then((res) => {
         setVerdicts(res);
       })
