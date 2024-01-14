@@ -6,4 +6,4 @@ if [ -f dist.zip ]; then
 fi
 
 # Zip dist
-zip -r dist.zip dist
+cd dist && zip -r ../dist.zip ./*
