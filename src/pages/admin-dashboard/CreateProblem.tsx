@@ -15,6 +15,7 @@ import { useTranslation } from "react-i18next";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import MarkdownRender from "../../components/markdown/MarkdownRender";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
+import FileUploader from "../../components/FileUploader";
 
 const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
 
@@ -112,7 +113,7 @@ const CreateProblem: React.FC = () => {
               </div>
             )}
           </div>
-
+          <FileUploader />
           <Divider />
           <Input
             className="w-1/2"
