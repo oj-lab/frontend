@@ -5,6 +5,7 @@ import {
   TableHeader,
   TableRow,
   TableCell,
+  Chip,
 } from "@nextui-org/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,28 +28,6 @@ export interface SubmissionTableProps {
 
 const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
   const navigate = useNavigate();
-
-  const renderCell = React.useCallback(
-    (
-      submissionInfo: SubmissionServiceModel.SubmissionInfo,
-      columnUid: React.Key,
-    ) => {
-      if (columnUid === "problem") {
-        return submissionInfo.problem.title;
-      }
-      if (columnUid === "user") {
-        return submissionInfo.user.name;
-      }
-      if (columnUid === "language") {
-        return submissionInfo.language;
-      }
-      if (columnUid === "status") {
-        return submissionInfo.status;
-      }
-      return null;
-    },
-    [],
-  );
 
   return (
     <Table className={props.className} aria-label="Submission Table">
@@ -75,9 +54,17 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
               }
             }}
           >
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
+            <TableCell>{item.problem.title}</TableCell>
+            <TableCell>{item.user.name}</TableCell>
+            <TableCell>{item.language}</TableCell>
+            <TableCell>
+              <Chip
+                color={item.status === "finished" ? "success" : "danger"}
+                variant="bordered"
+              >
+                {item.status}
+              </Chip>
+            </TableCell>
           </TableRow>
         )}
       </TableBody>

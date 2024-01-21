@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 const iconPath = `${import.meta.env.BASE_URL}images/oj-lab-icon.svg`;
 
 const navigation = [
-  { name: "Problem", href: "/admin/problem", icon: HomeIcon, current: true },
-  { name: "User", href: "/admin/user", icon: UsersIcon, current: false },
+  { name: "Problem", href: "/admin/problem", icon: HomeIcon },
+  { name: "User", href: "/admin/user", icon: UsersIcon },
 ];
 
 interface SidebarProps {
@@ -96,10 +96,10 @@ export default function Sidebar(props: SidebarProps) {
                               <li key={item.name}>
                                 <div
                                   className={joinClasses(
-                                    item.current
+                                    window.location.href.includes(item.href)
                                       ? "bg-indigo-700 text-white"
                                       : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
-                                    "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+                                    "group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                                   )}
                                   onClick={() => {
                                     navigate(item.href);
@@ -107,7 +107,7 @@ export default function Sidebar(props: SidebarProps) {
                                 >
                                   <item.icon
                                     className={joinClasses(
-                                      item.current
+                                      window.location.href.includes(item.href)
                                         ? "text-white"
                                         : "text-indigo-200 group-hover:text-white",
                                       "h-6 w-6 shrink-0",
@@ -145,10 +145,10 @@ export default function Sidebar(props: SidebarProps) {
                       <li key={item.name}>
                         <div
                           className={joinClasses(
-                            item.current
+                            window.location.href.includes(item.href)
                               ? "bg-indigo-700 text-white"
                               : "text-indigo-200 hover:bg-indigo-700 hover:text-white",
-                            "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
+                            "group flex cursor-pointer gap-x-3 rounded-md p-2 text-sm font-semibold leading-6",
                           )}
                           onClick={() => {
                             navigate(item.href);
@@ -156,7 +156,7 @@ export default function Sidebar(props: SidebarProps) {
                         >
                           <item.icon
                             className={joinClasses(
-                              item.current
+                              window.location.href.includes(item.href)
                                 ? "text-white"
                                 : "text-indigo-200 group-hover:text-white",
                               "h-6 w-6 shrink-0",
