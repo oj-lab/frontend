@@ -2,7 +2,6 @@
   "recommendations": [
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
-    "pkief.material-icon-theme",
     "bradlc.vscode-tailwindcss"
   ]
 }

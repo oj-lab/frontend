@@ -8,13 +8,13 @@ Suggest using VSCode or other VSCode based cloud editor.
 
 ### Project setup
 
-```
+```sh
 npm install
 ```
 
 ### Compiles and hot-reloads for development
 
-```
+```sh
 npm run start
 ```
 
@@ -22,10 +22,10 @@ npm run start
 
 Please run the following before commit:
 
-```
+```sh
 npm run prettier:check
 ```
 
-```
+```sh
 npm run lint
 ```
