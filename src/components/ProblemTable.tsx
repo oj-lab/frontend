@@ -13,6 +13,7 @@ import { ProblemServiceModel } from "../typings/problem";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../utils/common";
+import { Badge } from "@/shadcn/components/ui/badge";
 
 const columns = [
   { name: "SLUG", uid: "slug" },
@@ -37,7 +38,13 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         return <Actions />;
       }
       if (columnUid === "tags") {
-        return <Tags tags={problemInfo.tags} />;
+        return () => {
+          problemInfo.tags.map((tag) => (
+            <Badge key={tag.slug} color="primary">
+              {tag.name}
+            </Badge>
+          ));
+        };
       }
       if (columnUid === "title") {
         return problemInfo.title;
