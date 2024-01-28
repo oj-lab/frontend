@@ -36,6 +36,7 @@
     "rehype-katex": "^6.0.3",
     "rehype-mathjax": "^4.0.3",
     "remark-math": "^5.1.1",
+    "theme-change": "^2.5.0",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -70,9 +71,11 @@
     ]
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.10",
     "@types/redux-logger": "^3.0.9",
     "@vitejs/plugin-react": "^2.0.1",
     "autoprefixer": "^10.4.15",
+    "daisyui": "^4.6.0",
     "eslint-config-react-app": "^7.0.1",
     "postcss": "^8.4.28",
     "prettier": "3.0.2",

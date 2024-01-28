@@ -26,22 +26,15 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
       <Menu as="div" className="relative z-50">
         <Menu.Button className="flex items-center p-1.5">
           <span className="sr-only">Open user menu</span>
-          <img
-            className="h-8 w-8 rounded-full bg-gray-50"
-            src={props.avatarUrl}
-            alt=""
-          />
+          <img className="h-8 w-8 rounded-full" src={props.avatarUrl} alt="" />
           <span className="hidden lg:flex lg:items-center">
             <span
-              className="ml-4 text-sm font-semibold leading-6 text-gray-900"
+              className="ml-4 text-sm font-semibold leading-6"
               aria-hidden="true"
             >
               {props.userName}
             </span>
-            <ChevronDownIcon
-              className="ml-2 h-5 w-5 text-gray-400"
-              aria-hidden="true"
-            />
+            <ChevronDownIcon className="ml-2 h-5 w-5" aria-hidden="true" />
           </span>
         </Menu.Button>
         <Transition
@@ -53,14 +46,14 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             {props.navigation?.map((item) => (
               <Menu.Item key={item.name}>
                 {({ active }) => (
                   <div
                     className={joinClasses(
-                      active ? "bg-gray-100" : "",
-                      "block cursor-pointer px-4 py-2 text-sm text-gray-700",
+                      active ? "bg-base-200" : "",
+                      "text-s block cursor-pointer px-4 py-2",
                     )}
                     onClick={() => {
                       navigate(item.href);

@@ -73,12 +73,10 @@ const CreateProblem: React.FC = () => {
         </div>
       </div>
       <div>
-        <p className="text-gray-500">
+        <p className="">
           {t("Please fill in the information below to create a new problem.")}
         </p>
-        <p className="text-gray-500">
-          {t("The information marked with * is required.")}
-        </p>
+        <p className="">{t("The information marked with * is required.")}</p>
       </div>
       <Card className="mt-4">
         <CardBody className="gap-4">
@@ -96,9 +94,7 @@ const CreateProblem: React.FC = () => {
             {slug && slug !== "slug" && (
               <div className="flex items-center gap-2">
                 <Spinner color="warning" aria-label="Checking..." />
-                <p className="text-sm text-gray-500">
-                  {t("Checking slug is valid...")}
-                </p>
+                <p className="text-sm ">{t("Checking slug is valid...")}</p>
               </div>
             )}
             {slug === "slug" && (
@@ -107,9 +103,7 @@ const CreateProblem: React.FC = () => {
             {!slug && (
               <div className="flex items-center gap-2">
                 <XCircleIcon className="h-8 fill-red-500" aria-label="Error" />
-                <p className="text-sm text-gray-500">
-                  {t("Slug is not valid.")}
-                </p>
+                <p className="text-sm ">{t("Slug is not valid.")}</p>
               </div>
             )}
           </div>
