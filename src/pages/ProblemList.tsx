@@ -15,7 +15,7 @@ const ProblemList: React.FC = () => {
           data={getProblemInfoList()}
           showActions={false}
           enableNavigation
-          className="w-full sm:w-2/3"
+          className="h-fit w-full"
         />
         <div className="w-full sm:w-1/3">
           <NewsCard />
