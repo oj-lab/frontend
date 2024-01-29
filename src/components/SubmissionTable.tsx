@@ -1,12 +1,3 @@
-import {
-  Table,
-  TableBody,
-  TableColumn,
-  TableHeader,
-  TableRow,
-  TableCell,
-  Chip,
-} from "@nextui-org/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../utils/common";
@@ -30,45 +21,36 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
   const navigate = useNavigate();
 
   return (
-    <Table className={props.className} aria-label="Submission Table">
-      <TableHeader
-        columns={columns.filter((col) => {
-          if (!props.showActions) {
-            return col.uid !== "actions";
-          }
-          return true;
-        })}
-      >
-        {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
-      </TableHeader>
-      <TableBody items={props.data}>
-        {(item) => (
-          <TableRow
-            className={joinClasses(
-              props.enableNavigation && "cursor-pointer hover:bg-gray-50",
-            )}
-            key={item.uid}
-            onClick={() => {
-              if (props.enableNavigation) {
-                navigate(`/submission/${item.uid}`);
-              }
-            }}
-          >
-            <TableCell>{item.problem.title}</TableCell>
-            <TableCell>{item.user.name}</TableCell>
-            <TableCell>{item.language}</TableCell>
-            <TableCell>
-              <Chip
-                color={item.status === "finished" ? "success" : "danger"}
-                variant="bordered"
-              >
-                {item.status}
-              </Chip>
-            </TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <div className={props.className}>
+      <table className={joinClasses("table")} aria-label="Problem Table">
+        <thead>
+          <tr>
+            {columns.map((column) => {
+              return <th key={column.uid}>{column.name}</th>;
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((submission) => (
+            <tr className="hover" onClick={() => navigate(submission.uid)}>
+              <th>{submission.problem.title}</th>
+              <td>{submission.user.name}</td>
+              <td>{submission.language}</td>
+              <td>
+                <div
+                  className={joinClasses(
+                    "badge badge-outline",
+                    submission.status === "finished" ? "badge-success" : "",
+                  )}
+                >
+                  {submission.status}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
