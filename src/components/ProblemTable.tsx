@@ -2,7 +2,6 @@ import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { ProblemServiceModel } from "../typings/problem";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { joinClasses } from "../utils/common";
 
 const columns = [
   { name: "SLUG", uid: "slug" },
@@ -23,7 +22,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
 
   return (
     <div className={props.className}>
-      <table className={joinClasses("table")} aria-label="Problem Table">
+      <table className="table" aria-label="Problem Table">
         <thead>
           <tr>
             {columns.map((column) => {

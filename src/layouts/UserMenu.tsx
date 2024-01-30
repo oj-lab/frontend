@@ -23,7 +23,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
   return (
     <>
       {/* Profile dropdown */}
-      <Menu as="div" className="relative z-50">
+      <Menu as="div" className="relative bg-base-100">
         <Menu.Button className="flex items-center p-1.5">
           <span className="sr-only">Open user menu</span>
           <img className="h-8 w-8 rounded-full" src={props.avatarUrl} alt="" />
@@ -46,7 +46,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-base-100 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             {props.navigation?.map((item) => (
               <Menu.Item key={item.name}>
                 {({ active }) => (
