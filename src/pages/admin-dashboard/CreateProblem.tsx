@@ -1,22 +1,9 @@
-import {
-  Button,
-  Card,
-  CardBody,
-  Chip,
-  Divider,
-  Input,
-  Spinner,
-  Tab,
-  Tabs,
-  Textarea,
-} from "@nextui-org/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import MarkdownRender from "../../components/markdown/MarkdownRender";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import FileUploader from "../../components/FileUploader";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
 
 ## Input
@@ -46,7 +33,6 @@ Hello! world!
 const CreateProblem: React.FC = () => {
   const [slug, setSlug] = useState<string>("");
   const [title, setTitle] = useState<string>("");
-  const [description, setDiscription] = useState<string>("");
   const [tags, setTags] = useState<string[]>(["default"]);
   const [addingTag, setAddingTag] = useState<string>("");
 
@@ -58,141 +44,165 @@ const CreateProblem: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-between">
+      <div className="flex justify-between px-4">
         <h1 className="text-3xl font-bold">{t("Create Problem")}</h1>
         <div className="flex gap-4">
-          <Button
-            variant="bordered"
+          <button
+            className="btn btn-error btn-sm text-base-100"
+            aria-label="Delete"
             onClick={() => {
               window.history.back();
             }}
           >
             {t("Cancel")}
-          </Button>
-          <Button color="primary">{t("Create")}</Button>
+          </button>
+          <button className="btn btn-primary btn-sm text-base-100">
+            {t("Create")}
+          </button>
         </div>
       </div>
-      <div>
-        <p className="text-gray-500">
+      <div className="px-4 pt-2">
+        <p className="">
           {t("Please fill in the information below to create a new problem.")}
         </p>
-        <p className="text-gray-500">
-          {t("The information marked with * is required.")}
-        </p>
+        <p className="">{t("The information marked with * is required.")}</p>
       </div>
-      <Card className="mt-4">
-        <CardBody className="gap-4">
+      <div className="card mt-4 border border-base-300 pt-4 shadow-xl">
+        <div className="card-body -mt-6">
           <div className="flex items-center gap-4">
-            <Input
-              className="w-1/2"
-              isRequired={true}
-              label={t("Problem slug")}
-              placeholder="example-problem"
-              value={slug}
-              onChange={(e) => {
-                setSlug(e.target.value);
-              }}
-            />
-            {slug && slug !== "slug" && (
-              <div className="flex items-center gap-2">
-                <Spinner color="warning" aria-label="Checking..." />
-                <p className="text-sm text-gray-500">
-                  {t("Checking slug is valid...")}
-                </p>
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Problem Slug</span>
               </div>
-            )}
-            {slug === "slug" && (
-              <CheckCircleIcon className="h-8 fill-green-500" />
-            )}
-            {!slug && (
-              <div className="flex items-center gap-2">
-                <XCircleIcon className="h-8 fill-red-500" aria-label="Error" />
-                <p className="text-sm text-gray-500">
-                  {t("Slug is not valid.")}
-                </p>
-              </div>
-            )}
-          </div>
-          <FileUploader />
-          <Divider />
-          <Input
-            className="w-1/2"
-            isRequired={true}
-            label={t("Problem title")}
-            placeholder="Example Problem"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-          />
-          <Tabs aria-label="Options">
-            <Tab key="raw" title={t("Raw")}>
-              <Textarea
-                className="-mt-3"
-                label={t("Problem description")}
-                isRequired={true}
-                placeholder={descriptionPlaceholder}
-                value={description}
+              <input
+                type="text"
+                placeholder="Type here"
+                className="input input-bordered w-full max-w-xs"
                 onChange={(e) => {
-                  setDiscription(e.target.value);
+                  setSlug(e.target.value);
                 }}
+                value={slug}
               />
-            </Tab>
-            <Tab key="preview" title={t("Preview")}>
-              <Card className="-mt-3" shadow="sm">
-                <CardBody>
-                  <MarkdownRender
-                    content={description ? description : descriptionPlaceholder}
+            </label>
+            <div className="mt-9">
+              {slug && slug !== "slug" && (
+                <div className="flex items-center gap-2">
+                  <span className="loading loading-spinner loading-md" />
+                  <p className="text-sm ">{t("Checking slug is valid...")}</p>
+                </div>
+              )}
+              {slug === "slug" && (
+                <CheckCircleIcon className="h-8 fill-green-500" />
+              )}
+              {!slug && (
+                <div className="flex items-center gap-2">
+                  <XCircleIcon
+                    className="h-8 fill-red-500"
+                    aria-label="Error"
                   />
-                </CardBody>
-              </Card>
-            </Tab>
-          </Tabs>
-          <Divider />
+                  <p className="text-sm ">{t("Slug is not valid.")}</p>
+                </div>
+              )}
+            </div>
+          </div>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Upload Package</span>
+            </div>
+            <input type="file" className="file-input w-full max-w-xs" />
+          </label>
+          <div className="divider" />
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Problem Title</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Type here"
+              className="input input-bordered w-full max-w-xs"
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              value={title}
+            />
+          </label>
+          <div role="tablist" className="tabs tabs-lifted">
+            <input
+              type="radio"
+              name="my_tabs_2"
+              role="tab"
+              className="tab"
+              aria-label="Raw"
+            />
+            <div
+              role="tabpanel"
+              className="tab-content rounded-box border-base-300 bg-base-100 p-6"
+            >
+              Raw
+            </div>
+
+            <input
+              type="radio"
+              name="my_tabs_2"
+              role="tab"
+              className="tab"
+              aria-label="Preview"
+              checked
+            />
+            <div
+              role="tabpanel"
+              className="tab-content rounded-box border-base-300 bg-base-100 p-6"
+            >
+              Preview
+            </div>
+          </div>
+          <div className="divider" />
           <div className="flex flex-col gap-4">
             {tags.length > 0 && (
               <div className="flex gap-2">
                 {tags.map((tag, index) => (
-                  <Chip
-                    key={index}
-                    onClose={() => {
+                  <div
+                    className="badge badge-neutral cursor-pointer gap-2"
+                    onClick={() => {
                       handleRemoveTag(tag);
                     }}
-                    variant="flat"
                   >
-                    {tag}
-                  </Chip>
+                    <span>{tag}</span>
+                  </div>
                 ))}
               </div>
             )}
             <div className="flex items-center gap-4">
-              <Input
-                className="w-1/2"
-                label={t("Add problem tag")}
-                placeholder="new-tag"
-                value={addingTag}
-                onChange={(e) => {
-                  setAddingTag(e.target.value);
-                }}
-              />
-              <Button
-                size="sm"
-                radius="full"
-                isIconOnly={true}
-                color="secondary"
-                onClick={() => {
-                  if (addingTag) {
-                    setTags([...tags, addingTag]);
-                    setAddingTag("");
-                  }
-                }}
-              >
-                <PlusIcon className="h-6 w-6" />
-              </Button>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Problem Tags</span>
+                </div>
+                <input
+                  type="text"
+                  placeholder="Type here"
+                  className="input input-bordered w-full max-w-xs"
+                  onChange={(e) => {
+                    setAddingTag(e.target.value);
+                  }}
+                />
+              </label>
+              <div className="mt-9">
+                <button
+                  className="btn btn-circle btn-primary btn-sm"
+                  onClick={() => {
+                    if (addingTag) {
+                      setTags([...tags, addingTag]);
+                      setAddingTag("");
+                    }
+                  }}
+                >
+                  <PlusIcon className="h-6 w-6" />
+                </button>
+              </div>
             </div>
           </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
     </>
   );
 };

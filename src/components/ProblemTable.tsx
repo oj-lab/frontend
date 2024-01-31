@@ -1,18 +1,7 @@
-import {
-  Table,
-  TableBody,
-  TableColumn,
-  TableHeader,
-  TableRow,
-  TableCell,
-  Chip,
-  Button,
-} from "@nextui-org/react";
 import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { ProblemServiceModel } from "../typings/problem";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { joinClasses } from "../utils/common";
 
 const columns = [
   { name: "SLUG", uid: "slug" },
@@ -31,97 +20,53 @@ export interface ProblemTableProps {
 const ProblemTable: React.FC<ProblemTableProps> = (props) => {
   const navigate = useNavigate();
 
-  const renderCell = React.useCallback(
-    (problemInfo: ProblemServiceModel.ProblemInfo, columnUid: React.Key) => {
-      if (columnUid === "actions") {
-        return <Actions />;
-      }
-      if (columnUid === "tags") {
-        return <Tags tags={problemInfo.tags} />;
-      }
-      if (columnUid === "title") {
-        return problemInfo.title;
-      }
-      if (columnUid === "slug") {
-        return problemInfo.slug;
-      }
-      return null;
-    },
-    [],
-  );
-
   return (
-    <Table className={props.className} aria-label="Problem Table">
-      <TableHeader
-        columns={columns.filter((col) => {
-          if (!props.showActions) {
-            return col.uid !== "actions";
-          }
-          return true;
-        })}
-      >
-        {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
-      </TableHeader>
-      <TableBody items={props.data}>
-        {(item) => (
-          <TableRow
-            className={joinClasses(
-              props.enableNavigation && "cursor-pointer hover:bg-gray-50",
-            )}
-            key={item.slug}
-            onClick={() => {
-              if (props.enableNavigation) {
-                navigate(`/problem/${item.slug}`);
+    <div className={props.className}>
+      <table className="table" aria-label="Problem Table">
+        <thead>
+          <tr>
+            {columns.map((column) => {
+              if (column.uid === "actions" && !props.showActions) {
+                return null;
               }
-            }}
-          >
-            {(columnKey) => (
-              <TableCell>{renderCell(item, columnKey)}</TableCell>
-            )}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+              return <th key={column.uid}>{column.name}</th>;
+            })}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((problemInfo) => (
+            <tr className="hover" onClick={() => navigate(problemInfo.slug)}>
+              <th>{problemInfo.slug}</th>
+              <td>{problemInfo.title}</td>
+              <td>
+                <div className="space-x-2">
+                  {problemInfo.tags.map((tag) => (
+                    <div className="badge badge-outline">{tag.name}</div>
+                  ))}
+                </div>
+              </td>
+              {props.showActions && (
+                <td>
+                  <Actions />
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
 const Actions: React.FC = () => {
   return (
-    <div className="flex gap-4">
-      <Button
-        className="min-w-7 min-h-7 h-7 w-7"
-        title="Edit"
-        size="sm"
-        variant="light"
-        color="primary"
-        isIconOnly
-      >
-        <PencilSquareIcon className="h-5 w-5" />
-      </Button>
-      <Button
-        className="min-w-7 min-h-7 h-7 w-7"
-        title="Delete"
-        size="sm"
-        variant="light"
-        color="danger"
-        isIconOnly
-      >
-        <TrashIcon className="h-5 w-5" />
-      </Button>
-    </div>
-  );
-};
-
-const Tags: React.FC<{ tags: ProblemServiceModel.AlgorithmTag[] }> = (
-  props,
-) => {
-  return (
-    <div className="flex gap-1">
-      {props.tags.map((tag) => (
-        <Chip variant="bordered" key={tag.slug}>
-          {tag.name}
-        </Chip>
-      ))}
+    <div className="flex space-x-2">
+      <button className="btn btn-square btn-outline btn-primary btn-xs">
+        <PencilSquareIcon className="h-4 w-4" />
+      </button>
+      <button className="btn btn-square btn-outline btn-error btn-xs">
+        <TrashIcon className="h-4 w-4" />
+      </button>
     </div>
   );
 };

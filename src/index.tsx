@@ -3,10 +3,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { worker } from "./mocks/server";
-
 import "./i18n/i18n";
 import "./index.css";
 import { getMode, isGhPages, isMock } from "./utils/environment";
+import { themeChange } from "theme-change";
+
+themeChange();
 
 console.log("Running in:", getMode());
 if (isMock()) {

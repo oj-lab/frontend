@@ -1,12 +1,3 @@
-import {
-  Table,
-  TableBody,
-  TableColumn,
-  TableHeader,
-  TableRow,
-  TableCell,
-  Chip,
-} from "@nextui-org/react";
 import { JudgeModel } from "../typings/judge";
 
 const columns = [
@@ -17,31 +8,39 @@ const columns = [
 
 export interface JudgeVerdictTableProps {
   data: JudgeModel.JudgeVerdict[];
+  className?: string;
 }
 
 const JudgeVerdictTable: React.FC<JudgeVerdictTableProps> = (props) => {
   return (
-    <Table>
-      <TableHeader columns={columns}>
-        {(column) => <TableColumn key={column.uid}>{column.name}</TableColumn>}
-      </TableHeader>
-      <TableBody items={props.data}>
-        {(item) => (
-          <TableRow key={item.id}>
-            <TableCell>
-              <Chip
-                color={item.verdict === "Accepted" ? "success" : "danger"}
-                variant="bordered"
-              >
-                {item.verdict}
-              </Chip>
-            </TableCell>
-            <TableCell>{item.time_usage}</TableCell>
-            <TableCell>{item.memory_usage}</TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <div className={props.className}>
+      <table className="table" aria-label="Judge Verdict Table">
+        <thead>
+          <tr>
+            {columns.map((column) => (
+              <th key={column.uid}>{column.name}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {props.data.map((judgeVerdict) => (
+            <tr>
+              <th>
+                <div
+                  className={`badge badge-outline ${
+                    judgeVerdict.verdict === "Accepted" ? "badge-success" : ""
+                  }`}
+                >
+                  {judgeVerdict.verdict}
+                </div>
+              </th>
+              <td>{judgeVerdict.time_usage}</td>
+              <td>{judgeVerdict.memory_usage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
