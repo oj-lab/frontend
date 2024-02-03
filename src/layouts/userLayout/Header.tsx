@@ -93,14 +93,14 @@ export default function Header() {
                     {/* this hidden checkbox controls the state */}
                     <input
                       type="checkbox"
-                      className="theme-controller"
+                      className="theme-controller h-12 w-12 rounded-full hover:bg-[var(--fallback-bc,oklch(var(--bc)/0.2))]"
                       value="light"
                       data-set-theme="light"
                       data-key="theme"
                     />
                     {/* moon icon */}
                     <svg
-                      className="swap-off h-6 w-6 fill-current"
+                      className="swap-off h-6 w-full self-center fill-current"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                     >
@@ -108,7 +108,7 @@ export default function Header() {
                     </svg>
                     {/* sun icon */}
                     <svg
-                      className="swap-on h-6 w-6 fill-current"
+                      className="swap-on h-6 w-full self-center fill-current"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 24 24"
                     >
