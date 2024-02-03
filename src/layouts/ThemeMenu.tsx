@@ -1,7 +1,13 @@
 import { joinClasses } from "@/utils/common";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-export default function ThemeMenu() {
+interface ThemeMenuProps {
+  className?: string;
+}
+
+const ThemeMenu: React.FC<ThemeMenuProps> = (props) => {
+  const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(() => {
@@ -23,6 +29,7 @@ export default function ThemeMenu() {
         className={joinClasses(
           "dropdown dropdown-end",
           open && "dropdown-open",
+          props.className,
         )}
         onClick={() => {
           setOpen(!open);
@@ -36,7 +43,7 @@ export default function ThemeMenu() {
             open ? "z-[2]" : "z-[0]",
           )}
         >
-          Theme
+          {t("Theme")}
           <svg
             width="12px"
             height="12px"
@@ -49,7 +56,7 @@ export default function ThemeMenu() {
         </div>
         <ul
           tabIndex={0}
-          className="dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow-2xl"
+          className="menu dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow-2xl"
         >
           <li>
             <input
@@ -100,4 +107,6 @@ export default function ThemeMenu() {
       </div>
     </>
   );
-}
+};
+
+export default ThemeMenu;

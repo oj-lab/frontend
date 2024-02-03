@@ -1,5 +1,4 @@
-import Header from "../../layouts/userLayout/Header";
-import Navbar from "../Navbar";
+import Navbar from "./Navbar";
 
 export interface UserLayoutProps {
   title?: string;
@@ -9,7 +8,6 @@ export interface UserLayoutProps {
 const UserLayout: React.FC<UserLayoutProps> = (props) => {
   return (
     <div className="relative flex flex-1 flex-col">
-      <Header />
       <Navbar />
       {props.title && (
         <header className="h-auto shadow">

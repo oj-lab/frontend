@@ -30,7 +30,7 @@ const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
       )}
       <div
         className={joinClasses(
-          "dropdown dropdown-end",
+          "dropdown-end dropdown",
           open && "dropdown-open",
           props.className,
         )}
@@ -49,12 +49,11 @@ const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[2] w-36 rounded-box bg-base-100 p-2 shadow"
+          className="menu dropdown-content z-[2] w-36 rounded-box bg-base-100 p-2 shadow-2xl"
         >
           {LANGUAGE_SELECTIONS.map((item, index) => (
             <li key={index}>
               <span
-                className="hover:bg-[var(--fallback-bc,oklch(var(--bc)/0.2))]"
                 onClick={() => {
                   changeLanguage(item.value);
                   setOpen(false);

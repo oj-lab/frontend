@@ -5,13 +5,11 @@ import React from "react";
 
 export interface UserMenuProps {
   avatarUrl?: string;
-  userName?: string;
   navigation?: Array<{ name: string; href: string }>;
 }
 
 /**
  * @param {string} props.avatarUrl
- * @param {string} props.userName
  * @param {Array<{ name: string, href: string }>} props.navigation The name of navigation will be translated.
  */
 const UserMenu: React.FC<UserMenuProps> = (props) => {
@@ -60,12 +58,11 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow"
+          className="menu dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow-2xl"
         >
           {props.navigation?.map((item, index) => (
             <li key={index}>
               <a
-                className="hover:bg-[var(--fallback-bc,oklch(var(--bc)/0.2))]"
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
