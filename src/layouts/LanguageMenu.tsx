@@ -30,7 +30,7 @@ const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
       )}
       <div
         className={joinClasses(
-          "dropdown-end dropdown",
+          "dropdown dropdown-end",
           open && "dropdown-open",
           props.className,
         )}

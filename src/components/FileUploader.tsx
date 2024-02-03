@@ -33,8 +33,8 @@ const FileUploader: React.FC = () => {
 
   return (
     <div
-      className="flex h-36 cursor-pointer items-center 
-        justify-center rounded-xl border-1.5 border-dashed 
+      className="border-1.5 flex h-36 cursor-pointer 
+        items-center justify-center rounded-xl border-dashed 
         border-gray-400 bg-gray-100 p-4 text-center"
       onDrop={onDrop}
       onDragOver={onDragOver}
@@ -48,7 +48,7 @@ const FileUploader: React.FC = () => {
         accept=".zip"
         multiple={false}
       />
-      <p className="text-lg text-gray-500 after:ml-0.5 after:text-xs after:text-danger after:content-['*']">
+      <p className="after:text-danger text-lg text-gray-500 after:ml-0.5 after:text-xs after:content-['*']">
         Drop some files here, or click to select file
       </p>
     </div>
