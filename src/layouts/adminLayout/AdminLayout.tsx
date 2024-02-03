@@ -1,32 +1,18 @@
 import { Outlet } from "react-router-dom";
-import Sidebar from "./Sidebar";
-import { useState } from "react";
-import Header from "./Header";
+import Header from "./Navbar";
+import Drawer from "./Drawer";
 
 const AdminLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-
   return (
-    <>
-      <Sidebar
-        open={sidebarOpen}
-        onClose={() => {
-          setSidebarOpen(false);
-        }}
-      />
-      <div>
-        <div className="lg:pl-80">
-          <Header
-            onClickSidebarButton={() => {
-              setSidebarOpen(true);
-            }}
-          />
-          <main className="p-6">
-            <Outlet />
-          </main>
-        </div>
+    <div className="flex flex-row">
+      <Drawer />
+      <div className="w-full">
+        <Header />
+        <main className="p-6">
+          <Outlet />
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 

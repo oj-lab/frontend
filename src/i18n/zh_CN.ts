@@ -5,6 +5,8 @@ const ZH_CN_TRANSLATIONS: Resource = {
     "English (US)": "英语 (美式)",
     "Simple Chinese": "简体中文",
 
+    Theme: "主题",
+
     Create: "创建",
     Cancel: "取消",
     "Sign out": "登出",
