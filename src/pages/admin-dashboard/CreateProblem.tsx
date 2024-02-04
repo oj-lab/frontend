@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
+import MarkdownRender from "@/components/markdown/MarkdownRender";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
@@ -33,6 +34,9 @@ Hello! world!
 const CreateProblem: React.FC = () => {
   const [slug, setSlug] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>(
+    descriptionPlaceholder,
+  );
   const [tags, setTags] = useState<string[]>(["default"]);
   const [addingTag, setAddingTag] = useState<string>("");
 
@@ -76,7 +80,7 @@ const CreateProblem: React.FC = () => {
               </div>
               <input
                 type="text"
-                placeholder="Type here"
+                placeholder="slug should be unique"
                 className="input input-bordered w-full max-w-xs"
                 onChange={(e) => {
                   setSlug(e.target.value);
@@ -112,13 +116,13 @@ const CreateProblem: React.FC = () => {
             <input type="file" className="file-input w-full max-w-xs" />
           </label>
           <div className="divider" />
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control w-full max-w-xs -mt-3">
             <div className="label">
               <span className="label-text">Problem Title</span>
             </div>
             <input
               type="text"
-              placeholder="Type here"
+              placeholder="which displays on problem header"
               className="input input-bordered w-full max-w-xs"
               onChange={(e) => {
                 setTitle(e.target.value);
@@ -126,41 +130,50 @@ const CreateProblem: React.FC = () => {
               value={title}
             />
           </label>
-          <div role="tablist" className="tabs tabs-lifted">
+          <span className="ml-1 mt-4 text-sm">Problem Description</span>
+          <div role="tablist" className="tabs-boxed tabs p-1">
             <input
               type="radio"
-              name="my_tabs_2"
+              name="problem_description_tabs"
               role="tab"
               className="tab"
               aria-label="Raw"
-            />
-            <div
-              role="tabpanel"
-              className="tab-content rounded-box border-base-300 bg-base-100 p-6"
-            >
-              Raw
-            </div>
-
-            <input
-              type="radio"
-              name="my_tabs_2"
-              role="tab"
-              className="tab"
-              aria-label="Preview"
               checked
             />
             <div
               role="tabpanel"
-              className="tab-content rounded-box border-base-300 bg-base-100 p-6"
+              className="tab-content rounded-md border-base-300 bg-base-100 p-2"
             >
-              Preview
+              <textarea
+                className="textarea h-64 w-full"
+                placeholder="Bio"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                value={description}
+              />
+            </div>
+            <input
+              type="radio"
+              name="problem_description_tabs"
+              role="tab"
+              className="tab"
+              aria-label="Preview"
+            />
+            <div
+              role="tabpanel"
+              className="tab-content rounded-md border-base-300 bg-base-100 p-2"
+            >
+              <div className="h-64 w-full overflow-auto p-4">
+                <MarkdownRender content={description} />
+              </div>
             </div>
           </div>
           <div className="divider" />
           <div className="flex flex-col gap-4">
             {tags.length > 0 && (
               <div className="flex gap-2">
-                {tags.map((tag, index) => (
+                {tags.map((tag) => (
                   <div
                     className="badge badge-neutral cursor-pointer gap-2"
                     onClick={() => {
@@ -179,7 +192,7 @@ const CreateProblem: React.FC = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Type here"
+                  placeholder="click tag to remove"
                   className="input input-bordered w-full max-w-xs"
                   onChange={(e) => {
                     setAddingTag(e.target.value);
