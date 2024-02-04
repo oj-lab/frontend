@@ -1,5 +1,6 @@
 import { Bars3Icon, HomeIcon, UsersIcon } from "@heroicons/react/24/outline";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const iconPath = `${import.meta.env.BASE_URL}images/oj-lab-icon.svg`;
 
@@ -10,6 +11,7 @@ const navigation = [
 
 export const Drawer: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <div className="drawer z-[1] w-fit lg:drawer-open">
@@ -36,10 +38,10 @@ export const Drawer: React.FC = () => {
         <ul className="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
           {navigation.map((item) => (
             <li key={item.name}>
-              <a href={item.href}>
+              <div onClick={() => navigate(item.href)}>
                 <item.icon className="h-6 w-6 shrink-0" />
                 {t(item.name)}
-              </a>
+              </div>
             </li>
           ))}
         </ul>
