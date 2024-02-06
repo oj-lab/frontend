@@ -16,7 +16,7 @@ const UserLayout: React.FC<UserLayoutProps> = (props) => {
           </div>
         </header>
       )}
-      <main className="max-w-7xl flex-auto flex-col self-center py-6 sm:px-6 lg:px-8">
+      <main className="flex-auto flex-col self-center py-6 sm:px-6 lg:px-8 w-full max-w-7xl">
         {props.children}
       </main>
     </div>

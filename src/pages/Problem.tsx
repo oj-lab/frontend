@@ -1,4 +1,3 @@
-import { Button } from "@nextui-org/react";
 import CodeEditor from "../components/code-editor/CodeEditor";
 import MarkdownRender from "../components/markdown/MarkdownRender";
 import { useProblem } from "../hooks/problem";
@@ -29,30 +28,30 @@ const Problem: React.FC = () => {
 
   return (
     <UserLayout title={getProblem()?.title}>
-      <div className="flex flex-col sm:flex-row">
-        <div className="w-full flex-1 sm:w-1/2">
+      <div className="flex flex-1 flex-col gap-6 sm:flex-row">
+        <div className="w-full flex-1">
           <MarkdownRender
             content={getProblem()?.description || ""}
             rehypePlugin="rehypeKatex"
           />
         </div>
-        <div className="flex w-full flex-col gap-4 sm:w-1/2">
+        <div className="flex w-1/2 flex-col gap-4">
           <CodeEditor
-            className="h-96 w-full overflow-hidden"
+            className="h-full w-full overflow-hidden rounded-lg"
             value={defaultCode}
             onChange={(value: string) => {
               setSrc(value);
             }}
           />
-          <Button
-            className="relative bottom-16 right-2 self-end"
-            color="primary"
-            variant="solid"
-            onClick={runJudge}
-          >
-            Submit
-          </Button>
         </div>
+      </div>
+      <div className="relative">
+        <button
+          className="btn btn-primary absolute bottom-4 right-4 self-end"
+          onClick={runJudge}
+        >
+          Submit
+        </button>
       </div>
       {getVerdicts().length > 0 && (
         <div className="my-8">
