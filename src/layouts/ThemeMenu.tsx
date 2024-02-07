@@ -9,6 +9,11 @@ interface ThemeMenuProps {
 const ThemeMenu: React.FC<ThemeMenuProps> = (props) => {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
+  const [theme, setTheme] = React.useState(localStorage.getItem("theme"));
+  React.useEffect(() => {
+    localStorage.setItem("theme", theme === null ? "default" : theme);
+  }, [theme]);
+  const themeList = ["default", "retro", "cyberpunk", "valentine", "aqua"];
 
   React.useEffect(() => {
     document?.activeElement instanceof HTMLElement &&
@@ -58,51 +63,23 @@ const ThemeMenu: React.FC<ThemeMenuProps> = (props) => {
           tabIndex={0}
           className="menu dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow-2xl"
         >
-          <li>
-            <input
-              type="radio"
-              name="theme-dropdown"
-              className="theme-controller btn btn-ghost btn-sm btn-block justify-start font-normal"
-              aria-label="Default"
-              value="default"
-            />
-          </li>
-          <li>
-            <input
-              type="radio"
-              name="theme-dropdown"
-              className="theme-controller btn btn-ghost btn-sm btn-block justify-start font-normal"
-              aria-label="Retro"
-              value="retro"
-            />
-          </li>
-          <li>
-            <input
-              type="radio"
-              name="theme-dropdown"
-              className="theme-controller btn btn-ghost btn-sm btn-block justify-start font-normal"
-              aria-label="Cyberpunk"
-              value="cyberpunk"
-            />
-          </li>
-          <li>
-            <input
-              type="radio"
-              name="theme-dropdown"
-              className="theme-controller btn btn-ghost btn-sm btn-block justify-start font-normal"
-              aria-label="Valentine"
-              value="valentine"
-            />
-          </li>
-          <li>
-            <input
-              type="radio"
-              name="theme-dropdown"
-              className="theme-controller btn btn-ghost btn-sm btn-block justify-start font-normal"
-              aria-label="Aqua"
-              value="aqua"
-            />
-          </li>
+          {themeList.map((x) => {
+            return (
+              <li key={x}>
+                <input
+                  type="radio"
+                  name="theme-dropdown"
+                  className="theme-controller btn btn-ghost btn-sm btn-block justify-start font-normal"
+                  aria-label={x[0].toUpperCase() + x.slice(1)}
+                  value={x}
+                  checked={theme === x}
+                  onChange={() => {
+                    setTheme(x);
+                  }}
+                />
+              </li>
+            );
+          })}
         </ul>
       </div>
     </>
