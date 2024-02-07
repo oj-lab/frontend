@@ -34,7 +34,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
       )}
       <div
         className={joinClasses(
-          "dropdown-end dropdown",
+          "dropdown dropdown-end",
           open && "dropdown-open",
         )}
         onClick={() => {

@@ -27,7 +27,7 @@ const ThemeMenu: React.FC<ThemeMenuProps> = (props) => {
       )}
       <div
         className={joinClasses(
-          "dropdown-end dropdown",
+          "dropdown dropdown-end",
           open && "dropdown-open",
           props.className,
         )}
