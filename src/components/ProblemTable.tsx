@@ -15,6 +15,7 @@ export interface ProblemTableProps {
   showActions?: boolean;
   enableNavigation?: boolean;
   className?: string;
+  enableRouting?: boolean;
 }
 
 const ProblemTable: React.FC<ProblemTableProps> = (props) => {
@@ -38,15 +39,17 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
             <tr
               key={problemInfo.slug}
               className="hover"
-              onClick={() => navigate(problemInfo.slug)}
+              onClick={() => {
+                if (props.enableRouting) navigate(problemInfo.slug);
+              }}
             >
               <th>{problemInfo.slug}</th>
               <td>{problemInfo.title}</td>
               <td>
                 <div className="space-x-2">
                   {problemInfo.tags.map((tag) => (
-                    <div key={tag.slug} className="badge badge-outline">
-                      {tag.name}
+                    <div key={tag} className="badge badge-outline">
+                      {tag}
                     </div>
                   ))}
                 </div>
@@ -60,20 +63,56 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
           ))}
         </tbody>
       </table>
+      <dialog id="delete_confirm_modal" className="modal">
+        <div className="modal-box">
+          <h3 className="text-lg font-bold">Confirm</h3>
+          <p className="py-4">Are you sure to delete this problem</p>
+          <div className="modal-action">
+            <form method="dialog">
+              {/* if there is a button in form, it will close the modal */}
+              <button className="btn btn-sm">cancel</button>
+            </form>
+            <button
+              className="btn btn-error btn-sm"
+              onClick={() => {
+                // delete problem
+              }}
+            >
+              delete
+            </button>
+          </div>
+        </div>
+        <form method="dialog" className="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
     </div>
   );
 };
 
 const Actions: React.FC = () => {
   return (
-    <div className="flex space-x-2">
-      <button className="btn btn-square btn-outline btn-primary btn-xs">
-        <PencilSquareIcon className="h-4 w-4" />
-      </button>
-      <button className="btn btn-square btn-outline btn-error btn-xs">
-        <TrashIcon className="h-4 w-4" />
-      </button>
-    </div>
+    <>
+      <div className="flex space-x-2">
+        <button className="btn btn-square btn-outline btn-primary btn-xs">
+          <PencilSquareIcon className="h-4 w-4" />
+        </button>
+        <button
+          className="btn btn-square btn-outline btn-error btn-xs"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const modal = document.getElementById(
+              "delete_confirm_modal",
+            ) as HTMLDialogElement;
+            modal?.showModal();
+          }}
+        >
+          <TrashIcon className="h-4 w-4" />
+        </button>
+      </div>
+    </>
   );
 };
 

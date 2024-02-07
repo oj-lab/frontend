@@ -12,6 +12,18 @@ export namespace ProblemService {
     return res.data;
   }
 
+  export async function putProblem(problem: ProblemServiceModel.Problem) {
+    let res = await client.put<ProblemServiceModel.Problem>(
+      `/api/v1/problem`,
+      problem,
+    );
+
+    if (res.status !== 200) {
+      throw Error("failed to put problem");
+    }
+    return res.data;
+  }
+
   export async function getProblemInfoList() {
     let res = await client.get<{
       total: number;

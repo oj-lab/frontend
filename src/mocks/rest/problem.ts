@@ -36,7 +36,7 @@ Hello! world!
 \`\`\`
 
 `,
-      tags: [{ slug: "primer", name: "Primer" }],
+      tags: ["Primer"],
     };
 
     return HttpResponse.json(response);
@@ -53,19 +53,23 @@ export const getProblemInfoList = http.get("/api/v1/problem", (info) => {
       {
         slug: "hello-world",
         title: "Hello World",
-        tags: [{ slug: "primer", name: "Primer" }],
+        tags: ["Pimer"],
       },
       {
         slug: "a-plus-b-problem",
         title: "A+B Problem",
-        tags: [
-          { slug: "primer", name: "Primer" },
-          { slug: "math", name: "Math" },
-        ],
+        tags: ["Primer", "Math"],
       },
     ],
   };
   return new Response(JSON.stringify(response), {
     status: 200,
   });
+});
+
+export const putProblem = http.put("/api/v1/problem", async (info) => {
+  let requestBody: ProblemServiceModel.Problem =
+    (await info.request.json()) as ProblemServiceModel.Problem;
+
+  return HttpResponse.json(requestBody);
 });

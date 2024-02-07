@@ -3,6 +3,8 @@ import { useTranslation } from "react-i18next";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import MarkdownRender from "@/components/markdown/MarkdownRender";
+import { ProblemService } from "@/api/problem";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
@@ -41,6 +43,7 @@ const CreateProblem: React.FC = () => {
   const [addingTag, setAddingTag] = useState<string>("");
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const handleRemoveTag = (tagToRemove: string) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
@@ -60,7 +63,19 @@ const CreateProblem: React.FC = () => {
           >
             {t("Cancel")}
           </button>
-          <button className="btn btn-primary btn-sm text-base-100">
+          <button
+            className="btn btn-primary btn-sm text-base-100"
+            onClick={() => {
+              ProblemService.putProblem({
+                slug,
+                title,
+                description,
+                tags,
+              }).then((_) => {
+                navigate("/admin/problem");
+              });
+            }}
+          >
             {t("Create")}
           </button>
         </div>
@@ -138,7 +153,7 @@ const CreateProblem: React.FC = () => {
               role="tab"
               className="tab"
               aria-label="Raw"
-              checked
+              defaultChecked
             />
             <div
               role="tabpanel"
@@ -175,6 +190,7 @@ const CreateProblem: React.FC = () => {
               <div className="flex gap-2">
                 {tags.map((tag) => (
                   <div
+                    key={tag}
                     className="badge badge-neutral cursor-pointer gap-2"
                     onClick={() => {
                       handleRemoveTag(tag);
@@ -204,8 +220,14 @@ const CreateProblem: React.FC = () => {
                   className="btn btn-circle btn-primary btn-sm"
                   onClick={() => {
                     if (addingTag) {
-                      setTags([...tags, addingTag]);
-                      setAddingTag("");
+                      let isDuplicate = false;
+                      tags.forEach((tag) => {
+                        if (tag === addingTag) isDuplicate = true;
+                      });
+                      if (!isDuplicate) {
+                        setTags([...tags, addingTag]);
+                        setAddingTag("");
+                      }
                     }
                   }}
                 >

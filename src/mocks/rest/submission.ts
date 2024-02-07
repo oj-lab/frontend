@@ -17,7 +17,7 @@ export const getSubmissionInfoList = http.get("/api/v1/submission", (info) => {
         problem: {
           slug: "hello-world",
           title: "Hello World",
-          tags: [{ slug: "primer", name: "Primer" }],
+          tags: ["Primer"],
         },
         language: "C++",
         status: "finished",
@@ -31,7 +31,7 @@ export const getSubmissionInfoList = http.get("/api/v1/submission", (info) => {
         problem: {
           slug: "a-plus-b-problem",
           title: "A + B Problem",
-          tags: [{ slug: "primer", name: "Primer" }],
+          tags: ["Primer"],
         },
         language: "C++",
         status: "wrong answer",
