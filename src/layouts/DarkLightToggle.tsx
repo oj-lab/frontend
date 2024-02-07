@@ -2,10 +2,10 @@ import React from "react";
 
 export default function DarkLightToggle() {
   const [isdark, setIsdark] = React.useState(
-    localStorage.getItem('isdark') === 'true' ? true : false
+    localStorage.getItem("isdark") === "true" ? true : false,
   );
   React.useEffect(() => {
-    localStorage.setItem('isdark', JSON.stringify(isdark));
+    localStorage.setItem("isdark", JSON.stringify(isdark));
   }, [isdark]);
   return (
     <label className="swap swap-rotate">
@@ -17,7 +17,7 @@ export default function DarkLightToggle() {
         data-set-theme="dark"
         data-key="theme"
         checked={isdark}
-        onChange={()=>setIsdark(!isdark)}
+        onChange={() => setIsdark(!isdark)}
       />
       {/* sun icon */}
       <svg

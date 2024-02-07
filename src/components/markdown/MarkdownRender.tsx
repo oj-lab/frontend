@@ -14,8 +14,8 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = (props) => {
     props.rehypePlugin === undefined
       ? []
       : props.rehypePlugin === "rehypeKatex"
-      ? [rehypeKatex]
-      : [rehypeMathjax];
+        ? [rehypeKatex]
+        : [rehypeMathjax];
 
   return (
     <ReactMarkdown
