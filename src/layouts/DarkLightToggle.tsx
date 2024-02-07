@@ -1,9 +1,17 @@
+import { joinClasses } from "@/utils/common";
 import React from "react";
 
 export default function DarkLightToggle() {
-  const [isdark, setIsdark] = React.useState(
-    localStorage.getItem("isdark") === "true" ? true : false,
-  );
+  function isWindowDarkMode(): boolean {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+
+  const [isdark, setIsdark] = React.useState(() => {
+    if (localStorage.getItem("isdark") === "true") return true;
+    if (localStorage.getItem("isdark") === "false") return false;
+    return isWindowDarkMode();
+  });
+
   React.useEffect(() => {
     localStorage.setItem("isdark", JSON.stringify(isdark));
   }, [isdark]);
@@ -13,15 +21,16 @@ export default function DarkLightToggle() {
       <input
         type="checkbox"
         className="theme-controller h-12 w-12 rounded-full hover:bg-[var(--fallback-bc,oklch(var(--bc)/0.2))]"
-        value="dark"
-        data-set-theme="dark"
-        data-key="theme"
-        checked={isdark}
+        value={isWindowDarkMode() ? "light" : "dark"}
+        checked={isWindowDarkMode() ? !isdark : isdark}
         onChange={() => setIsdark(!isdark)}
       />
       {/* sun icon */}
       <svg
-        className="swap-on h-6 w-full self-center fill-current"
+        className={joinClasses(
+          "h-6 w-full self-center fill-current",
+          isWindowDarkMode() ? "swap-on" : "swap-off",
+        )}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -29,7 +38,10 @@ export default function DarkLightToggle() {
       </svg>
       {/* moon icon */}
       <svg
-        className="swap-off h-6 w-full self-center fill-current"
+        className={joinClasses(
+          "swap-off h-6 w-full self-center fill-current",
+          isWindowDarkMode() ? "swap-off" : "swap-on",
+        )}
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
