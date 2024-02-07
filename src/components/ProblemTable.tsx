@@ -35,13 +35,19 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         </thead>
         <tbody>
           {props.data.map((problemInfo) => (
-            <tr className="hover" onClick={() => navigate(problemInfo.slug)}>
+            <tr
+              key={problemInfo.slug}
+              className="hover"
+              onClick={() => navigate(problemInfo.slug)}
+            >
               <th>{problemInfo.slug}</th>
               <td>{problemInfo.title}</td>
               <td>
                 <div className="space-x-2">
                   {problemInfo.tags.map((tag) => (
-                    <div className="badge badge-outline">{tag.name}</div>
+                    <div key={tag.slug} className="badge badge-outline">
+                      {tag.name}
+                    </div>
                   ))}
                 </div>
               </td>

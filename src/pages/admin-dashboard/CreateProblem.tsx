@@ -116,7 +116,7 @@ const CreateProblem: React.FC = () => {
             <input type="file" className="file-input w-full max-w-xs" />
           </label>
           <div className="divider" />
-          <label className="form-control w-full max-w-xs -mt-3">
+          <label className="form-control -mt-3 w-full max-w-xs">
             <div className="label">
               <span className="label-text">Problem Title</span>
             </div>
@@ -145,8 +145,8 @@ const CreateProblem: React.FC = () => {
               className="tab-content rounded-md border-base-300 bg-base-100 p-2"
             >
               <textarea
-                className="textarea h-64 w-full"
-                placeholder="Bio"
+                className="textarea m-0 h-64 w-full"
+                placeholder="write problem description here"
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}

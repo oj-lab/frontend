@@ -1,9 +1,9 @@
-import { rest } from "msw";
+import { http } from "msw";
 import { JudgeServiceModel } from "../../typings/judge";
 
-export const postJudge = rest.post(
-  "/api/v1/problem/:slug/judge",
-  (_req, res, ctx) => {
+export const postJudge = http.post(
+  "/api/v1/problem/:slug/submission",
+  (info) => {
     const response: JudgeServiceModel.JudgeVerdict[] = [
       {
         verdict: "Accepted",
@@ -27,6 +27,8 @@ export const postJudge = rest.post(
       },
     ];
 
-    return res(ctx.status(200), ctx.json(response));
+    return new Response(JSON.stringify(response), {
+      status: 200,
+    });
   },
 );

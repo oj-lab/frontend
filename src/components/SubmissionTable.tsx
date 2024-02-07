@@ -17,6 +17,19 @@ export interface SubmissionTableProps {
   className?: string;
 }
 
+function getBadgeColorClasses(status: string): string {
+  switch (status) {
+    case "finished":
+      return "badge-success";
+    case "pending":
+      return "badge-warning";
+    case "wrong answer":
+      return "badge-error";
+    default:
+      return "";
+  }
+}
+
 const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
   const navigate = useNavigate();
 
@@ -40,7 +53,7 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
                 <div
                   className={joinClasses(
                     "badge badge-outline",
-                    submission.status === "finished" ? "badge-success" : "",
+                    getBadgeColorClasses(submission.status),
                   )}
                 >
                   {submission.status}

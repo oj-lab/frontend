@@ -19,14 +19,6 @@ export const Drawer: React.FC = () => {
       <div className="drawer-content fixed p-2 lg:hidden">
         <label htmlFor="my-drawer" className="btn btn-ghost drawer-button">
           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-          <div className="flex h-8 shrink-0 items-center justify-center align-middle">
-            <img
-              className="mr-2 h-8 w-auto gap-4"
-              src={iconPath}
-              alt="OJ Lab"
-            />
-            <h1 className="text-xl font-bold text-white">Admin</h1>
-          </div>
         </label>
       </div>
       <div className="drawer-side">
@@ -36,6 +28,14 @@ export const Drawer: React.FC = () => {
           className="drawer-overlay"
         />
         <ul className="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
+          <div className="flex flex-row px-4 pb-2">
+            <img
+              className="mr-2 h-12 w-auto gap-4"
+              src={iconPath}
+              alt="OJ Lab"
+            />
+            <h1 className="self-center text-2xl font-bold">OJ Lab Admin</h1>
+          </div>
           {navigation.map((item) => (
             <li key={item.name}>
               <div onClick={() => navigate(item.href)}>

@@ -28,7 +28,7 @@ const Problem: React.FC = () => {
             type="checkbox"
             className="toggle toggle-primary"
             checked={showActions}
-            onClick={() => {
+            onChange={() => {
               setShowActions(!showActions);
             }}
           />

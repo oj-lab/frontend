@@ -1,23 +1,30 @@
-import { rest } from "msw";
+import { http } from "msw";
 
-export const getCurrentUser = rest.get("/user/current", (req, res, ctx) => {
-  const authToken = req.cookies["auth-token"];
+export const getCurrentUser = http.get("/user/current", (info) => {
+  const authToken = info.cookies["auth-token"];
   if (authToken === "233") {
-    return res(
-      ctx.json({
+    return new Response(
+      JSON.stringify({
         username: "admin",
         roles: ["admin", "user"],
       }),
+      {
+        status: 200,
+      },
     );
   }
-  return res(
-    ctx.status(403),
-    ctx.json({
-      message: "Failed to authenticate!",
-    }),
-  );
+  return new Response("Unauthorized", {
+    status: 401,
+  });
 });
 
-export const postLogin = rest.post("/login", (req, res, ctx) => {
-  return res(ctx.status(200), ctx.cookie("auth-token", "233"));
+export const postLogin = http.post("/login", (info) => {
+  return new Response(
+    JSON.stringify({
+      token: "233",
+    }),
+    {
+      status: 200,
+    },
+  );
 });
