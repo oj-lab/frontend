@@ -2,6 +2,7 @@ import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { ProblemServiceModel } from "../typings/problem";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ProblemService } from "@/api/problem";
 
 const columns = [
   { name: "SLUG", uid: "slug" },
@@ -19,6 +20,8 @@ export interface ProblemTableProps {
 }
 
 const ProblemTable: React.FC<ProblemTableProps> = (props) => {
+  const [deletingSlug, setDeletingSlug] = React.useState<string>("");
+
   const navigate = useNavigate();
 
   return (
@@ -56,7 +59,9 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               </td>
               {props.showActions && (
                 <td>
-                  <Actions />
+                  <Actions
+                    onClickDelete={() => setDeletingSlug(problemInfo.slug)}
+                  />
                 </td>
               )}
             </tr>
@@ -75,7 +80,13 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
             <button
               className="btn btn-error btn-sm"
               onClick={() => {
-                // delete problem
+                ProblemService.deleteProblem(deletingSlug).then((_) => {
+                  navigate("/admin/problem");
+                });
+                const modal = document.getElementById(
+                  "delete_confirm_modal",
+                ) as HTMLDialogElement;
+                modal?.close();
               }}
             >
               delete
@@ -90,11 +101,18 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
   );
 };
 
-const Actions: React.FC = () => {
+interface ActionsProps {
+  onClickDelete: () => void;
+}
+
+const Actions: React.FC<ActionsProps> = (props) => {
   return (
     <>
       <div className="flex space-x-2">
-        <button className="btn btn-square btn-outline btn-primary btn-xs">
+        <button
+          className="btn btn-square btn-outline btn-primary btn-xs"
+          disabled
+        >
           <PencilSquareIcon className="h-4 w-4" />
         </button>
         <button
@@ -103,6 +121,7 @@ const Actions: React.FC = () => {
             e.preventDefault();
             e.stopPropagation();
 
+            props.onClickDelete();
             const modal = document.getElementById(
               "delete_confirm_modal",
             ) as HTMLDialogElement;

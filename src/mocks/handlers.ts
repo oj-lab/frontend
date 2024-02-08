@@ -1,5 +1,12 @@
 import { postJudge } from "./rest/judge";
-import { getProblemInfo, getProblemInfoList, putProblem } from "./rest/problem";
+import {
+  checkProblemSlug,
+  getProblemInfo,
+  getProblemInfoList,
+  putProblem,
+  deleteProblem,
+  putProblemPackage,
+} from "./rest/problem";
 import { getSubmissionInfoList } from "./rest/submission";
 import { getCurrentUser, postLogin } from "./rest/user";
 
@@ -10,5 +17,8 @@ export const restHandlers = [
   getProblemInfo,
   getProblemInfoList,
   getSubmissionInfoList,
+  checkProblemSlug,
+  putProblemPackage,
+  deleteProblem,
   postJudge,
 ];

@@ -5,6 +5,7 @@ import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import MarkdownRender from "@/components/markdown/MarkdownRender";
 import { ProblemService } from "@/api/problem";
 import { useNavigate } from "react-router-dom";
+import React from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
@@ -41,6 +42,9 @@ const CreateProblem: React.FC = () => {
   );
   const [tags, setTags] = useState<string[]>(["default"]);
   const [addingTag, setAddingTag] = useState<string>("");
+  const [isValidSlug, setIsValidSlug] = useState<boolean | undefined>(
+    undefined,
+  );
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -99,21 +103,30 @@ const CreateProblem: React.FC = () => {
                 className="input input-bordered w-full max-w-xs"
                 onChange={(e) => {
                   setSlug(e.target.value);
+                  if (e.target.value === "") {
+                    setIsValidSlug(undefined);
+                    return;
+                  }
+                  ProblemService.checkProblemSlug(e.target.value).then(
+                    (data) => {
+                      setIsValidSlug(data.valid);
+                    },
+                  );
                 }}
                 value={slug}
               />
             </label>
             <div className="mt-9">
-              {slug && slug !== "slug" && (
+              {slug && isValidSlug === undefined && (
                 <div className="flex items-center gap-2">
                   <span className="loading loading-spinner loading-md" />
                   <p className="text-sm ">{t("Checking slug is valid...")}</p>
                 </div>
               )}
-              {slug === "slug" && (
+              {isValidSlug && (
                 <CheckCircleIcon className="h-8 fill-green-500" />
               )}
-              {!slug && (
+              {isValidSlug === false && (
                 <div className="flex items-center gap-2">
                   <XCircleIcon
                     className="h-8 fill-red-500"
@@ -128,7 +141,22 @@ const CreateProblem: React.FC = () => {
             <div className="label">
               <span className="label-text">Upload Package</span>
             </div>
-            <input type="file" className="file-input w-full max-w-xs" />
+            <input
+              type="file"
+              className="file-input w-full max-w-xs"
+              onChange={(e) => {
+                if (e.target.files) {
+                  ProblemService.putProblemPackage(
+                    slug,
+                    e.target.files[0],
+                  ).then((_) => {
+                    console.log("uploaded");
+                  });
+                }
+              }}
+              disabled={!isValidSlug}
+              accept=".zip"
+            />
           </label>
           <div className="divider" />
           <label className="form-control -mt-3 w-full max-w-xs">
