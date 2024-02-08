@@ -3,12 +3,12 @@ export namespace ProblemServiceModel {
     slug: string;
     title: string;
     description: string;
-    tags: string[];
+    tags: { name: string }[];
   }
 
   export interface ProblemInfo {
     slug: string;
     title: string;
-    tags: string[];
+    tags: { name: string }[];
   }
 }

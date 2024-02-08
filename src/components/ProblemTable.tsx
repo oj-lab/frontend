@@ -51,8 +51,8 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               <td>
                 <div className="space-x-2">
                   {problemInfo.tags.map((tag) => (
-                    <div key={tag} className="badge badge-outline">
-                      {tag}
+                    <div key={tag.name} className="badge badge-outline">
+                      {tag.name}
                     </div>
                   ))}
                 </div>
@@ -81,7 +81,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               className="btn btn-error btn-sm"
               onClick={() => {
                 ProblemService.deleteProblem(deletingSlug).then((_) => {
-                  navigate("/admin/problem");
+                  window.location.reload();
                 });
                 const modal = document.getElementById(
                   "delete_confirm_modal",

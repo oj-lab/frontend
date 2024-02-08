@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ProblemServiceModel } from "../typings/problem";
 import { ProblemService } from "../api/problem";
 
-export const useProblem = (slug: string) => {
+export const useProblem = (slug: string, fallback?: () => void) => {
   const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
     null,
   );
@@ -14,8 +14,9 @@ export const useProblem = (slug: string) => {
       })
       .catch((err) => {
         console.log(err);
+        fallback?.();
       });
-  }, [slug]);
+  }, [slug, fallback]);
 
   function getProblem() {
     return problem;

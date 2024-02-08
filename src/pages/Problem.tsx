@@ -6,6 +6,7 @@ import { useJudge } from "../hooks/judge";
 import { judgeVerdictListPipe } from "../pipes/judge";
 import { useEffect } from "react";
 import UserLayout from "../layouts/userLayout/UserLayout";
+import { useNavigate, useParams } from "react-router-dom";
 
 const defaultCode = `#include <iostream>
 using namespace std;
@@ -18,9 +19,13 @@ int main() {
 }`;
 
 const Problem: React.FC = () => {
-  const { getProblem } = useProblem("hello-world");
-  const { setSrc, setSrcLanguage, runJudge, getVerdicts } =
-    useJudge("hello-world");
+  const navigate = useNavigate();
+  const slug = useParams().slug as string;
+
+  const { getProblem } = useProblem(slug, () => {
+    navigate("/problem");
+  });
+  const { setSrc, setSrcLanguage, runJudge, getVerdicts } = useJudge(slug);
 
   useEffect(() => {
     setSrcLanguage("Cpp");
@@ -37,7 +42,7 @@ const Problem: React.FC = () => {
         </div>
         <div className="flex w-1/2 flex-col gap-4">
           <CodeEditor
-            className="h-full w-full overflow-hidden rounded-lg"
+            className="h-full min-h-96 w-full overflow-hidden rounded-lg"
             value={defaultCode}
             onChange={(value: string) => {
               setSrc(value);

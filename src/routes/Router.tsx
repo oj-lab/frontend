@@ -14,7 +14,7 @@ const PageRouter: React.FC = () => {
         <Routes>
           <Route path="/" element={<Navigate replace to="/problem" />} />
           <Route path="/problem" element={<ProblemList />} />
-          <Route path="/problem/*" element={<Problem />} />
+          <Route path="/problem/:slug" element={<Problem />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="" element={<Navigate replace to="/admin/problem" />} />
             <Route path="problem" element={<AdminProblem />} />

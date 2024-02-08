@@ -74,7 +74,7 @@ const CreateProblem: React.FC = () => {
                 slug,
                 title,
                 description,
-                tags,
+                tags: tags.map((tag) => ({ name: tag })),
               }).then((_) => {
                 navigate("/admin/problem");
               });
