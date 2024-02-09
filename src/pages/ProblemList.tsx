@@ -1,12 +1,11 @@
 import NewsCard from "../components/NewsCard";
 import ProblemTable from "../components/ProblemTable";
-import { useEvent } from "../hooks/event";
 import { useProblemInfoList } from "../hooks/problem";
 import UserLayout from "../layouts/userLayout/UserLayout";
 
 const ProblemList: React.FC = () => {
   const { getProblemInfoList } = useProblemInfoList();
-  useEvent();
+  // useEvent();
 
   return (
     <UserLayout>

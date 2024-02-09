@@ -10,10 +10,11 @@ export const useJudge = (slug: string) => {
     [],
   );
 
-  function runJudge() {
+  function runJudge(postSubmission: () => void) {
     JudgeService.postSubmission(slug, src, src_language)
       .then((res) => {
         setVerdicts(res);
+        postSubmission();
       })
       .catch((err) => {
         console.log(err);

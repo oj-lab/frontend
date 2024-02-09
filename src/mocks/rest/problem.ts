@@ -36,7 +36,7 @@ Hello! world!
 \`\`\`
 
 `,
-      tags: ["Primer"],
+      tags: [{ name: "Primer" }],
     };
 
     return HttpResponse.json(response);
@@ -53,12 +53,12 @@ export const getProblemInfoList = http.get("/api/v1/problem", (info) => {
       {
         slug: "hello-world",
         title: "Hello World",
-        tags: ["Pimer"],
+        tags: [{ name: "Pimer" }],
       },
       {
         slug: "a-plus-b-problem",
         title: "A+B Problem",
-        tags: ["Primer", "Math"],
+        tags: [{ name: "Primer" }, { name: "Math" }],
       },
     ],
   };

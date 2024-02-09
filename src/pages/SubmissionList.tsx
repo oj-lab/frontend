@@ -1,12 +1,11 @@
 import NewsCard from "../components/NewsCard";
 import SubmissionTable from "../components/SubmissionTable";
-import { useEvent } from "../hooks/event";
 import { useSubmissionList } from "../hooks/submission";
 import UserLayout from "../layouts/userLayout/UserLayout";
 
 const SubmissionList: React.FC = () => {
   const { getSubmissionList } = useSubmissionList();
-  useEvent();
+  // useEvent();
 
   return (
     <UserLayout>
