@@ -47,11 +47,7 @@ export const getSubmissionInfoList = http.get("/api/v1/submission", (info) => {
 
 export const getSubmissionInfo = http.get("/api/v1/submission/:uid", ( { params }) => {
   const { uid } = params;
-  const response: {
-    data: SubmissionServiceModel.SubmissionInfo;
-  } = {
-    data: submissions[+uid-1]
-  };
+  const response: SubmissionServiceModel.SubmissionInfo = submissions[+uid-1];
   return new Response(JSON.stringify(response), {
     status: 200,
   });

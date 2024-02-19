@@ -29,7 +29,7 @@ export const useSubmission = (uid: string) => {
   useEffect(() => {
     SubmissionService.getSubmission(uid)
       .then((res) => {
-        setSubmission(res.data)
+        setSubmission(res)
       })
       .catch((err) => {
         console.log(err);
