@@ -9,9 +9,7 @@ const Submission: React.FC = () => {
 
   return (
     <UserLayout>
-      <SubmissionDetail
-        data={getSubmission()}
-      />
+      <SubmissionDetail data={getSubmission()} />
     </UserLayout>
   );
 };

@@ -7,11 +7,8 @@ export interface SubmissionDetailProps {
 }
 
 const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
-
   return (
-    <div className={props.className}>
-      {props.data?props.data.uid:""}
-    </div>
+    <div className={props.className}>{props.data ? props.data.uid : ""}</div>
   );
 };
 

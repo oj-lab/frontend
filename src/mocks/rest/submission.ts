@@ -1,7 +1,7 @@
 import { http } from "msw";
 import { SubmissionServiceModel } from "../../typings/submission";
 
-const submissions:SubmissionServiceModel.SubmissionInfo[] = [
+const submissions: SubmissionServiceModel.SubmissionInfo[] = [
   {
     uid: "1",
     user: {
@@ -45,10 +45,14 @@ export const getSubmissionInfoList = http.get("/api/v1/submission", (info) => {
   });
 });
 
-export const getSubmissionInfo = http.get("/api/v1/submission/:uid", ( { params }) => {
-  const { uid } = params;
-  const response: SubmissionServiceModel.SubmissionInfo = submissions[+uid-1];
-  return new Response(JSON.stringify(response), {
-    status: 200,
-  });
-});
+export const getSubmissionInfo = http.get(
+  "/api/v1/submission/:uid",
+  ({ params }) => {
+    const { uid } = params;
+    const response: SubmissionServiceModel.SubmissionInfo =
+      submissions[+uid - 1];
+    return new Response(JSON.stringify(response), {
+      status: 200,
+    });
+  },
+);
