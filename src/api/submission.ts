@@ -12,4 +12,13 @@ export namespace SubmissionService {
     }
     return res.data;
   }
+  export async function getSubmission(uid: string) {
+    let res = await client.get<{
+      data: SubmissionServiceModel.SubmissionInfo
+    }>(`/api/v1/submission/${uid}`);
+    if (res.status !== 200) {
+      throw Error("failed to get submission detail");
+    }
+    return res.data;
+  }
 }
