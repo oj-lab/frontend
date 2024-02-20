@@ -7,6 +7,7 @@ export namespace SubmissionServiceModel {
     user: UserServiceModel.UserInfo;
     problem: ProblemServiceModel.ProblemInfo;
     language: string;
+    code: string;
     status: string;
   }
 }

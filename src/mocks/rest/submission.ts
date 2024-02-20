@@ -13,7 +13,8 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
       title: "Hello World",
       tags: ["Primer"],
     },
-    language: "C++",
+    language: "Cpp",
+    code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "finished",
   },
   {
@@ -27,7 +28,8 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
       title: "A + B Problem",
       tags: ["Primer"],
     },
-    language: "C++",
+    language: "Cpp",
+    code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "wrong answer",
   },
 ];
