@@ -22,6 +22,7 @@
     "monaco-editor": "^0.39.0",
     "msw": "^2.1.7",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^13.2.2",
     "react-markdown": "^8.0.7",
@@ -69,6 +70,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.10",
+    "@types/react-copy-to-clipboard": "^5.0.7",
     "@types/react-syntax-highlighter": "^15.5.11",
     "@types/redux-logger": "^3.0.9",
     "@vitejs/plugin-react": "^4.2.1",
