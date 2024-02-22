@@ -4,6 +4,8 @@ import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { SubmissionServiceModel } from "../typings/submission";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
+import { joinClasses } from "@/utils/common";
+import { getBadgeColorClasses } from "@/utils/color";
 
 export interface SubmissionDetailProps {
   data?: SubmissionServiceModel.SubmissionInfo;
@@ -14,23 +16,32 @@ const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
   const [copyTip, setCopyTip] = React.useState("Copy code");
   return props.data ? (
     <div className="grid gap-2 overflow-x-auto">
-      <div className="rounded border-2 border-slate-200">
+      <div className="overflow-hidden rounded-lg border">
         <table className="table">
           {/* head */}
           <thead>
             <tr>
-              <th className="border">uid</th>
-              <th className="border">slug</th>
-              <th className="border">language</th>
-              <th className="border">status</th>
+              <th className="border-r">UID</th>
+              <th className="border-l">SLUG</th>
+              <th className="border-l">LANGUAGE</th>
+              <th className="border-l">STATUS</th>
             </tr>
           </thead>
           <tbody>
             <tr className="bg-base-200">
-              <td className="border">{props.data.uid}</td>
-              <td className="border">{props.data.problem.slug}</td>
-              <td className="border">{props.data.language}</td>
-              <td className="border">{props.data.status}</td>
+              <td className="border-r border-t">{props.data.uid}</td>
+              <td className="border-l border-t">{props.data.problem.slug}</td>
+              <td className="border-l border-t">{props.data.language}</td>
+              <td className="border-l border-t">
+                <div
+                  className={joinClasses(
+                    "badge badge-outline",
+                    getBadgeColorClasses(props.data.status),
+                  )}
+                >
+                  {props.data.status}
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>

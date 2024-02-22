@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../utils/common";
 import { SubmissionServiceModel } from "../typings/submission";
+import { getBadgeColorClasses } from "@/utils/color";
 
 const columns = [
   { name: "PROBLEM", uid: "problem" },
@@ -15,19 +16,6 @@ export interface SubmissionTableProps {
   showActions?: boolean;
   enableNavigation?: boolean;
   className?: string;
-}
-
-function getBadgeColorClasses(status: string): string {
-  switch (status) {
-    case "finished":
-      return "badge-success";
-    case "pending":
-      return "badge-warning";
-    case "wrong answer":
-      return "badge-error";
-    default:
-      return "";
-  }
 }
 
 const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
