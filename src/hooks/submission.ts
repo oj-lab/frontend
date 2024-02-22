@@ -23,3 +23,23 @@ export const useSubmissionList = () => {
 
   return { getSubmissionList };
 };
+
+export const useSubmission = (uid: string) => {
+  const [submission, setSubmission] =
+    useState<SubmissionServiceModel.SubmissionInfo>();
+  useEffect(() => {
+    SubmissionService.getSubmission(uid)
+      .then((res) => {
+        setSubmission(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [uid]);
+
+  function getSubmission() {
+    return submission;
+  }
+
+  return { getSubmission };
+};

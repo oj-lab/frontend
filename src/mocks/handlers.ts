@@ -7,7 +7,7 @@ import {
   deleteProblem,
   putProblemPackage,
 } from "./rest/problem";
-import { getSubmissionInfoList } from "./rest/submission";
+import { getSubmissionInfoList, getSubmissionInfo } from "./rest/submission";
 import { getCurrentUser, postLogin } from "./rest/user";
 
 export const restHandlers = [
@@ -17,6 +17,7 @@ export const restHandlers = [
   getProblemInfo,
   getProblemInfoList,
   getSubmissionInfoList,
+  getSubmissionInfo,
   checkProblemSlug,
   putProblemPackage,
   deleteProblem,
