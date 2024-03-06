@@ -33,7 +33,7 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
         </thead>
         <tbody>
           {props.data.map((submission, idx) => (
-            <tr className="hover" onClick={() => navigate(submission.uid)} key={idx}>
+            <tr className="hover" onClick={() => navigate(submission.UID)} key={idx}>
               <th>{submission.problem.title}</th>
               <td>{submission.user.name}</td>
               <td>{submission.language}</td>

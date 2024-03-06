@@ -29,7 +29,7 @@ const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
           </thead>
           <tbody>
             <tr className="bg-base-200">
-              <td className="border-r border-t">{props.data.uid}</td>
+              <td className="border-r border-t">{props.data.UID}</td>
               <td className="border-l border-t">{props.data.problem.slug}</td>
               <td className="border-l border-t">{props.data.language}</td>
               <td className="border-l border-t">
