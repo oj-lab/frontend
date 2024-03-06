@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProblemServiceModel } from "../typings/problem";
 import { ProblemService } from "../api/problem";
 
@@ -6,6 +6,11 @@ export const useProblem = (slug: string, fallback?: () => void) => {
   const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
     null,
   );
+  const fallbackRef = useRef(fallback);
+
+  useEffect(() => {
+    fallbackRef.current = fallback;
+  }, [fallback]);
 
   useEffect(() => {
     ProblemService.getProblem(slug)
@@ -14,9 +19,9 @@ export const useProblem = (slug: string, fallback?: () => void) => {
       })
       .catch((err) => {
         console.log(err);
-        fallback?.();
+        fallbackRef.current?.();
       });
-  }, [slug, fallback]);
+  }, [slug]);
 
   function getProblem() {
     return problem;
