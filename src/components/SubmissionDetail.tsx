@@ -1,5 +1,5 @@
 import React from "react";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { SubmissionServiceModel } from "../typings/submission";
 import { CopyToClipboard } from "react-copy-to-clipboard";
