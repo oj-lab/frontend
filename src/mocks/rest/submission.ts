@@ -3,7 +3,7 @@ import { SubmissionServiceModel } from "../../typings/submission";
 
 const submissions: SubmissionServiceModel.SubmissionInfo[] = [
   {
-    uid: "1",
+    UID: "1",
     user: {
       account: "user-1",
       name: "User 1",
@@ -18,7 +18,7 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
     status: "finished",
   },
   {
-    uid: "2",
+    UID: "2",
     user: {
       account: "user-2",
       name: "User 2",

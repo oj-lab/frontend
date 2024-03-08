@@ -1,5 +1,5 @@
 import React from "react";
-import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { PrismAsyncLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { SubmissionServiceModel } from "../typings/submission";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -29,7 +29,7 @@ const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
           </thead>
           <tbody>
             <tr className="bg-base-200">
-              <td className="border-r border-t">{props.data.uid}</td>
+              <td className="border-r border-t">{props.data.UID}</td>
               <td className="border-l border-t">{props.data.problem.slug}</td>
               <td className="border-l border-t">{props.data.language}</td>
               <td className="border-l border-t">

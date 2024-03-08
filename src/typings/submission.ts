@@ -3,7 +3,7 @@ import { UserServiceModel } from "./user";
 
 export namespace SubmissionServiceModel {
   export interface SubmissionInfo {
-    uid: string;
+    UID: string;
     user: UserServiceModel.UserInfo;
     problem: ProblemServiceModel.ProblemInfo;
     language: string;
