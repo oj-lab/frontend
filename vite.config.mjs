@@ -31,19 +31,20 @@ const viteConfig = ({ mode }) => {
     plugins: [
       react(),
       {
-        name: 'add-script',
-        apply: 'build',
-        transformIndexHtml: {
-          order: 1,
-          handler(html, ctx) {
-            if (ctx.mode === 'gh-pages') {
-              return html.replace(
-                '<meta name="website-id" content="" />',
-                '<meta name="website-id" content="b636e4e9-a210-4ef5-a7e9-192e04b798c5" />'
-              )
-            }
-            return html
-          },
+        name: "add-analytics",
+        apply: "build",
+        transformIndexHtml(html) {
+          if (isGhPagesBuild) {
+            return html.replace(
+              /<script analytics>(.*?)<\/script>/,
+              `<script defer src="https://us.umami.is/script.js" data-website-id="b636e4e9-a210-4ef5-a7e9-192e04b798c5"></script>`,
+            );
+          } else {
+            return html.replace(
+              /<script analytics>(.*?)<\/title>/,
+              "<!-- analytics not enabled -->",
+            );
+          }
         },
       },
     ],
