@@ -28,7 +28,25 @@ const viteConfig = ({ mode }) => {
         },
       },
     },
-    plugins: [react()],
+    plugins: [
+      react(),
+      {
+        name: 'add-script',
+        apply: 'build',
+        transformIndexHtml: {
+          order: 1,
+          handler(html, ctx) {
+            if (ctx.mode === 'gh-pages') {
+              return html.replace(
+                '<meta name="website-id" content="" />',
+                '<meta name="website-id" content="b636e4e9-a210-4ef5-a7e9-192e04b798c5" />'
+              )
+            }
+            return html
+          },
+        },
+      },
+    ],
     resolve: {
       alias: {
         "@": path.resolve(__dirname, "./src"),
