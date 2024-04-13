@@ -41,6 +41,17 @@ module.exports = {
       "sunset",
     ],
   },
+  theme: {
+    keyframes: {
+      fadeOut: {
+        "0%": { opacity: 1 },
+        "100%": { opacity: 0 },
+      },
+    },
+    animation: {
+      fadeOut: "fadeOut 0.2s ease-out forwards",
+    },
+  },
   darkMode: "class",
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };

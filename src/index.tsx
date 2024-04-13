@@ -5,6 +5,8 @@ import reportWebVitals from "./reportWebVitals";
 import "./i18n/i18n";
 import "./index.css";
 import { getMode, isGhPages, isMock } from "./utils/environment";
+import { Provider } from "react-redux";
+import store from "./store";
 
 console.log("Running in:", getMode());
 
@@ -36,7 +38,9 @@ enableMocking().then(() => {
   );
   root.render(
     <React.StrictMode>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </React.StrictMode>,
   );
 });
