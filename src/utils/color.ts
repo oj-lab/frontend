@@ -1,11 +1,15 @@
 export function getBadgeColorClasses(status: string): string {
   switch (status) {
-    case "finished":
+    case "Accepted":
       return "badge-success";
-    case "pending":
-      return "badge-warning";
-    case "wrong answer":
+    case "WrongAnswer":
       return "badge-error";
+    case "CompileError":
+      return "badge-warning";
+    case "pending":
+      return "badge-primary";
+    case "running":
+      return "badge-secondary";
     default:
       return "";
   }

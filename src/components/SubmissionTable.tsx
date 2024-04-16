@@ -45,10 +45,16 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
                 <div
                   className={joinClasses(
                     "badge badge-outline",
-                    getBadgeColorClasses(submission.status),
+                    getBadgeColorClasses(
+                      submission.status === "finished"
+                        ? submission.mainResult
+                        : submission.status,
+                    ),
                   )}
                 >
-                  {submission.status}
+                  {submission.status === "finished"
+                    ? submission.mainResult
+                    : submission.status}
                 </div>
               </td>
             </tr>

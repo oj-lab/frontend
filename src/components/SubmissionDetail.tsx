@@ -36,10 +36,16 @@ const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
                 <div
                   className={joinClasses(
                     "badge badge-outline",
-                    getBadgeColorClasses(props.data.status),
+                    getBadgeColorClasses(
+                      props.data.status === "finished"
+                        ? props.data.mainResult
+                        : props.data.status,
+                    ),
                   )}
                 >
-                  {props.data.status}
+                  {props.data.status === "finished"
+                    ? props.data.mainResult
+                    : props.data.status}
                 </div>
               </td>
             </tr>

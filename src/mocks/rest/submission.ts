@@ -11,11 +11,12 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
     problem: {
       slug: "hello-world",
       title: "Hello World",
-      tags: ["Primer"],
+      tags: [{ name: "Primer" }],
     },
     language: "Cpp",
     code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "finished",
+    mainResult: "Accepted",
   },
   {
     UID: "2",
@@ -26,11 +27,12 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
     problem: {
       slug: "a-plus-b-problem",
       title: "A + B Problem",
-      tags: ["Primer"],
+      tags: [{ name: "Primer" }, { name: "Math" }],
     },
     language: "Cpp",
     code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
-    status: "wrong answer",
+    status: "finished",
+    mainResult: "WrongAnswer",
   },
 ];
 
