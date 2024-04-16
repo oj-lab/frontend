@@ -16,7 +16,7 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
     language: "Cpp",
     code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "finished",
-    mainResult: "Accepted"
+    mainResult: "Accepted",
   },
   {
     UID: "2",
