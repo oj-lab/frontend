@@ -9,5 +9,6 @@ export namespace SubmissionServiceModel {
     language: string;
     code: string;
     status: string;
+    mainResult: string;
   }
 }
