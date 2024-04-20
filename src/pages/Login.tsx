@@ -1,122 +1,107 @@
 import React from "react";
 import UserLayout from "../layouts/userLayout/UserLayout";
 import { useLogin } from "../hooks/login";
+import { redirectToOAuthGitHub } from "@/api/login";
+import GitHubIcon from "@/components/icons/GitHubIcon";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
 const background = `${import.meta.env.BASE_URL}images/loginBackground.webp`;
-const githubIconPath = `${import.meta.env.BASE_URL}images/github-mark.svg`;
-const eyeOn = `${import.meta.env.BASE_URL}images/eye-on.svg`;
-const eyeOff = `${import.meta.env.BASE_URL}images/eye-off.svg`;
-
-const client_id = "c0ddc8b484c351d2a3b5";
-const authorize_uri = "https://github.com/login/oauth/authorize";
-const redirect_uri = "http://localhost:8080/api/v1/user/oauth/redirect";
 
 const Login: React.FC = () => {
-  const [type, setType] = React.useState<string>("password");
-  const [icon, setIcon] = React.useState<string>(eyeOn);
+  const [showPassaword, setShowPassword] = React.useState<boolean>(false);
   const { runLogin, setAccount, setPassword } = useLogin();
 
   const toggleShowPassword = () => {
-    if (type === "password") {
-      setIcon(eyeOn);
-      setType("text");
-    } else {
-      setIcon(eyeOff);
-      setType("password");
-    }
+    setShowPassword(!showPassaword);
   };
 
   return (
     <UserLayout>
-      <section className="mx-5 my-0 flex flex-col items-center justify-center space-y-10 md:mx-0 md:my-0 md:flex-row md:space-x-16 md:space-y-40">
-        <div className="max-w-sm md:w-1/3">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <div className="max-w-sm">
           <img src={background} alt="BackgroundImage" />
         </div>
 
-        <div className="max-w-sm md:w-1/3">
-          <div className="text-center md:text-left">
-            <label className="ab ml-10 mr-10">Sign in with</label>
+        <div className="flex w-1/3 max-w-sm flex-col gap-4">
+          <div className="flex items-center justify-center gap-4">
+            <label className="font-semibold">Sign in with</label>
             <button
               type="button"
-              className="centermx-1 h-9 w-9  rounded-full text-white shadow-[0_4px_9px_-4px_#3b71ca] hover:bg-blue-700"
-              onClick={
-                () =>
-                  (window.location.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}`)
-                // backend will get github user info
-                //
-                // If exists, get user info from backend, like login
-                //
-                // or maybe come to a password set stage, login ?
-              }
+              className="centermx-1 h-9 w-9 rounded-full hover:shadow-[0_0px_24px_-4px_#999999]"
+              onClick={redirectToOAuthGitHub}
             >
-              <img src={githubIconPath} alt="github" />
-            </button>
-          </div>
-          <div className="my-5 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-            <p className="mx-4 mb-0 text-center font-semibold text-slate-500">
-              Or
-            </p>
-          </div>
-          <input
-            className="flex w-full rounded border border-solid border-gray-300 px-4 py-2 text-sm"
-            type="text"
-            placeholder="Username"
-            onChange={(e) => setAccount(e.target.value)}
-          />
-          <div className="relative mt-4 rounded border border-solid border-gray-300 py-0">
-            <input
-              className="flex w-full rounded px-4 py-2 text-sm"
-              type={type}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
-            <button
-              className="absolute end-0 top-0 rounded-e-md p-1.5"
-              onClick={toggleShowPassword}
-            >
-              <img src={icon} alt="toggle" />
+              <GitHubIcon className="fill-base-content" />
             </button>
           </div>
 
-          <div className="mt-4 flex justify-between text-sm font-semibold">
-            <label className="flex cursor-pointer text-slate-500 hover:text-slate-600">
-              <input className="mr-1" type="checkbox" />
-              <span>Remember Me</span>
+          <div className="flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
+            <p className="mx-4 text-center font-semibold text-slate-500">Or</p>
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="input input-bordered flex items-center gap-2">
+              <input
+                className="grow"
+                type="text"
+                placeholder="Username"
+                onChange={(e) => setAccount(e.target.value)}
+              />
             </label>
-            <a
-              className="text-blue-600 hover:text-blue-700 hover:underline hover:underline-offset-4"
-              href="/login" // no support
-            >
-              Forgot Password?
-            </a>
+            <label className="input input-bordered flex items-center gap-2">
+              <input
+                className="grow"
+                type={showPassaword ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+              <button
+                className="btn btn-circle btn-ghost btn-sm"
+                onClick={toggleShowPassword}
+              >
+                {showPassaword ? (
+                  <EyeIcon className="h-6 w-6" />
+                ) : (
+                  <EyeSlashIcon className="h-6 w-6" />
+                )}
+              </button>
+            </label>
           </div>
 
-          <div className="text-center md:text-left">
-            <button
-              className="mt-4 rounded bg-blue-600 px-4 py-2 text-xs uppercase tracking-wider text-white hover:bg-blue-700"
-              type="submit"
-              onClick={() => {
-                runLogin(() => {
-                  // redirect?
-                  // user status update?
-                });
-              }}
-            >
-              Login
+          <div className="flex justify-between text-sm font-semibold">
+            <label className="flex cursor-pointer items-center gap-1 text-slate-500 hover:text-slate-600">
+              <input
+                type="checkbox"
+                defaultChecked
+                className="checkbox checkbox-xs"
+              />
+              <span className="select-none">Remember Me</span>
+            </label>
+            <button className="btn btn-link h-6 min-h-6 p-0 ">
+              Forgot Password?
             </button>
           </div>
-          <div className="mt-4 text-center text-sm font-semibold text-slate-500 md:text-left">
+
+          <button
+            className="btn btn-neutral btn-active btn-block"
+            type="submit"
+            onClick={() => {
+              runLogin(() => {
+                console.log("login success");
+              });
+            }}
+          >
+            Login
+          </button>
+
+          <div className="text-left text-sm font-semibold text-slate-500">
             Don&apos;t have an account?{" "}
-            <a
-              className="text-red-600 hover:underline hover:underline-offset-4"
-              href="/login" // no support
-            >
+            <button className="btn btn-link h-6 min-h-6 p-0 text-error">
               Register
-            </a>
+            </button>
           </div>
         </div>
-      </section>
+      </div>
     </UserLayout>
   );
 };

@@ -26,3 +26,7 @@ export async function getCurrentUser(): Promise<UserResponse> {
     roles: res.data.roles,
   };
 }
+
+export function redirectToOAuthGitHub() {
+  window.location.href = "/api/v1/oauth/github";
+}
