@@ -10,7 +10,7 @@ export async function login(account: string, password: string) {
     account: account,
     password: password,
   });
-  console.log(res)
+  console.log(res);
   if (res.status !== 200) {
     throw Error("failed to login");
   }
