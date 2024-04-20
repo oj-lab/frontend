@@ -1,11 +1,7 @@
 import React from "react";
-
 import UserLayout from "../layouts/userLayout/UserLayout";
 import { useLogin } from "../hooks/login";
 
-// import { useParams } from "react-router-dom";
-// import { AiOutlineTwitter } from "react-icons/ai";
-// import { BiLogoFacebook } from "react-icons/bi";
 
 const background = `${import.meta.env.BASE_URL}images/loginBackground.webp`;
 const githubIconPath = `${import.meta.env.BASE_URL}images/github-mark.svg`;
