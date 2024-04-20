@@ -12,6 +12,9 @@ const githubIconPath = `${import.meta.env.BASE_URL}images/github-mark.svg`;
 const eyeOn = `${import.meta.env.BASE_URL}images/eye-on.svg`;
 const eyeOff = `${import.meta.env.BASE_URL}images/eye-off.svg`;
 
+const client_id = 'c0ddc8b484c351d2a3b5';
+const authorize_uri = 'https://github.com/login/oauth/authorize';
+const redirect_uri = 'http://localhost:8080/api/v1/user/oauth/redirect';
 
 const Login: React.FC = () => {
     const [type, setType] = React.useState<string>("password");
@@ -42,6 +45,14 @@ const Login: React.FC = () => {
                         <button
                             type="button"
                             className="centermx-1 h-9 w-9  rounded-full hover:bg-blue-700 text-white shadow-[0_4px_9px_-4px_#3b71ca]"
+                            onClick={() =>
+                                window.location.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}`
+                                // backend will get github user info
+                                //
+                                // If exists, get user info from backend, like login
+                                //
+                                // or maybe come to a password set stage, login ?
+                            }
                         >
                             <img src={githubIconPath} alt="github" />
                         </button>
@@ -58,9 +69,9 @@ const Login: React.FC = () => {
                         placeholder="Username"
                         onChange={(e) => setAccount(e.target.value)}
                     />
-                    <div className="relative mt-4 py-0 border border-solid border-gray-300 flex rounded">
+                    <div className="relative mt-4 py-0 border border-solid border-gray-300 rounded">
                         <input
-                            className="py-2 px-4 block w-full rounded"
+                            className="flex text-sm py-2 px-4 w-full rounded"
                             type={type}
                             placeholder="Password"
                             onChange={(e) => setPassword(e.target.value)}
@@ -70,7 +81,6 @@ const Login: React.FC = () => {
                             <img src={icon} alt="toggle" />
                         </button>
                     </div>
-
 
                     <div className="mt-4 flex justify-between font-semibold text-sm">
                         <label className="flex text-slate-500 hover:text-slate-600 cursor-pointer">
@@ -91,8 +101,8 @@ const Login: React.FC = () => {
                             type="submit"
                             onClick={() => {
                                 runLogin(() => {
-                                    // do redirect
-                                    // user status update                                    
+                                    // redirect?
+                                    // user status update?                                    
                                 });
                             }}
 

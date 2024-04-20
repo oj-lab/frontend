@@ -5,7 +5,6 @@ export const useLogin = () => {
     const [account, setAccount] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-
     function runLogin(postLogin: () => void) {
         login(account, password)
             .then(() => {
