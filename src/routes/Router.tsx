@@ -7,6 +7,7 @@ import AdminLayout from "../layouts/adminLayout/AdminLayout";
 import ProblemList from "../pages/ProblemList";
 import SubmissionList from "../pages/SubmissionList";
 import Submission from "../pages/Submission";
+import Login from "../pages/Login";
 
 const PageRouter: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const PageRouter: React.FC = () => {
       <Suspense>
         <Routes>
           <Route path="/" element={<Navigate replace to="/problem" />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/problem" element={<ProblemList />} />
           <Route path="/problem/:slug" element={<Problem />} />
           <Route path="/admin" element={<AdminLayout />}>

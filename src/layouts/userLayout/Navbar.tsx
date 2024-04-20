@@ -19,6 +19,7 @@ const user = {
 };
 const userNavigation = [
   { name: "Admin page", href: "/admin" },
+  { name: "Login", href: "/login" },
   { name: "Sign out", href: "#" },
 ];
 
