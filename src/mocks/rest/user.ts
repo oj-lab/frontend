@@ -1,11 +1,12 @@
-import { http } from "msw";
+import { HttpResponse, http } from "msw";
 
-export const getCurrentUser = http.get("/user/current", (info) => {
+export const getCurrentUser = http.get("/api/v1/user/current", (info) => {
   const authToken = info.cookies["auth-token"];
-  if (authToken === "233") {
+  const username = authToken?.split("-")[3];
+  if (authToken === "mock-token") {
     return new Response(
       JSON.stringify({
-        username: "admin",
+        username: username,
         roles: ["admin", "user"],
       }),
       {
@@ -18,13 +19,16 @@ export const getCurrentUser = http.get("/user/current", (info) => {
   });
 });
 
-export const postLogin = http.post("/login", (info) => {
-  return new Response(
-    JSON.stringify({
-      token: "233",
-    }),
-    {
-      status: 200,
+export const postLogin = http.post("/api/v1/user/login", async (info) => {
+  const body = await info.request.json();
+  const { account } = body?.valueOf() as {
+    account: string;
+    password: string;
+  };
+  return new HttpResponse(null, {
+    status: 200,
+    headers: {
+      "Set-Cookie": `auth-token=mock-token-for-${account}`,
     },
-  );
+  });
 });

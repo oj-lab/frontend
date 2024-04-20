@@ -1,7 +1,6 @@
 import React from "react";
 import UserLayout from "../layouts/userLayout/UserLayout";
-import { useLogin } from "../hooks/login";
-import { redirectToOAuthGitHub } from "@/api/login";
+import { redirectToOAuthGitHub, postLogin } from "@/api/auth";
 import GitHubIcon from "@/components/icons/GitHubIcon";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 
@@ -9,7 +8,8 @@ const background = `${import.meta.env.BASE_URL}images/loginBackground.webp`;
 
 const Login: React.FC = () => {
   const [showPassaword, setShowPassword] = React.useState<boolean>(false);
-  const { runLogin, setAccount, setPassword } = useLogin();
+  const [account, setAccount] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassaword);
@@ -86,9 +86,7 @@ const Login: React.FC = () => {
             className="btn btn-neutral btn-active btn-block"
             type="submit"
             onClick={() => {
-              runLogin(() => {
-                console.log("login success");
-              });
+              postLogin(account, password);
             }}
           >
             Login
