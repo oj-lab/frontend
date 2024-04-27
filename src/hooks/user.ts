@@ -1,5 +1,5 @@
+import { UserResponse, getCurrentUser } from "@/api/auth";
 import { useEffect, useState } from "react";
-import { getCurrentUser, UserResponse } from "../api/login";
 
 export enum UserState {
   UserSignedIn,
@@ -8,7 +8,7 @@ export enum UserState {
 }
 
 export const useUser = () => {
-  const [user, setUser] = useState<UserResponse | null>(null);
+  const [user, setUser] = useState<UserResponse | undefined>(undefined);
   const [userState, setUserState] = useState<UserState>(UserState.Loading);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export const useUser = () => {
         console.log(err);
         setUserState(UserState.UserSignedOut);
       });
-  });
+  }, []);
 
   function getUser() {
     return user;

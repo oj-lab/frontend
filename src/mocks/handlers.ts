@@ -8,11 +8,12 @@ import {
   putProblemPackage,
 } from "./rest/problem";
 import { getSubmissionInfoList, getSubmissionInfo } from "./rest/submission";
-import { getCurrentUser, postLogin } from "./rest/user";
+import { getCurrentUser, postLogin, postSignOut } from "./rest/user";
 
 export const restHandlers = [
   getCurrentUser,
   postLogin,
+  postSignOut,
   putProblem,
   getProblemInfo,
   getProblemInfoList,

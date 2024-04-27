@@ -15,12 +15,12 @@ const userNavigation = [
 const Navbar: React.FC = () => {
   return (
     <>
-      <div className="navbar bg-base-100">
+      <div className="navbar bg-base-100 lg:px-8">
         <div className="ml-80 flex flex-1 justify-end">
           <div className="flex flex-row items-center justify-center gap-2">
             <LanguageMenu />
             <DarkLightToggle />
-            <UserMenu avatarUrl={user.imageUrl} navigation={userNavigation} />
+            <UserMenu avatarUrl={user.imageUrl} actions={userNavigation} />
           </div>
         </div>
       </div>

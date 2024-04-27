@@ -3,7 +3,7 @@ import { HttpResponse, http } from "msw";
 export const getCurrentUser = http.get("/api/v1/user/current", (info) => {
   const authToken = info.cookies["auth-token"];
   const username = authToken?.split("-")[3];
-  if (authToken === "mock-token") {
+  if (authToken && authToken.startsWith("mock-token")) {
     return new Response(
       JSON.stringify({
         username: username,
@@ -29,6 +29,15 @@ export const postLogin = http.post("/api/v1/user/login", async (info) => {
     status: 200,
     headers: {
       "Set-Cookie": `auth-token=mock-token-for-${account}`,
+    },
+  });
+});
+
+export const postSignOut = http.post("/api/v1/user/logout", async (info) => {
+  return new HttpResponse(null, {
+    status: 200,
+    headers: {
+      "Set-Cookie": `auth-token=; Max-Age=0`,
     },
   });
 });

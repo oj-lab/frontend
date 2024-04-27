@@ -10,9 +10,16 @@ export async function postLogin(account: string, password: string) {
     account: account,
     password: password,
   });
-  console.log(res);
   if (res.status !== 200) {
     throw Error("failed to login");
+  }
+  return res;
+}
+
+export async function postSignOut() {
+  let res = await client.post<void>("/api/v1/user/logout");
+  if (res.status !== 200) {
+    throw Error("failed to sign out");
   }
   return res;
 }

@@ -86,7 +86,10 @@ const Login: React.FC = () => {
             className="btn btn-neutral btn-active btn-block"
             type="submit"
             onClick={() => {
-              postLogin(account, password);
+              postLogin(account, password).then((res) => {
+                console.log(res);
+                window.location.href = "/";
+              });
             }}
           >
             Login

@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../utils/common";
 import React from "react";
 
+export interface UserMenuAction {
+  name: string;
+  href?: string;
+  onClick?: () => void;
+}
+
 export interface UserMenuProps {
   avatarUrl?: string;
-  navigation?: Array<{ name: string; href: string }>;
+  actions?: Array<UserMenuAction>;
 }
 
 /**
@@ -60,13 +66,15 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
           tabIndex={0}
           className="menu dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow-2xl"
         >
-          {props.navigation?.map((item, index) => (
+          {props.actions?.map((item, index) => (
             <li key={index}>
               <a
                 href={item.href}
                 onClick={(e) => {
                   e.preventDefault();
-                  navigate(item.href);
+                  if (item.onClick) {
+                    item.onClick();
+                  } else if (item.href) navigate(item.href);
                 }}
               >
                 {t(item.name)}
