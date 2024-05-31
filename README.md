@@ -2,7 +2,8 @@
 
 ![Codespace Supported](https://img.shields.io/badge/Codespace_Supported-000000?style=flat&logo=github)
 
-_See what we plan to do_ or _tell us your new idea_ in [Discussions](https://github.com/oj-lab/oj-lab-front/discussions).
+_See what we plan to do_ or _tell us your new idea_ in
+[Discussions](https://github.com/oj-lab/oj-lab-front/discussions).
 
 ## Development
 
@@ -20,14 +21,11 @@ npm install
 npm run start
 ```
 
-### Lints
+### Lints & Formats
 
 Please run the following before commit:
 
 ```sh
 npm run prettier:check
-```
-
-```sh
 npm run lint
 ```
