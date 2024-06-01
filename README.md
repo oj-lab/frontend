@@ -21,6 +21,12 @@ npm install
 npm run start
 ```
 
+For working without backend:
+
+```sh
+npm run start:mock
+```
+
 ### Lints & Formats
 
 Please run the following before commit:
@@ -29,3 +35,11 @@ Please run the following before commit:
 npm run prettier:check
 npm run lint
 ```
+
+## UI Resources
+
+🩷 Thanks to the awesome open-source community,
+OJ Lab Front mainly uses the following resources:
+
+- [daisyUI](https://daisyui.com/) for Tailwind CSS components
+- [Tabler Icons](https://tabler.io/icons) for icons
