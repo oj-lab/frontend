@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { DefaultIconStroke, DefaultIconStrokeWidth } from "./defaults";
+import { DefaultIconStrokeWidth } from "./defaults";
 
 const MoonStarsIcon: FC<{
   className?: string;
@@ -10,7 +10,7 @@ const MoonStarsIcon: FC<{
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
-      stroke={DefaultIconStroke}
+      stroke="currentColor"
       stroke-width={DefaultIconStrokeWidth}
       stroke-linecap="round"
       stroke-linejoin="round"

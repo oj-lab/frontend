@@ -24,3 +24,7 @@ code {
 .fade-out {
   @apply animate-fadeOut;
 }
+
+.no-uppercase {
+  text-transform: none;
+}

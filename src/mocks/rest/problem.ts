@@ -53,7 +53,7 @@ export const getProblemInfoList = http.get("/api/v1/problem", (info) => {
       {
         slug: "hello-world",
         title: "Hello World",
-        tags: [{ name: "Pimer" }],
+        tags: [{ name: "Primer" }],
       },
       {
         slug: "a-plus-b-problem",

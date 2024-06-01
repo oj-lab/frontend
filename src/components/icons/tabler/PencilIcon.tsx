@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { DefaultIconStrokeWidth } from "./defaults";
 
-const PackageIcon: FC<{
+const PencilIcon: FC<{
   className?: string;
 }> = (props) => {
   return (
@@ -16,13 +16,10 @@ const PackageIcon: FC<{
       className={props.className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
-      <path d="M12 12l8 -4.5" />
-      <path d="M12 12l0 9" />
-      <path d="M12 12l-8 -4.5" />
-      <path d="M16 5.25l-8 4.5" />
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
     </svg>
   );
 };
 
-export default PackageIcon;
+export default PencilIcon;

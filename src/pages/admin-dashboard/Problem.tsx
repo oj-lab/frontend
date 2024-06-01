@@ -34,7 +34,11 @@ const Problem: React.FC = () => {
           />
           <span className="label-text">{t("Show actions")}</span>
         </label>
-        <ProblemTable data={getProblemInfoList()} showActions={showActions} />
+        <ProblemTable
+          data={getProblemInfoList()}
+          showActions={showActions}
+          className="card card-bordered rounded"
+        />
       </div>
     </>
   );

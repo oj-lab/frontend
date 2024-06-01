@@ -1,14 +1,15 @@
-import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import { ProblemServiceModel } from "../typings/problem";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ProblemService } from "@/api/problem";
+import TrashIcon from "./icons/tabler/TrashIcon";
+import PencilIcon from "./icons/tabler/PencilIcon";
 
 const columns = [
-  { name: "SLUG", uid: "slug" },
-  { name: "TITLE", uid: "title" },
-  { name: "TAGS", uid: "tags" },
-  { name: "ACTIONS", uid: "actions" },
+  { name: "Slug", uid: "slug" },
+  { name: "Title", uid: "title" },
+  { name: "Tags", uid: "tags" },
+  { name: "Actions", uid: "actions" },
 ];
 
 export interface ProblemTableProps {
@@ -33,7 +34,14 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               if (column.uid === "actions" && !props.showActions) {
                 return null;
               }
-              return <th key={column.uid}>{column.name}</th>;
+              return (
+                <th
+                  key={column.uid}
+                  className="text-sm font-normal text-base-content/80"
+                >
+                  {column.name}
+                </th>
+              );
             })}
           </tr>
         </thead>
@@ -41,24 +49,27 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
           {props.data.map((problemInfo) => (
             <tr
               key={problemInfo.slug}
-              className="hover"
+              className="hover h-14"
               onClick={() => {
                 if (props.enableRouting) navigate(problemInfo.slug);
               }}
             >
-              <th>{problemInfo.slug}</th>
-              <td>{problemInfo.title}</td>
+              <td className="font-normal">{problemInfo.slug}</td>
+              <td className="font-semibold">{problemInfo.title}</td>
               <td>
                 <div className="space-x-2">
                   {problemInfo.tags.map((tag) => (
-                    <div key={tag.name} className="badge badge-outline">
+                    <div
+                      key={tag.name}
+                      className="badge border-base-300 bg-base-300 font-semibold text-base-content/80"
+                    >
                       {tag.name}
                     </div>
                   ))}
                 </div>
               </td>
               {props.showActions && (
-                <td>
+                <td className="p-2">
                   <Actions
                     onClickDelete={() => setDeletingSlug(problemInfo.slug)}
                   />
@@ -108,15 +119,12 @@ interface ActionsProps {
 const Actions: React.FC<ActionsProps> = (props) => {
   return (
     <>
-      <div className="flex space-x-2">
-        <button
-          className="btn btn-square btn-outline btn-primary btn-xs"
-          disabled
-        >
-          <PencilSquareIcon className="h-4 w-4" />
+      <div className="flex space-x-1">
+        <button className="btn btn-square btn-ghost btn-sm rounded hover:bg-primary/20">
+          <PencilIcon className="h-5 w-5 text-primary" />
         </button>
         <button
-          className="btn btn-square btn-outline btn-error btn-xs"
+          className="btn btn-square btn-ghost btn-sm rounded hover:bg-error/20"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -128,7 +136,7 @@ const Actions: React.FC<ActionsProps> = (props) => {
             modal?.showModal();
           }}
         >
-          <TrashIcon className="h-4 w-4" />
+          <TrashIcon className="h-5 w-5 text-error" />
         </button>
       </div>
     </>

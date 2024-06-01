@@ -50,7 +50,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         <div
           tabIndex={0}
           className={joinClasses(
-            "avatar btn btn-circle btn-ghost m-1",
+            "avatar btn btn-circle btn-ghost btn-md",
             open ? "z-[2]" : "z-[0]",
           )}
         >
@@ -64,7 +64,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[2] w-32 rounded-box bg-base-100 p-2 shadow-2xl"
+          className="menu dropdown-content z-[2] w-32 rounded-box border border-base-200 bg-base-100 p-2 shadow-2xl"
         >
           {props.actions?.map((item, index) => (
             <li key={index}>

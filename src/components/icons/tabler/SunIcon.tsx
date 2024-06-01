@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { DefaultIconStroke } from "./defaults";
 
 const SunIcon: FC<{
   className?: string;
@@ -9,9 +8,9 @@ const SunIcon: FC<{
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"
-      stroke={DefaultIconStroke}
+      stroke="currentColor"
       // Make it thicker, since it looks thinner than the other icon
-      stroke-width="1.85"
+      stroke-width="1.75"
       stroke-linecap="round"
       stroke-linejoin="round"
       className={props.className}
