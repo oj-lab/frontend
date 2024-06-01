@@ -6,9 +6,9 @@ const AdminLayout = () => {
   return (
     <div className="flex flex-row">
       <Drawer>
-        <div className="w-full">
+        <div className="h-full w-full">
           <Header />
-          <main className="p-6">
+          <main className="h-full bg-base-200/80 p-6">
             <Outlet />
           </main>
         </div>

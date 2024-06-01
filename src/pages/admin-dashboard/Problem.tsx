@@ -37,7 +37,7 @@ const Problem: React.FC = () => {
         <ProblemTable
           data={getProblemInfoList()}
           showActions={showActions}
-          className="card card-bordered rounded"
+          className="card card-bordered rounded bg-base-100"
         />
       </div>
     </>
