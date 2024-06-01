@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
 import { joinClasses } from "../utils/common";
-import { LanguageIcon } from "@heroicons/react/24/outline";
 import { changeLanguage } from "i18next";
 import { LANGUAGE_SELECTIONS } from "../i18n/i18n";
 import React from "react";
+import LanguageIcon from "@/components/icons/tabler/LanguageIcon";
 
 interface LanguageMenuProps {
   className?: string;
@@ -41,7 +41,7 @@ const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
         <div
           tabIndex={0}
           className={joinClasses(
-            "avatar btn btn-circle btn-ghost m-1",
+            "avatar btn btn-circle btn-ghost btn-sm m-1",
             open ? "z-[2]" : "z-[0]",
           )}
         >
