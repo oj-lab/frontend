@@ -1,9 +1,9 @@
 import ProblemTable from "../../components/ProblemTable";
 import { useProblemInfoList } from "../../hooks/problem";
-import { PlusIcon } from "@heroicons/react/24/outline";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import React from "react";
+import PlusIcon from "@/components/icons/tabler/PlusIcon";
 
 const Problem: React.FC = () => {
   const navigate = useNavigate();
@@ -13,32 +13,30 @@ const Problem: React.FC = () => {
 
   return (
     <>
-      <button
-        className="btn btn-circle btn-primary absolute bottom-6 right-6"
-        onClick={() => {
-          navigate("/admin/new/problem");
-        }}
-      >
-        <PlusIcon className="h-6 w-6" />
-      </button>
-
-      <div className="flex flex-col gap-4">
-        <label className="label w-fit cursor-pointer space-x-4">
-          <input
-            type="checkbox"
-            className="toggle toggle-primary"
-            checked={showActions}
-            onChange={() => {
-              setShowActions(!showActions);
+      <div className="card card-bordered flex flex-col rounded bg-base-100">
+        <div className="flex flex-row items-center justify-between">
+          <label className="label w-fit cursor-pointer space-x-4 px-3">
+            <input
+              type="checkbox"
+              className="toggle toggle-primary"
+              checked={showActions}
+              onChange={() => {
+                setShowActions(!showActions);
+              }}
+            />
+            <span className="label-text">{t("Show actions")}</span>
+          </label>
+          <button
+            className="border-1 btn btn-ghost m-4 h-10 min-h-10 rounded border-base-300"
+            onClick={() => {
+              navigate("/admin/new/problem");
             }}
-          />
-          <span className="label-text">{t("Show actions")}</span>
-        </label>
-        <ProblemTable
-          data={getProblemInfoList()}
-          showActions={showActions}
-          className="card card-bordered rounded bg-base-100"
-        />
+          >
+            <PlusIcon className="h-4 w-4" />
+            New Problem
+          </button>
+        </div>
+        <ProblemTable data={getProblemInfoList()} showActions={showActions} />
       </div>
     </>
   );

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ProblemService } from "@/api/problem";
 import TrashIcon from "./icons/tabler/TrashIcon";
 import PencilIcon from "./icons/tabler/PencilIcon";
+import { joinClasses } from "@/utils/common";
 
 const columns = [
   { name: "Slug", uid: "slug" },
@@ -37,7 +38,9 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               return (
                 <th
                   key={column.uid}
-                  className="text-sm font-normal text-base-content/80"
+                  className={joinClasses(
+                    "text-sm font-normal text-base-content/80",
+                  )}
                 >
                   {column.name}
                 </th>

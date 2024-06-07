@@ -38,7 +38,7 @@ npm run lint
 
 ## UI Resources
 
-🩷 Thanks to the awesome open-source community,
+💕 Thanks to the awesome open-source community,
 OJ Lab Front mainly uses the following resources:
 
 - [daisyUI](https://daisyui.com/) for Tailwind CSS components
