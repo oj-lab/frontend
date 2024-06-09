@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { joinClasses } from "../utils/common";
+import { joinClasses } from "../../utils/common";
 import { changeLanguage } from "i18next";
-import { LANGUAGE_SELECTIONS } from "../i18n/i18n";
+import { LANGUAGE_SELECTIONS } from "../../i18n/i18n";
 import React from "react";
 import LanguageIcon from "@/components/icons/tabler/LanguageIcon";
 

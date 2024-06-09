@@ -1,9 +1,9 @@
-import { ProblemServiceModel } from "../typings/problem";
+import { ProblemServiceModel } from "../../typings/problem";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { ProblemService } from "@/api/problem";
-import TrashIcon from "./icons/tabler/TrashIcon";
-import PencilIcon from "./icons/tabler/PencilIcon";
+import TrashIcon from "../icons/tabler/TrashIcon";
+import PencilIcon from "../icons/tabler/PencilIcon";
 import { joinClasses } from "@/utils/common";
 
 const columns = [
@@ -16,7 +16,6 @@ const columns = [
 export interface ProblemTableProps {
   data: ProblemServiceModel.ProblemInfo[];
   showActions?: boolean;
-  enableNavigation?: boolean;
   className?: string;
   enableRouting?: boolean;
 }
@@ -30,21 +29,12 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
     <div className={props.className}>
       <table className="table" aria-label="Problem Table">
         <thead>
-          <tr>
+          <tr className="border-base-content/10">
             {columns.map((column) => {
               if (column.uid === "actions" && !props.showActions) {
                 return null;
               }
-              return (
-                <th
-                  key={column.uid}
-                  className={joinClasses(
-                    "text-sm font-normal text-base-content/80",
-                  )}
-                >
-                  {column.name}
-                </th>
-              );
+              return <th key={column.uid}>{column.name}</th>;
             })}
           </tr>
         </thead>
@@ -52,19 +42,22 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
           {props.data.map((problemInfo) => (
             <tr
               key={problemInfo.slug}
-              className="hover h-14"
+              className={joinClasses(
+                "border-base-content/10",
+                props.enableRouting ? "hover cursor-pointer" : "",
+              )}
               onClick={() => {
                 if (props.enableRouting) navigate(problemInfo.slug);
               }}
             >
-              <td className="font-normal">{problemInfo.slug}</td>
-              <td className="font-semibold">{problemInfo.title}</td>
+              <td>{problemInfo.slug}</td>
+              <th>{problemInfo.title}</th>
               <td>
                 <div className="space-x-2">
                   {problemInfo.tags.map((tag) => (
                     <div
                       key={tag.name}
-                      className="badge border-base-300 bg-base-300 font-semibold text-base-content/80"
+                      className="badge border-0 bg-base-300 font-semibold text-base-content/80"
                     >
                       {tag.name}
                     </div>

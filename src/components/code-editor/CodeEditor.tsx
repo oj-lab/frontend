@@ -23,6 +23,10 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           language: "cpp",
           theme: "vs-dark",
           automaticLayout: true,
+          scrollBeyondLastLine: false,
+          scrollbar: {
+            vertical: "auto",
+          },
         });
 
         props.onChange(editor!.getValue());

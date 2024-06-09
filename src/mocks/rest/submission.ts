@@ -34,6 +34,22 @@ const submissions: SubmissionServiceModel.SubmissionInfo[] = [
     status: "finished",
     mainResult: "WrongAnswer",
   },
+  {
+    UID: "3",
+    user: {
+      account: "user-2",
+      name: "User 2",
+    },
+    problem: {
+      slug: "a-plus-b-problem",
+      title: "A + B Problem",
+      tags: [{ name: "Primer" }, { name: "Math" }],
+    },
+    language: "Cpp",
+    code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
+    status: "finished",
+    mainResult: "CompileError",
+  },
 ];
 
 export const getSubmissionInfoList = http.get("/api/v1/submission", (info) => {

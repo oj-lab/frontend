@@ -28,3 +28,18 @@ code {
 .no-uppercase {
   text-transform: none;
 }
+
+/* Avoid override by .toggle */
+.monaco-editor .find-widget .button.toggle {
+  position: absolute !important;
+  top: 0 !important;
+  left: 3px !important;
+  width: 18p !important;
+  height: 100% !important;
+  border-radius: 0 !important;
+  border: 0 !important;
+  background-color: transparent !important;
+  box-sizing: border-box !important;
+  --handleoffset: 0 !important;
+  color: currentColor !important;
+}

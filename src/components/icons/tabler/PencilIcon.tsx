@@ -10,9 +10,9 @@ const PencilIcon: FC<{
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      stroke-width={DefaultIconStrokeWidth}
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth={DefaultIconStrokeWidth}
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={props.className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />

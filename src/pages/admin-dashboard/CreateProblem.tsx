@@ -55,7 +55,7 @@ const CreateProblem: React.FC = () => {
 
   return (
     <>
-      <div className="flex justify-between px-4">
+      <div className="flex w-full justify-between px-4">
         <h1 className="text-3xl font-bold">{t("Create Problem")}</h1>
         <div className="flex gap-4">
           <button
@@ -84,13 +84,13 @@ const CreateProblem: React.FC = () => {
           </button>
         </div>
       </div>
-      <div className="px-4 pt-2">
+      <div className="w-full px-4 pt-2">
         <p className="">
           {t("Please fill in the information below to create a new problem.")}
         </p>
         <p className="">{t("The information marked with * is required.")}</p>
       </div>
-      <div className="card mt-4 border border-base-300 pt-4 shadow-xl">
+      <div className="card mt-4 w-full border border-base-300 pt-4 shadow-xl">
         <div className="card-body -mt-6">
           <div className="flex items-center gap-4">
             <label className="form-control w-full max-w-xs">

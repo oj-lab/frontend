@@ -1,11 +1,10 @@
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { SubmissionServiceModel } from "../typings/submission";
+import { SubmissionServiceModel } from "../../typings/submission";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
-import { joinClasses } from "@/utils/common";
-import { getBadgeColorClasses } from "@/utils/color";
+import SubmissionTable from "./SubmissionTable";
 
 export interface SubmissionDetailProps {
   data?: SubmissionServiceModel.SubmissionInfo;
@@ -14,43 +13,11 @@ export interface SubmissionDetailProps {
 
 const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
   const [copyTip, setCopyTip] = React.useState("Copy code");
+
   return props.data ? (
     <div className="grid gap-2 overflow-x-auto">
-      <div className="overflow-hidden rounded-lg border">
-        <table className="table">
-          {/* head */}
-          <thead>
-            <tr>
-              <th className="border-r">UID</th>
-              <th className="border-l">SLUG</th>
-              <th className="border-l">LANGUAGE</th>
-              <th className="border-l">STATUS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="bg-base-200">
-              <td className="border-r border-t">{props.data.UID}</td>
-              <td className="border-l border-t">{props.data.problem.slug}</td>
-              <td className="border-l border-t">{props.data.language}</td>
-              <td className="border-l border-t">
-                <div
-                  className={joinClasses(
-                    "badge badge-outline",
-                    getBadgeColorClasses(
-                      props.data.status === "finished"
-                        ? props.data.mainResult
-                        : props.data.status,
-                    ),
-                  )}
-                >
-                  {props.data.status === "finished"
-                    ? props.data.mainResult
-                    : props.data.status}
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div className="h-fit rounded border border-base-content/10 bg-base-100">
+        <SubmissionTable data={[props.data]} />
       </div>
       <div className="relative overflow-x-hidden">
         <button

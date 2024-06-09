@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { DefaultIconStrokeWidth } from "./defaults";
 
-const TrashIcon: FC<{
+const ReportIcon: FC<{
   className?: string;
 }> = (props) => {
   return (
@@ -16,13 +16,15 @@ const TrashIcon: FC<{
       className={props.className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M4 7l16 0" />
-      <path d="M10 11l0 6" />
-      <path d="M14 11l0 6" />
-      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+      <path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" />
+      <path d="M18 14v4h4" />
+      <path d="M18 11v-4a2 2 0 0 0 -2 -2h-2" />
+      <path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" />
+      <path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+      <path d="M8 11h4" />
+      <path d="M8 15h3" />
     </svg>
   );
 };
 
-export default TrashIcon;
+export default ReportIcon;

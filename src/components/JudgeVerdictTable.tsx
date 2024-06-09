@@ -1,9 +1,10 @@
+import { joinClasses } from "@/utils/common";
 import { JudgeModel } from "../typings/judge";
 
 const columns = [
-  { name: "RESULT", uid: "result" },
-  { name: "TIME USAGE", uid: "time_usage" },
-  { name: "MEMORY USAGE", uid: "memory_usage" },
+  { name: "Result", uid: "result" },
+  { name: "Time Usage", uid: "time_usage" },
+  { name: "Memory Usage", uid: "memory_usage" },
 ];
 
 export interface JudgeVerdictTableProps {
@@ -16,7 +17,7 @@ const JudgeVerdictTable: React.FC<JudgeVerdictTableProps> = (props) => {
     <div className={props.className}>
       <table className="table" aria-label="Judge Verdict Table">
         <thead>
-          <tr>
+          <tr className="border-base-content/10">
             {columns.map((column) => (
               <th key={column.uid}>{column.name}</th>
             ))}
@@ -24,7 +25,12 @@ const JudgeVerdictTable: React.FC<JudgeVerdictTableProps> = (props) => {
         </thead>
         <tbody>
           {props.data.map((judgeVerdict) => (
-            <tr>
+            <tr
+              className={joinClasses(
+                props.data.length > 1 ? "border-base-content/10" : "border-0",
+              )}
+              key={judgeVerdict.id}
+            >
               <th>
                 <div
                   className={`badge badge-outline ${

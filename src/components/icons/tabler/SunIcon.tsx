@@ -10,9 +10,9 @@ const SunIcon: FC<{
       fill="none"
       stroke="currentColor"
       // Make it thicker, since it looks thinner than the other icon
-      stroke-width="1.75"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       className={props.className}
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />

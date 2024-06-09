@@ -7,8 +7,18 @@ module.exports = {
   ],
   daisyui: {
     themes: [
-      "light",
-      "dark",
+      {
+        light: {
+          ...require("daisyui/src/theming/themes")["light"],
+          "--content-background": "#f2f5f8",
+        },
+      },
+      {
+        dark: {
+          ...require("daisyui/src/theming/themes")["dark"],
+          "--content-background": "#1a202c",
+        },
+      },
       "cupcake",
       "bumblebee",
       "emerald",

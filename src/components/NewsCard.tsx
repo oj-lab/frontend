@@ -1,6 +1,6 @@
 export default function NewsCard() {
   return (
-    <div className="card border shadow-xl">
+    <div className="card rounded border border-base-content/10 bg-base-100">
       <div className="card-body">
         <h1 className="card-title">
           Release Note

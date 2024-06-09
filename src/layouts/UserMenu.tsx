@@ -1,7 +1,8 @@
-import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../utils/common";
 import React from "react";
+import { UserState, useUser } from "@/hooks/user";
+import { useCookies } from "react-cookie";
 
 export interface UserMenuAction {
   name: string;
@@ -20,8 +21,10 @@ export interface UserMenuProps {
  */
 const UserMenu: React.FC<UserMenuProps> = (props) => {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const [, , removeCookie] = useCookies(["auth-token"]);
   const [open, setOpen] = React.useState(false);
+  const { getUserState } = useUser();
+  const isLogined = getUserState() === UserState.UserSignedIn;
 
   React.useEffect(() => {
     document?.activeElement instanceof HTMLElement &&
@@ -64,23 +67,35 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[2] w-32 rounded-box border border-base-200 bg-base-100 p-2 shadow-2xl"
+          className="menu dropdown-content z-[2] w-32 rounded border border-base-200 bg-base-100 shadow-2xl"
         >
-          {props.actions?.map((item, index) => (
-            <li key={index}>
-              <a
-                href={item.href}
+          {isLogined && (
+            <li key="logout">
+              <span
+                className="rounded"
                 onClick={(e) => {
                   e.preventDefault();
-                  if (item.onClick) {
-                    item.onClick();
-                  } else if (item.href) navigate(item.href);
+                  removeCookie("auth-token");
+                  window.location.reload();
                 }}
               >
-                {t(item.name)}
-              </a>
+                Logout
+              </span>
             </li>
-          ))}
+          )}
+          {!isLogined && (
+            <li key="login">
+              <span
+                className="rounded"
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/login");
+                }}
+              >
+                Login
+              </span>
+            </li>
+          )}
         </ul>
       </div>
     </>
