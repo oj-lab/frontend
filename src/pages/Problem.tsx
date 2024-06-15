@@ -2,7 +2,7 @@ import CodeEditor from "../components/code-editor/CodeEditor";
 import MarkdownRender from "../components/markdown/MarkdownRender";
 import { useProblem } from "../hooks/problem";
 import JudgeVerdictTable from "../components/JudgeVerdictTable";
-import { useJudge } from "../hooks/judge";
+import { useRunJudge } from "../hooks/judge";
 import { judgeVerdictListPipe } from "../pipes/judge";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,7 +26,7 @@ const Problem: React.FC = () => {
   const { getProblem } = useProblem(slug, () => {
     navigate("/problem");
   });
-  const { setSrc, setSrcLanguage, runJudge, getVerdicts } = useJudge(slug);
+  const { setSrc, setSrcLanguage, runJudge, getVerdicts } = useRunJudge(slug);
 
   useEffect(() => {
     setSrcLanguage("Cpp");
@@ -37,7 +37,7 @@ const Problem: React.FC = () => {
       {toggleToast && (
         <div className="toast toast-center toast-top z-10">
           <div className="alert alert-success">
-            <span>Submission sent successfully.</span>
+            <span>Judge sent successfully.</span>
           </div>
         </div>
       )}

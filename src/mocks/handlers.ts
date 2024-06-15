@@ -1,4 +1,4 @@
-import { postJudge } from "./rest/judge";
+import { postJudge, getJudgeInfoList, getJudgeInfo } from "./rest/judge";
 import {
   checkProblemSlug,
   getProblemInfo,
@@ -7,7 +7,6 @@ import {
   deleteProblem,
   putProblemPackage,
 } from "./rest/problem";
-import { getSubmissionInfoList, getSubmissionInfo } from "./rest/submission";
 import { getCurrentUser, postLogin, postSignOut } from "./rest/user";
 
 export const restHandlers = [
@@ -17,8 +16,8 @@ export const restHandlers = [
   putProblem,
   getProblemInfo,
   getProblemInfoList,
-  getSubmissionInfoList,
-  getSubmissionInfo,
+  getJudgeInfoList,
+  getJudgeInfo,
   checkProblemSlug,
   putProblemPackage,
   deleteProblem,

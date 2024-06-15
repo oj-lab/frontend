@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../../utils/common";
-import { SubmissionServiceModel } from "../../typings/submission";
+import { JudgeServiceModel } from "../../typings/judge";
 
 const columns = [
   { name: "Problem Title", uid: "problem" },
@@ -10,13 +10,13 @@ const columns = [
   { name: "Status", uid: "status" },
 ];
 
-export interface SubmissionTableProps {
-  data: SubmissionServiceModel.SubmissionInfo[];
+export interface JudgeTableProps {
+  data: JudgeServiceModel.JudgeInfo[];
   enableRouting?: boolean;
   className?: string;
 }
 
-const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
+const JudgeTable: React.FC<JudgeTableProps> = (props) => {
   const navigate = useNavigate();
 
   return (
@@ -30,47 +30,47 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((submission, idx) => (
+          {props.data.map((judge, idx) => (
             <tr
               className={joinClasses(
                 props.data.length > 1 ? "border-base-content/10" : "border-0",
                 props.enableRouting ? "hover cursor-pointer" : "",
               )}
               onClick={() => {
-                if (props.enableRouting) navigate(submission.UID);
+                if (props.enableRouting) navigate(judge.UID);
               }}
               key={idx}
             >
-              <th>{submission.problem.title}</th>
-              <td>{submission.user.name}</td>
-              <td>{submission.language}</td>
+              <th>{judge.problem.title}</th>
+              <td>{judge.user.name}</td>
+              <td>{judge.language}</td>
               <td>
                 <div
                   className={joinClasses(
                     "badge border-0 font-semibold",
-                    submission.status === "finished" &&
-                      submission.mainResult === "Accepted"
+                    judge.status === "finished" &&
+                      judge.mainResult === "Accepted"
                       ? "bg-success/10 text-success"
                       : "",
-                    submission.status === "finished" &&
-                      submission.mainResult === "WrongAnswer"
+                    judge.status === "finished" &&
+                      judge.mainResult === "WrongAnswer"
                       ? "bg-error/10 text-error"
                       : "",
-                    submission.status === "finished" &&
-                      submission.mainResult === "CompileError"
+                    judge.status === "finished" &&
+                      judge.mainResult === "CompileError"
                       ? "bg-warning/10 text-warning"
                       : "",
-                    submission.status === "pending"
+                    judge.status === "pending"
                       ? "bg-primary/10 text-primary"
                       : "",
-                    submission.status === "running"
+                    judge.status === "running"
                       ? "bg-secondary/10 text-secondary"
                       : "",
                   )}
                 >
-                  {submission.status === "finished"
-                    ? submission.mainResult
-                    : submission.status}
+                  {judge.status === "finished"
+                    ? judge.mainResult
+                    : judge.status}
                 </div>
               </td>
             </tr>
@@ -81,4 +81,4 @@ const SubmissionTable: React.FC<SubmissionTableProps> = (props) => {
   );
 };
 
-export default SubmissionTable;
+export default JudgeTable;

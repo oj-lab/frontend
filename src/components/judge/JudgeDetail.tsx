@@ -1,23 +1,23 @@
 import React from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { SubmissionServiceModel } from "../../typings/submission";
+import { JudgeServiceModel } from "../../typings/judge";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import DocumentDuplicateIcon from "@heroicons/react/24/outline/DocumentDuplicateIcon";
-import SubmissionTable from "./SubmissionTable";
+import JudgeTable from "./JudgeTable";
 
-export interface SubmissionDetailProps {
-  data?: SubmissionServiceModel.SubmissionInfo;
+export interface JudgeDetailProps {
+  data?: JudgeServiceModel.JudgeInfo;
   className?: string;
 }
 
-const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
+const JudgeDetail: React.FC<JudgeDetailProps> = (props) => {
   const [copyTip, setCopyTip] = React.useState("Copy code");
 
   return props.data ? (
     <div className="grid gap-2 overflow-x-auto">
       <div className="h-fit rounded border border-base-content/10 bg-base-100">
-        <SubmissionTable data={[props.data]} />
+        <JudgeTable data={[props.data]} />
       </div>
       <div className="relative overflow-x-hidden">
         <button
@@ -56,4 +56,4 @@ const SubmissionDetail: React.FC<SubmissionDetailProps> = (props) => {
   );
 };
 
-export default SubmissionDetail;
+export default JudgeDetail;

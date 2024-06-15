@@ -5,8 +5,8 @@ import { default as AdminProblemList } from "../pages/admin-dashboard/ProblemLis
 import { default as AdminCreateProblem } from "../pages/admin-dashboard/CreateProblem";
 import Layout from "../layouts/Layout";
 import ProblemList from "../pages/ProblemList";
-import SubmissionList from "../pages/SubmissionList";
-import Submission from "../pages/Submission";
+import JudgeList from "../pages/JudgeList";
+import Judge from "../pages/Judge";
 import Login from "../pages/Login";
 
 const PageRouter: React.FC = () => {
@@ -19,8 +19,8 @@ const PageRouter: React.FC = () => {
             <Route path="login" element={<Login />} />
             <Route path="problem" element={<ProblemList />} />
             <Route path="problem/:slug" element={<Problem />} />
-            <Route path="/submission" element={<SubmissionList />} />
-            <Route path="/submission/:uid" element={<Submission />} />
+            <Route path="/judge" element={<JudgeList />} />
+            <Route path="/judge/:uid" element={<Judge />} />
             <Route
               path="admin"
               element={<Navigate replace to="/admin/problem" />}

@@ -1,4 +1,16 @@
+import { ProblemServiceModel } from "./problem";
+import { UserServiceModel } from "./user";
+
 export namespace JudgeServiceModel {
+  export interface JudgeInfo {
+    UID: string;
+    user: UserServiceModel.UserInfo;
+    problem: ProblemServiceModel.ProblemInfo;
+    language: string;
+    code: string;
+    status: string;
+    mainResult: string;
+  }
   export interface RunJudgeRequest {
     code: string;
     language: string;

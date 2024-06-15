@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const navigation = [
   { name: "Problems", href: "/problem", icon: FileTextIcon },
-  { name: "Submissions", href: "/submission", icon: ReportIcon },
+  { name: "Judges", href: "/judge", icon: ReportIcon },
 ];
 
 const adminNavigation = [
