@@ -47,7 +47,7 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
           aria-label="close sidebar"
           className="drawer-overlay"
         />
-        <div className="h-full border-r border-base-content/10">
+        <div className="h-full border-r border-base-content/10 bg-base-100">
           <div className="flex flex-row px-6 py-2">
             <img
               className="mr-2 h-12 w-auto gap-4"

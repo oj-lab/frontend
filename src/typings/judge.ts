@@ -9,7 +9,7 @@ export namespace JudgeServiceModel {
     language: string;
     code: string;
     status: string;
-    mainResult: string;
+    verdict: string;
   }
   export interface RunJudgeRequest {
     code: string;

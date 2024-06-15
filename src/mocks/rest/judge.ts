@@ -45,7 +45,7 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
     language: "Cpp",
     code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "finished",
-    mainResult: "Accepted",
+    verdict: "Accepted",
   },
   {
     UID: "2",
@@ -61,7 +61,7 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
     language: "Cpp",
     code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "finished",
-    mainResult: "WrongAnswer",
+    verdict: "WrongAnswer",
   },
   {
     UID: "3",
@@ -77,7 +77,7 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
     language: "Cpp",
     code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
     status: "finished",
-    mainResult: "CompileError",
+    verdict: "CompileError",
   },
 ];
 

@@ -41,23 +41,22 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               }}
               key={idx}
             >
-              <th>{judge.problem.title}</th>
-              <td>{judge.user.name}</td>
+              <th>{judge.problem?.title}</th>
+              <td>{judge.user?.name}</td>
               <td>{judge.language}</td>
               <td>
                 <div
                   className={joinClasses(
                     "badge border-0 font-semibold",
-                    judge.status === "finished" &&
-                      judge.mainResult === "Accepted"
+                    judge.status === "finished" && judge.verdict === "Accepted"
                       ? "bg-success/10 text-success"
                       : "",
                     judge.status === "finished" &&
-                      judge.mainResult === "WrongAnswer"
+                      judge.verdict === "WrongAnswer"
                       ? "bg-error/10 text-error"
                       : "",
                     judge.status === "finished" &&
-                      judge.mainResult === "CompileError"
+                      judge.verdict === "CompileError"
                       ? "bg-warning/10 text-warning"
                       : "",
                     judge.status === "pending"
@@ -68,9 +67,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
                       : "",
                   )}
                 >
-                  {judge.status === "finished"
-                    ? judge.mainResult
-                    : judge.status}
+                  {judge.status === "finished" ? judge.verdict : judge.status}
                 </div>
               </td>
             </tr>
