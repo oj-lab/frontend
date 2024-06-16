@@ -3,7 +3,11 @@ import Header from "./Navbar";
 import Drawer from "./Drawer";
 import Breadcrumbs from "@/layouts/Breadcrumbs";
 
-const Layout = () => {
+export interface LayoutProps {
+  children?: React.ReactNode;
+}
+
+const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <div className="flex flex-row">
       <Drawer>
@@ -11,7 +15,8 @@ const Layout = () => {
           <Header />
           <main className="flex h-full w-full flex-col items-stretch gap-2 overflow-auto px-12 pt-6">
             <Breadcrumbs />
-            <Outlet />
+            {props.children}
+            {!props.children && <Outlet />}
           </main>
         </div>
       </Drawer>

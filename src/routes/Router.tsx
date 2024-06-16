@@ -1,18 +1,24 @@
-import React, { Suspense } from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Problem from "../pages/Problem";
-import { default as AdminProblemList } from "../pages/admin-dashboard/ProblemList";
-import { default as AdminCreateProblem } from "../pages/admin-dashboard/CreateProblem";
 import Layout from "../layouts/Layout";
-import ProblemList from "../pages/ProblemList";
-import JudgeList from "../pages/JudgeList";
-import Judge from "../pages/Judge";
-import Login from "../pages/Login";
+
+const Problem = lazy(() => import("../pages/Problem"));
+const AdminProblemList = lazy(
+  () => import("../pages/admin-dashboard/ProblemList"),
+);
+const AdminCreateProblem = lazy(
+  () => import("../pages/admin-dashboard/CreateProblem"),
+);
+const ProblemList = lazy(() => import("../pages/ProblemList"));
+const JudgeList = lazy(() => import("../pages/JudgeList"));
+const Judge = lazy(() => import("../pages/Judge"));
+const Login = lazy(() => import("../pages/Login"));
 
 const PageRouter: React.FC = () => {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <Suspense>
+      {/* TODO: Perf loading view */}
+      <Suspense fallback={<Layout>loading...</Layout>}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="" element={<Navigate replace to="/problem" />} />
