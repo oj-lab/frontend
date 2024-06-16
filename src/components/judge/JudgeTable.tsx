@@ -2,11 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { joinClasses } from "../../utils/common";
 import { JudgeServiceModel } from "../../typings/judge";
+import BrandCPPIcon from "../icons/tabler/BrandCPPIcon";
+import BrandPythonIcon from "../icons/tabler/BrandPythonIcon";
 
 const columns = [
   { name: "Problem Title", uid: "problem" },
-  { name: "User", uid: "user" },
   { name: "Language", uid: "language" },
+  { name: "User", uid: "user" },
   { name: "Status", uid: "status" },
 ];
 
@@ -42,8 +44,8 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               key={idx}
             >
               <th>{judge.problem?.title}</th>
+              <td>{RenderLanguage(judge.language)}</td>
               <td>{judge.user?.name}</td>
-              <td>{judge.language}</td>
               <td>
                 <div
                   className={joinClasses(
@@ -77,5 +79,30 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
     </div>
   );
 };
+
+function RenderLanguage(language: string) {
+  if (language.toLowerCase() === "cpp") {
+    return (
+      <div className="badge min-w-10 border-0 bg-base-300">
+        <BrandCPPIcon className="h-4 w-4 stroke-base-content" />
+      </div>
+    );
+  }
+  if (language.toLowerCase() === "python") {
+    return (
+      <div className="badge min-w-10 border-0 bg-base-300">
+        <BrandPythonIcon className="h-4 w-4 stroke-base-content" />
+      </div>
+    );
+  }
+
+  return (
+    <div className="badge min-w-10 border-0 bg-base-300">
+      <span className="text-[10px] font-semibold">
+        {language.toUpperCase()}
+      </span>
+    </div>
+  );
+}
 
 export default JudgeTable;

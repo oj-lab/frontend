@@ -43,7 +43,13 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
       tags: [{ name: "Primer" }],
     },
     language: "Cpp",
-    code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
+    code: `#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+  cout << "Hello, World!";
+  return 0;
+}`,
     status: "finished",
     verdict: "Accepted",
   },
@@ -58,8 +64,9 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
       title: "A + B Problem",
       tags: [{ name: "Primer" }, { name: "Math" }],
     },
-    language: "Cpp",
-    code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
+    language: "Python",
+    code: `a, b = map(int, input().split())
+print(a - b)`,
     status: "finished",
     verdict: "WrongAnswer",
   },
@@ -74,8 +81,12 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
       title: "A + B Problem",
       tags: [{ name: "Primer" }, { name: "Math" }],
     },
-    language: "Cpp",
-    code: "#include<bits/stdc++.h>\nusing namespace std;\nint main()\n{}\n",
+    language: "Javascript",
+    code: `const readline = require('readline')
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});`,
     status: "finished",
     verdict: "CompileError",
   },
@@ -89,7 +100,7 @@ export const getJudgeInfoList = http.get("/api/v1/judge", (info) => {
     list: JudgeServiceModel.JudgeInfo[];
   } = {
     total: random,
-    list: judges.slice(0, random),
+    list: judges,
   };
   return new Response(JSON.stringify(response), {
     status: 200,
