@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import rehypeMathjax from "rehype-mathjax";
 import remarkMath from "remark-math";
 
 interface MarkdownRenderProps {
@@ -8,28 +10,19 @@ interface MarkdownRenderProps {
 }
 
 const MarkdownRender: React.FC<MarkdownRenderProps> = (props) => {
-  const [rehypePlugin, setRehypePlugin] = useState<any>(null);
-
-  useEffect(() => {
-    const loadRehypePlugin = async () => {
-      let module;
-      if (props.rehypePlugin === "rehypeKatex") {
-        module = await import("rehype-katex");
-      } else if (props.rehypePlugin === "rehypeMathjax") {
-        module = await import("rehype-mathjax");
-      }
-      setRehypePlugin(module?.default);
-    };
-
-    loadRehypePlugin();
-  }, [props.rehypePlugin]);
+  const getRehypePlugins = () =>
+    props.rehypePlugin === undefined
+      ? []
+      : props.rehypePlugin === "rehypeKatex"
+        ? [rehypeKatex]
+        : [rehypeMathjax];
 
   return (
     <ReactMarkdown
       className="prose h-full w-full"
       children={props.content}
       remarkPlugins={[remarkMath]}
-      rehypePlugins={rehypePlugin ? [rehypePlugin] : []}
+      rehypePlugins={getRehypePlugins()}
     />
   );
 };
