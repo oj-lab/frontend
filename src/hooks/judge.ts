@@ -63,5 +63,15 @@ export const useJudgeList = () => {
     return judgeList;
   }
 
-  return { getJudgeList };
+  function refreshJudgeList() {
+    JudgeService.getJudgeList()
+      .then((res) => {
+        setJudgeList(res.list);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  return { getJudgeList, refreshJudgeList };
 };

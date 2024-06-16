@@ -82,12 +82,14 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
 ];
 
 export const getJudgeInfoList = http.get("/api/v1/judge", (info) => {
+  let random = Math.floor(Math.random() * 3) + 1;
+
   const response: {
     total: number;
     list: JudgeServiceModel.JudgeInfo[];
   } = {
-    total: 2,
-    list: judges,
+    total: random,
+    list: judges.slice(0, random),
   };
   return new Response(JSON.stringify(response), {
     status: 200,
