@@ -67,7 +67,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[2] w-32 rounded border border-base-200 bg-base-100 shadow-2xl"
+          className="menu dropdown-content z-[2] w-32 rounded border border-base-content/10 bg-base-100 shadow-2xl"
         >
           {isLogined && (
             <li key="logout">
@@ -76,7 +76,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
                 onClick={(e) => {
                   e.preventDefault();
                   removeCookie("auth-token");
-                  window.location.reload();
+                  window.location.href = import.meta.env.BASE_URL;
                 }}
               >
                 Logout
