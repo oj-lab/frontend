@@ -82,7 +82,7 @@
     "postcss": "^8.4.28",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.3",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.4.4",
     "vite": "^5.0.13"
   },
   "msw": {
