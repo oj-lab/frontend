@@ -34,7 +34,7 @@
     "rehype-katex": "^6.0.3",
     "rehype-mathjax": "^6.0.0",
     "remark-math": "^5.1.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.5.3",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
