@@ -4,11 +4,12 @@ import { joinClasses } from "../../utils/common";
 import { JudgeServiceModel } from "../../typings/judge";
 import BrandCPPIcon from "../icons/tabler/BrandCPPIcon";
 import BrandPythonIcon from "../icons/tabler/BrandPythonIcon";
+import { getGravatarUrl } from "@/utils/avatar_url";
 
 const columns = [
+  { name: "User", uid: "user" },
   { name: "Problem Title", uid: "problem" },
   { name: "Language", uid: "language" },
-  { name: "User", uid: "user" },
   { name: "Status", uid: "status" },
 ];
 
@@ -43,9 +44,19 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               }}
               key={idx}
             >
-              <th>{judge.problem?.title}</th>
+              <td className="flex items-center gap-2 py-2">
+                <div className="avatar">
+                  <div className="w-8 rounded-full">
+                    <img
+                      src={getGravatarUrl(judge.user?.name)}
+                      alt={`avatar-${judge.user?.name}`}
+                    />
+                  </div>
+                </div>
+                {judge.user?.name}
+              </td>
+              <td>{judge.problem?.title}</td>
               <td>{RenderLanguage(judge.language)}</td>
-              <td>{judge.user?.name}</td>
               <td>
                 <div
                   className={joinClasses(
