@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import NewsCard from "../components/NewsCard";
 import JudgeTable from "../components/judge/JudgeTable";
 import { useJudgeList } from "../hooks/judge";
 
@@ -24,7 +23,7 @@ const JudgeList: React.FC = () => {
 
   return (
     <div className="flex w-full flex-auto flex-col gap-8 sm:flex-row">
-      <div className="h-fit rounded border border-base-content/10 bg-base-100 sm:w-2/3">
+      <div className="h-fit w-full rounded border border-base-content/10 bg-base-100">
         <div className="flex items-center gap-2 px-4 pb-2 pt-4">
           <progress
             className="progress h-1 w-12"
@@ -33,9 +32,6 @@ const JudgeList: React.FC = () => {
           />
         </div>
         <JudgeTable data={getJudgeList()} enableRouting />
-      </div>
-      <div className="w-full sm:w-1/3">
-        <NewsCard />
       </div>
     </div>
   );
