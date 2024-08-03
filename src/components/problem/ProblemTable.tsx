@@ -49,8 +49,8 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                 if (props.enableRouting) navigate(problemInfo.slug);
               }}
             >
-              <th>{problemInfo.title}</th>
-              <td>
+              <th className="w-1/3">{problemInfo.title}</th>
+              <td className="w-1/3">
                 <div className="space-x-2">
                   {problemInfo.tags.map((tag) => (
                     <div
@@ -63,7 +63,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                 </div>
               </td>
               {props.showActions && (
-                <td className="p-2">
+                <td className="w-1/3 p-2">
                   <Actions
                     onClickDelete={() => setDeletingSlug(problemInfo.slug)}
                   />

@@ -1,5 +1,6 @@
 import { HttpResponse, http } from "msw";
 import { ProblemServiceModel } from "../../typings/problem";
+import { ProblemMockData } from "../data/problem";
 
 export const getProblemInfo = http.get(
   "/api/v1/problem/:slug",
@@ -43,28 +44,26 @@ Hello! world!
   },
 );
 
-export const getProblemInfoList = http.get("/api/v1/problem", (info) => {
+export const getProblemInfoList = http.get("/api/v1/problem", ({ request }) => {
+  const url = new URL(request.url);
+
+  const limit = url.searchParams.get("limit");
+  const offset = url.searchParams.get("offset");
+
+  let problemInfoList = ProblemMockData.ProblemInfoList.slice(
+    Number(offset),
+    Number(offset) + Number(limit),
+  );
+
   const response: {
     total: number;
     list: ProblemServiceModel.ProblemInfo[];
   } = {
-    total: 2,
-    list: [
-      {
-        slug: "hello-world",
-        title: "Hello World",
-        tags: [{ name: "Primer" }],
-      },
-      {
-        slug: "a-plus-b-problem",
-        title: "A+B Problem",
-        tags: [{ name: "Primer" }, { name: "Math" }],
-      },
-    ],
+    total: ProblemMockData.ProblemInfoList.length,
+    list: problemInfoList,
   };
-  return new Response(JSON.stringify(response), {
-    status: 200,
-  });
+
+  return new Response(JSON.stringify(response), { status: 200 });
 });
 
 export const putProblem = http.put("/api/v1/problem", async (info) => {

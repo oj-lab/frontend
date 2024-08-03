@@ -24,11 +24,19 @@ export namespace ProblemService {
     return res.data;
   }
 
-  export async function getProblemInfoList() {
+  export async function getProblemInfoList(limit?: number, offset?: number) {
+    limit = limit || 10;
+    offset = offset || 0;
+
     let res = await client.get<{
       total: number;
       list: ProblemServiceModel.ProblemInfo[];
-    }>(`/api/v1/problem`);
+    }>(`/api/v1/problem`, {
+      params: {
+        limit,
+        offset,
+      },
+    });
     if (res.status !== 200) {
       throw Error("failed to get problem list");
     }
