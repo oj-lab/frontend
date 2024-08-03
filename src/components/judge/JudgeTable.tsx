@@ -44,7 +44,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               }}
               key={idx}
             >
-              <td className="flex items-center gap-2 py-2">
+              <td className="flex items-center gap-3 py-2">
                 <div className="avatar">
                   <div className="w-8 rounded-full">
                     <img

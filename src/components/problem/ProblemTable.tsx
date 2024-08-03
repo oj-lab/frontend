@@ -7,7 +7,6 @@ import PencilIcon from "../icons/tabler/PencilIcon";
 import { joinClasses } from "@/utils/common";
 
 const columns = [
-  { name: "Slug", uid: "slug" },
   { name: "Title", uid: "title" },
   { name: "Tags", uid: "tags" },
   { name: "Actions", uid: "actions" },
@@ -50,7 +49,6 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                 if (props.enableRouting) navigate(problemInfo.slug);
               }}
             >
-              <td>{problemInfo.slug}</td>
               <th>{problemInfo.title}</th>
               <td>
                 <div className="space-x-2">

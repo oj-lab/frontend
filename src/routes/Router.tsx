@@ -27,6 +27,8 @@ const PageRouter: React.FC = () => {
             <Route path="problem/:slug" element={<Problem />} />
             <Route path="/judge" element={<JudgeList />} />
             <Route path="/judge/:uid" element={<Judge />} />
+            <Route path="/rank" element={<div>rank</div>} />
+            {/* Admin */}
             <Route
               path="admin"
               element={<Navigate replace to="/admin/problem" />}
