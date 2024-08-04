@@ -1,4 +1,5 @@
-import { UserResponse, getCurrentUser } from "@/api/auth";
+import { getCurrentUser } from "@/api/auth";
+import { UserServiceModel } from "@/typings/user";
 import { useEffect, useState } from "react";
 
 export enum UserState {
@@ -8,7 +9,9 @@ export enum UserState {
 }
 
 export const useUser = () => {
-  const [user, setUser] = useState<UserResponse | undefined>(undefined);
+  const [user, setUser] = useState<UserServiceModel.UserInfo | undefined>(
+    undefined,
+  );
   const [userState, setUserState] = useState<UserState>(UserState.Loading);
 
   useEffect(() => {

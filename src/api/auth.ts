@@ -1,9 +1,5 @@
+import { UserServiceModel } from "@/typings/user";
 import { client } from "./client";
-
-export interface UserResponse {
-  username: string;
-  roles: string[];
-}
 
 export async function postLogin(account: string, password: string) {
   let res = await client.post<void>("/api/v1/user/login", {
@@ -24,15 +20,12 @@ export async function postSignOut() {
   return res;
 }
 
-export async function getCurrentUser(): Promise<UserResponse> {
-  let res = await client.get<UserResponse>("/api/v1/user/current");
+export async function getCurrentUser(): Promise<UserServiceModel.UserInfo> {
+  let res = await client.get<UserServiceModel.UserInfo>("/api/v1/user/current");
   if (res.status !== 200) {
     throw Error("failed to get current user");
   }
-  return {
-    username: res.data.username,
-    roles: res.data.roles,
-  };
+  return res.data;
 }
 
 export function redirectToOAuthGitHub() {

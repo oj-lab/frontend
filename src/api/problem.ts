@@ -2,7 +2,9 @@ import { ProblemServiceModel } from "../typings/problem";
 import { client } from "./client";
 
 export namespace ProblemService {
-  export async function getProblem(slug: string) {
+  export async function getProblem(
+    slug: string,
+  ): Promise<ProblemServiceModel.Problem> {
     let res = await client.get<ProblemServiceModel.Problem>(
       `/api/v1/problem/${slug}`,
     );
@@ -12,7 +14,9 @@ export namespace ProblemService {
     return res.data;
   }
 
-  export async function putProblem(problem: ProblemServiceModel.Problem) {
+  export async function putProblem(
+    problem: ProblemServiceModel.Problem,
+  ): Promise<ProblemServiceModel.Problem> {
     let res = await client.put<ProblemServiceModel.Problem>(
       `/api/v1/problem`,
       problem,
@@ -24,7 +28,13 @@ export namespace ProblemService {
     return res.data;
   }
 
-  export async function getProblemInfoList(limit?: number, offset?: number) {
+  export async function getProblemInfoList(
+    limit?: number,
+    offset?: number,
+  ): Promise<{
+    total: number;
+    list: ProblemServiceModel.ProblemInfo[];
+  }> {
     limit = limit || 10;
     offset = offset || 0;
 
@@ -46,7 +56,7 @@ export namespace ProblemService {
   export async function putProblemPackage(
     problemSlug: string,
     packageFile: File,
-  ) {
+  ): Promise<ProblemServiceModel.Problem> {
     let formData = new FormData();
     formData.append("file", packageFile);
     let res = await client.put<ProblemServiceModel.Problem>(
