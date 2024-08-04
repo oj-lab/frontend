@@ -13,7 +13,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
       <Drawer>
         <div className="flex flex-auto flex-col items-center bg-[--content-background]">
           <Header />
-          <main className="flex h-full w-full flex-col items-stretch gap-2 overflow-auto px-12 pt-6">
+          <main className="flex h-full w-full flex-col items-stretch gap-2 overflow-auto px-12 pb-6 pt-6">
             <Breadcrumbs />
             {props.children}
             {!props.children && <Outlet />}

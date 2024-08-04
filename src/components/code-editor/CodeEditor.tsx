@@ -7,22 +7,24 @@ export interface CodeEditorProps {
   className?: string;
   language?: string;
   onChange: (value: string) => void;
+  parent: HTMLElement;
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = (props) => {
   const [editor, setEditor] =
     useState<monaco.editor.IStandaloneCodeEditor | null>(null);
-  const monacoEl = useRef(null);
+  const monacoEl = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (monacoEl) {
+    if (monacoEl.current) {
       setEditor((editor) => {
         if (editor) return editor;
 
         editor = monaco.editor.create(monacoEl.current!, {
           value: props.value,
           language: props.language || "cpp",
-          theme: localStorage.getItem("isdark") === "true" ? "vs-dark" : "vs",
+          theme:
+            localStorage.getItem("isLightMode") === "true" ? "vs" : "vs-dark",
           automaticLayout: true,
           scrollBeyondLastLine: false,
           scrollbar: {
@@ -47,23 +49,17 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
 
   useEffect(() => {
     const handleStorageChange = () => {
-      console.log("theme change");
-      console.log(localStorage.getItem("isdark"));
       monaco.editor.setTheme(
-        localStorage.getItem("isdark") === "true" ? "vs-dark" : "vs",
+        localStorage.getItem("isLightMode") === "true" ? "vs" : "vs-dark",
       );
     };
 
-    // Initial theme setting
-    if (editor) {
-      monaco.editor.setTheme(
-        localStorage.getItem("isdark") === "true" ? "vs-dark" : "vs",
-      );
-    }
-
     // Listen for storage changes
-    window.addEventListener("themeChange", handleStorageChange);
-    console.log("added listener");
+    window.addEventListener("themeChanged", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("themeChanged", handleStorageChange);
+    };
   }, [editor]);
 
   useEffect(() => {
@@ -74,6 +70,56 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
       );
     }
   }, [props.language, editor]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (editor) {
+        // wait for next frame to ensure last layout finished
+        window.requestAnimationFrame(() => {
+          // get the parent dimensions and re-layout the editor
+          const rect = props.parent.getBoundingClientRect();
+          if (
+            localStorage.getItem("isDrawerOpen") === "true" &&
+            window.innerWidth >= 1024
+          ) {
+            editor.layout({
+              width: rect.width - 352,
+              height: window.innerHeight,
+            });
+          } else {
+            const currentWidth = editor.getLayoutInfo().width;
+            // make the transition smooth
+            if (currentWidth < rect.width - 112) {
+              editor.layout({
+                width: currentWidth + 1,
+                height: window.innerHeight,
+              });
+            } else {
+              editor.layout({
+                width: rect.width - 112,
+                height: window.innerHeight,
+              });
+            }
+          }
+        });
+      }
+    };
+
+    window.addEventListener("drawerChanged", handleResize);
+    const resizeObserver = new ResizeObserver(() => {
+      handleResize();
+    });
+    if (monacoEl.current) {
+      resizeObserver.observe(monacoEl.current);
+    }
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("drawerChanged", handleResize);
+      window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
+    };
+  }, [editor, props.parent]);
 
   return (
     <div

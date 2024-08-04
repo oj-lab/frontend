@@ -1,7 +1,7 @@
 import Menu3Icon from "@/components/icons/tabler/Menu3Icon";
 import { joinClasses } from "@/utils/common";
 import { LargeWindowWidth } from "@/utils/const";
-import React from "react";
+import React, { useEffect } from "react";
 import Menu from "./Menu";
 
 const OJLabIconPath = `${import.meta.env.BASE_URL}images/oj-lab-icon.svg`;
@@ -13,6 +13,11 @@ export interface DrawerProps {
 
 export const Drawer: React.FC<DrawerProps> = (props) => {
   const [open, setOpen] = React.useState<boolean>(true);
+
+  useEffect(() => {
+    localStorage.setItem("isDrawerOpen", open ? "true" : "false");
+    window.dispatchEvent(new Event("drawerChanged"));
+  }, [open]);
 
   return (
     <div

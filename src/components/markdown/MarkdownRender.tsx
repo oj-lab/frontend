@@ -3,8 +3,6 @@ import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import rehypeMathjax from "rehype-mathjax";
 import remarkMath from "remark-math";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 
 interface MarkdownRenderProps {
@@ -22,7 +20,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = (props) => {
 
   return (
     <ReactMarkdown
-      className="prose h-full w-full max-w-full"
+      className="prose h-full max-w-full"
       children={props.content}
       remarkPlugins={[remarkMath]}
       rehypePlugins={getRehypePlugins()}

@@ -32,7 +32,7 @@ const Problem: React.FC = () => {
   }, [setSrcLanguage]);
 
   return (
-    <div className="flex w-full flex-col gap-4">
+    <div className="flex flex-col gap-4">
       {toggleToast && (
         <div className="toast toast-center toast-top z-10">
           <div className="alert alert-success">
@@ -41,7 +41,7 @@ const Problem: React.FC = () => {
         </div>
       )}
 
-      <div className="h-fit w-full rounded border border-base-content/10 bg-base-100 p-6">
+      <div className="h-fit rounded border border-base-content/10 bg-base-100 p-6">
         <h1 className="mb-8 text-4xl font-bold">{getProblem()?.title}</h1>
         <MarkdownRender
           content={getProblem()?.description || ""}
@@ -51,7 +51,7 @@ const Problem: React.FC = () => {
 
       <p className="text-lg font-bold">Your Solution</p>
       <select
-        className="select select-bordered select-sm w-fit"
+        className="select select-bordered select-sm w-fit rounded"
         onChange={(e) => {
           setSrcLanguage(e.target.value);
         }}
@@ -67,6 +67,7 @@ const Problem: React.FC = () => {
             setSrc(value);
           }}
           language={getSrcLanguage()}
+          parent={document.body}
         />
       </div>
       <div className="relative">
