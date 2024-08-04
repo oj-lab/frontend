@@ -30,9 +30,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         <thead>
           <tr className="border-base-content/10">
             {columns.map((column) => {
-              if (column.uid === "actions" && !props.showActions) {
-                return null;
-              }
+              if (column.uid === "actions" && !props.showActions) return null;
               return <th key={column.uid}>{column.name}</th>;
             })}
           </tr>
@@ -51,16 +49,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
             >
               <th className="w-1/3">{problemInfo.title}</th>
               <td className="w-1/3">
-                <div className="space-x-2">
-                  {problemInfo.tags.map((tag) => (
-                    <div
-                      key={tag.name}
-                      className="badge border-0 bg-base-300 font-semibold text-base-content/80"
-                    >
-                      {tag.name}
-                    </div>
-                  ))}
-                </div>
+                <ProblemTags tags={problemInfo.tags} />
               </td>
               {props.showActions && (
                 <td className="w-1/3 p-2">
@@ -102,6 +91,21 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
           <button>close</button>
         </form>
       </dialog>
+    </div>
+  );
+};
+
+const ProblemTags: React.FC<{ tags: { name: string }[] }> = (props) => {
+  return (
+    <div className="space-x-2">
+      {props.tags.map((tag) => (
+        <div
+          key={tag.name}
+          className="badge border-0 bg-base-300 font-semibold text-base-content/80"
+        >
+          {tag.name}
+        </div>
+      ))}
     </div>
   );
 };
