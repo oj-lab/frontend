@@ -22,7 +22,7 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = (props) => {
 
   return (
     <ReactMarkdown
-      className="prose h-full w-full"
+      className="prose h-full w-full max-w-full"
       children={props.content}
       remarkPlugins={[remarkMath]}
       rehypePlugins={getRehypePlugins()}

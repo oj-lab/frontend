@@ -43,7 +43,11 @@ export const useRunJudge = (slug: string) => {
     return verdicts;
   }
 
-  return { runJudge, getVerdicts, setSrc, setSrcLanguage };
+  function getSrcLanguage() {
+    return src_language;
+  }
+
+  return { runJudge, getVerdicts, setSrc, setSrcLanguage, getSrcLanguage };
 };
 
 export const useJudgeList = () => {

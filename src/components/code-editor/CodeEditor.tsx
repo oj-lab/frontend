@@ -5,6 +5,7 @@ import "./useWorker";
 export interface CodeEditorProps {
   value: string;
   className?: string;
+  language?: string;
   onChange: (value: string) => void;
 }
 
@@ -20,8 +21,8 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
 
         editor = monaco.editor.create(monacoEl.current!, {
           value: props.value,
-          language: "cpp",
-          theme: "vs-dark",
+          language: props.language || "cpp",
+          theme: localStorage.getItem("isdark") === "true" ? "vs-dark" : "vs",
           automaticLayout: true,
           scrollBeyondLastLine: false,
           scrollbar: {
@@ -43,6 +44,36 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
     // !!! Cannot add props to the dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editor]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      console.log("theme change");
+      console.log(localStorage.getItem("isdark"));
+      monaco.editor.setTheme(
+        localStorage.getItem("isdark") === "true" ? "vs-dark" : "vs",
+      );
+    };
+
+    // Initial theme setting
+    if (editor) {
+      monaco.editor.setTheme(
+        localStorage.getItem("isdark") === "true" ? "vs-dark" : "vs",
+      );
+    }
+
+    // Listen for storage changes
+    window.addEventListener("themeChange", handleStorageChange);
+    console.log("added listener");
+  }, [editor]);
+
+  useEffect(() => {
+    if (editor) {
+      monaco.editor.setModelLanguage(
+        editor.getModel()!,
+        props.language || "cpp",
+      );
+    }
+  }, [props.language, editor]);
 
   return (
     <div

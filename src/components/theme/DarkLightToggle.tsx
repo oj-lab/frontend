@@ -15,8 +15,10 @@ export default function DarkLightToggle() {
   });
 
   React.useEffect(() => {
+    window.dispatchEvent(new Event("themeChange"));
     localStorage.setItem("isdark", JSON.stringify(isdark));
   }, [isdark]);
+
   return (
     <label className="swap swap-rotate">
       {/* this hidden checkbox controls the state */}
@@ -27,8 +29,10 @@ export default function DarkLightToggle() {
           "hover:bg-[var(--fallback-bc,oklch(var(--bc)/0.2))]",
         )}
         value={isWindowDarkMode() ? "light" : "dark"}
-        checked={isWindowDarkMode() ? !isdark : isdark}
-        onChange={() => setIsdark(!isdark)}
+        checked={isWindowDarkMode() ? isdark : !isdark}
+        onChange={() => {
+          setIsdark(!isdark);
+        }}
       />
       <SunIcon
         className={joinClasses(
