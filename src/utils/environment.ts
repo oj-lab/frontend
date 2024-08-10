@@ -1,4 +1,4 @@
-export const getMode = () => import.meta.env.MODE;
+export const getViteMode = () => import.meta.env.MODE;
 
-export const isMock = () => getMode() === "mock";
-export const isGhPages = () => getMode() === "gh-pages";
+export const isMock = () => getViteMode() === "mock";
+export const isGhPages = () => getViteMode() === "gh-pages";

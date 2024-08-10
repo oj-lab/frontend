@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "..";
 
 export interface Message {
   id: string;
@@ -35,9 +34,6 @@ const messageSlice = createSlice({
     },
   },
 });
-
-export const messageMapSelector = (state: RootState) =>
-  state.messageReducer.messageMap;
 
 export const { addMessage, setMessageExiting, removeMessage } =
   messageSlice.actions;

@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
-import { EVENT_URL } from "../api/event";
-import { isGhPages, isMock } from "../utils/environment";
+import { EVENT_URL } from "@/apis/event";
+import { isGhPages, isMock } from "@/utils/environment";
 
 export const useEvent = () => {
   useLayoutEffect(() => {

@@ -1,6 +1,6 @@
-import UserMenu from "./UserMenu";
-import LanguageMenu from "../components/i18n/LanguageMenu";
-import DarkLightToggle from "../components/theme/DarkLightToggle";
+import UserMenu from "@/components/navigation/UserMenu";
+import LanguageMenu from "@/components/navigation/LanguageMenu";
+import DarkLightToggle from "@/components/control/DarkLightToggle";
 
 const user = {
   name: "Tom Cook",

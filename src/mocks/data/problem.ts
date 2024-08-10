@@ -1,4 +1,4 @@
-import { ProblemServiceModel } from "@/typings/problem";
+import * as ProblemServiceModel from "@/models/service/problem";
 
 export namespace ProblemMockData {
   export const ProblemInfoList: ProblemServiceModel.ProblemInfo[] = [

@@ -29,7 +29,7 @@ npm run start:mock
 
 ### Lints & Formats
 
-Please run the following before commit:
+Please run the following commands before commit:
 
 ```sh
 npm run prettier:check

@@ -18,8 +18,8 @@ function* addMessageSaga(action: PayloadAction<Message>) {
   yield put(removeMessage(action.payload.id));
 }
 
-export const ADD_MESSAGE_SAGA = "message/addMessage/saga";
+export const AddMessageSagaPattern = "message/addMessage/saga";
 
 export function* watchAddMessage() {
-  yield takeEvery("message/addMessage/saga", addMessageSaga);
+  yield takeEvery(AddMessageSagaPattern, addMessageSaga);
 }

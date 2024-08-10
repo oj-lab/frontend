@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { JudgeServiceModel } from "../typings/judge";
-import { JudgeService } from "../api/judge";
+import * as JudgeServiceModel from "@/models/service/judge";
+import * as JudgeService from "@/apis/judge";
 
 export const useJudge = (uid: string) => {
   const [judge, setJudge] = useState<JudgeServiceModel.JudgeInfo>();

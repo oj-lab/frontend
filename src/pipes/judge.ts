@@ -1,26 +1,22 @@
-import { JudgeModel, JudgeServiceModel } from "../typings/judge";
-import { formatBytes, formatNanoSeconds } from "./common";
+import { formatBytes, formatNanoSeconds } from "@/utils/unit";
+import * as JudgeServiceModel from "@/models/service/judge";
+import * as JudgeViewModel from "@/models/view/judge";
 
 export const judgeVerdictListPipe = (
   judgeVerdicts: JudgeServiceModel.JudgeVerdict[],
-) => {
-  let id = 1;
-  let verdicts = judgeVerdicts.map((judgeVerdict) => {
+): JudgeViewModel.JudgeVerdict[] => {
+  return judgeVerdicts.map((judgeVerdict) => {
     let verdict = judgeVerdictPipe(judgeVerdict);
-    verdict.id = `${id++}`;
     return verdict;
   });
-
-  return verdicts;
 };
 
 export const judgeVerdictPipe = (
   judgeVerdict: JudgeServiceModel.JudgeVerdict,
-): JudgeModel.JudgeVerdict => {
-  let id = "";
+): JudgeViewModel.JudgeVerdict => {
   let verdict = judgeVerdict.verdict;
   let time_usage = formatNanoSeconds(judgeVerdict.time_usage.nanos);
   let memory_usage = formatBytes(judgeVerdict.memory_usage_bytes);
 
-  return { id, verdict, time_usage, memory_usage };
+  return { verdict, time_usage, memory_usage };
 };

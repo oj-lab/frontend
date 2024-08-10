@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { ProblemServiceModel } from "../typings/problem";
-import { ProblemService } from "../api/problem";
+import * as ProblemServiceModel from "@/models/service/problem";
+import * as ProblemService from "@/apis/problem";
 
 export const useProblem = (slug: string, fallback?: () => void) => {
   const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
