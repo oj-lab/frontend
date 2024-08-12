@@ -41,6 +41,8 @@ const judges: JudgeServiceModel.JudgeInfo[] = [
       slug: "hello-world",
       title: "Hello World",
       tags: [{ name: "Primer" }],
+      difficulty: "easy",
+      passRate: 90.97,
     },
     language: "Cpp",
     code: `#include <bits/stdc++.h>
@@ -52,6 +54,8 @@ int main() {
 }`,
     status: "finished",
     verdict: "Accepted",
+    submitTime: "2021-09-01T00:00:00Z",
+    finishedTime: "2021-09-01T00:00:00Z",
   },
   {
     UID: "2",
@@ -63,12 +67,16 @@ int main() {
       slug: "a-plus-b-problem",
       title: "A + B Problem",
       tags: [{ name: "Primer" }, { name: "Math" }],
+      difficulty: "medium",
+      passRate: 50.14,
     },
     language: "Python",
     code: `a, b = map(int, input().split())
 print(a - b)`,
     status: "finished",
     verdict: "WrongAnswer",
+    submitTime: "2021-09-01T00:00:00Z",
+    finishedTime: "2021-09-01T00:00:00Z",
   },
   {
     UID: "3",
@@ -80,6 +88,8 @@ print(a - b)`,
       slug: "a-plus-b-problem",
       title: "A + B Problem",
       tags: [{ name: "Primer" }, { name: "Math" }],
+      difficulty: "medium",
+      passRate: 50.14,
     },
     language: "Javascript",
     code: `const readline = require('readline')
@@ -89,6 +99,8 @@ const rl = readline.createInterface({
 });`,
     status: "finished",
     verdict: "CompileError",
+    submitTime: "2021-09-01T00:00:00Z",
+    finishedTime: "2021-09-01T00:00:00Z",
   },
 ];
 

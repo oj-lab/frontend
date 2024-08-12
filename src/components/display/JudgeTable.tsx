@@ -5,13 +5,7 @@ import * as JudgeServiceModel from "@/models/service/judge";
 import BrandCPPIcon from "@/components/display/icons/tabler/BrandCPPIcon";
 import BrandPythonIcon from "@/components/display/icons/tabler/BrandPythonIcon";
 import { getGravatarUrl } from "@/utils/avatarURL";
-
-const columns = [
-  { name: "User", uid: "user" },
-  { name: "Problem Title", uid: "problem" },
-  { name: "Language", uid: "language" },
-  { name: "Status", uid: "status" },
-];
+import { useTranslation } from "react-i18next";
 
 export interface JudgeTableProps {
   data: JudgeServiceModel.JudgeInfo[];
@@ -20,6 +14,7 @@ export interface JudgeTableProps {
 }
 
 const JudgeTable: React.FC<JudgeTableProps> = (props) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -27,9 +22,12 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
       <table className={joinClasses("table")} aria-label="Problem Table">
         <thead>
           <tr className="border-base-content/10">
-            {columns.map((column) => {
-              return <th key={column.uid}>{column.name}</th>;
-            })}
+            <th key="problemTitle">{t("Problem Title")}</th>
+            <th key="user">{t("User")}</th>
+            <th key="language">{t("Language")}</th>
+            <th key="status">{t("Status")}</th>
+            <th key="submitTime">{t("Submit Time")}</th>
+            <th key="finishedTime">{t("Finished Time")}</th>
           </tr>
         </thead>
         <tbody>
@@ -44,6 +42,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               }}
               key={idx}
             >
+              <th>{judge.problem?.title}</th>
               <td className="flex items-center gap-3 py-2">
                 <div className="avatar">
                   <div className="w-8 rounded-full">
@@ -53,9 +52,8 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
                     />
                   </div>
                 </div>
-                {judge.user?.name}
+                <span>{judge.user?.name}</span>
               </td>
-              <td>{judge.problem?.title}</td>
               <td>{RenderLanguage(judge.language)}</td>
               <td>
                 <div
@@ -83,6 +81,8 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
                   {judge.status === "finished" ? judge.verdict : judge.status}
                 </div>
               </td>
+              <td>{new Date(judge.submitTime).toLocaleString()}</td>
+              <td>{new Date(judge.finishedTime).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>

@@ -9,4 +9,6 @@ export interface ProblemInfo {
   slug: string;
   title: string;
   tags: { name: string }[];
+  difficulty: string;
+  passRate: number;
 }

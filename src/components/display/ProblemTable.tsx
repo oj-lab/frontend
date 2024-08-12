@@ -6,12 +6,7 @@ import TrashIcon from "./icons/tabler/TrashIcon";
 import PencilIcon from "./icons/tabler/PencilIcon";
 import { joinClasses } from "@/utils/common";
 import ConfirmDialog from "../control/ConfirmDialog";
-
-const columns = [
-  { name: "Title", uid: "title" },
-  { name: "Tags", uid: "tags" },
-  { name: "Actions", uid: "actions" },
-];
+import { useTranslation } from "react-i18next";
 
 export interface ProblemTableProps {
   data: ProblemServiceModel.ProblemInfo[];
@@ -21,6 +16,7 @@ export interface ProblemTableProps {
 }
 
 const ProblemTable: React.FC<ProblemTableProps> = (props) => {
+  const { t } = useTranslation();
   const [deletingSlug, setDeletingSlug] = React.useState<string>("");
 
   const navigate = useNavigate();
@@ -31,10 +27,11 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         <table className="table" aria-label="Problem Table">
           <thead>
             <tr className="border-base-content/10">
-              {columns.map((column) => {
-                if (column.uid === "actions" && !props.showActions) return null;
-                return <th key={column.uid}>{column.name}</th>;
-              })}
+              <th key="title">{t("Title")}</th>
+              <th key="tags">{t("Tags")}</th>
+              <th key="difficulty">{t("Difficulty")}</th>
+              <th key="accept_rate">{t("Accept Rate")}</th>
+              {props.showActions && <th key="actions">{t("Actions")}</th>}
             </tr>
           </thead>
           <tbody>
@@ -49,12 +46,20 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                   if (props.enableRouting) navigate(problemInfo.slug);
                 }}
               >
-                <th className="w-1/3">{problemInfo.title}</th>
-                <td className="w-1/3">
+                <th className="w-1/5">{problemInfo.title}</th>
+                <td className="w-1/5">
                   <ProblemTags tags={problemInfo.tags} />
                 </td>
+                <td className="w-1/5">
+                  <DifficultyBadge difficulty={problemInfo.difficulty} />
+                </td>
+                <td className="w-1/5">
+                  <span className="text-xs">
+                    {problemInfo.passRate.toFixed(2)}%
+                  </span>
+                </td>
                 {props.showActions && (
-                  <td className="w-1/3 p-2">
+                  <td className="w-1/5 p-2">
                     <ProblemActions
                       onClickDelete={() => setDeletingSlug(problemInfo.slug)}
                     />
@@ -90,6 +95,21 @@ const ProblemTags: React.FC<{ tags: { name: string }[] }> = (props) => {
           {tag.name}
         </div>
       ))}
+    </div>
+  );
+};
+
+const DifficultyBadge: React.FC<{ difficulty: string }> = (props) => {
+  return (
+    <div
+      className={joinClasses(
+        "badge border-0 bg-base-300 font-semibold text-base-content/80",
+        props.difficulty === "easy" && "bg-success/10 text-success",
+        props.difficulty === "medium" && "bg-warning/10 text-warning",
+        props.difficulty === "hard" && "bg-error/10 text-error",
+      )}
+    >
+      {props.difficulty}
     </div>
   );
 };

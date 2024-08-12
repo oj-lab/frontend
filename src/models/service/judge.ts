@@ -9,6 +9,8 @@ export interface JudgeInfo {
   code: string;
   status: string;
   verdict: string;
+  submitTime: string;
+  finishedTime: string;
 }
 export interface RunJudgeRequest {
   code: string;
