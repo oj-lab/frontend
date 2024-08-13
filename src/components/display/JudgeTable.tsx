@@ -6,6 +6,7 @@ import BrandCPPIcon from "@/components/display/icons/tabler/BrandCPPIcon";
 import BrandPythonIcon from "@/components/display/icons/tabler/BrandPythonIcon";
 import { getGravatarUrl } from "@/utils/avatarURL";
 import { useTranslation } from "react-i18next";
+import { shortenString } from "@/utils/string";
 
 export interface JudgeTableProps {
   data: JudgeServiceModel.JudgeInfo[];
@@ -22,6 +23,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
       <table className={joinClasses("table")} aria-label="Problem Table">
         <thead>
           <tr className="border-base-content/10">
+            <th key="uid">{t("UID")}</th>
             <th key="problemTitle">{t("Problem Title")}</th>
             <th key="user">{t("User")}</th>
             <th key="language">{t("Language")}</th>
@@ -42,7 +44,8 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               }}
               key={idx}
             >
-              <th>{judge.problem?.title}</th>
+              <th>{shortenString(judge.UID, 8, false)}</th>
+              <td>{judge.problem?.title}</td>
               <td className="flex items-center gap-3 py-2">
                 <div className="avatar">
                   <div className="w-8 rounded-full">

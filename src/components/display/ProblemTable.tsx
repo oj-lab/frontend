@@ -46,20 +46,20 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                   if (props.enableRouting) navigate(problemInfo.slug);
                 }}
               >
-                <th className="w-1/5">{problemInfo.title}</th>
-                <td className="w-1/5">
+                <th>{problemInfo.title}</th>
+                <td>
                   <ProblemTags tags={problemInfo.tags} />
                 </td>
-                <td className="w-1/5">
+                <td>
                   <DifficultyBadge difficulty={problemInfo.difficulty} />
                 </td>
-                <td className="w-1/5">
+                <td>
                   <span className="text-xs">
                     {problemInfo.passRate.toFixed(2)}%
                   </span>
                 </td>
                 {props.showActions && (
-                  <td className="w-1/5 p-2">
+                  <td className="p-2">
                     <ProblemActions
                       onClickDelete={() => setDeletingSlug(problemInfo.slug)}
                     />

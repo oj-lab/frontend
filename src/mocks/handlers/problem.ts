@@ -1,6 +1,6 @@
 import { HttpResponse, http } from "msw";
 import * as ProblemServiceModel from "@/models/service/problem";
-import { ProblemMockData } from "../data/problem";
+import * as ProblemMockData from "../data/problem";
 
 export const getProblemInfo = http.get(
   "/api/v1/problem/:slug",
@@ -8,42 +8,10 @@ export const getProblemInfo = http.get(
     const { slug } = params;
     console.log("slug:", slug);
 
-    const response: ProblemServiceModel.Problem = {
-      slug: slug.toString(),
-      title: "Hello! { ... }",
-      description: `
-Output a string with format: \`Hello! %s\`.
+    let problem = ProblemMockData.Problem;
+    problem.slug = slug.toString();
 
-## Input
-
-The first line contains a string \`s\`.
-
-- The length of string \`s\` is at most 100.
-- The string contains only lowercase and uppercase letters.
-
-## Output
-
-Output a string \`Hello! %s\`.
-
-## Example
-
-### Input:
-
-\`\`\`text
-world!
-\`\`\`
-
-### Output:
-
-\`\`\`text
-Hello! world!
-\`\`\`
-
-`,
-      tags: [{ name: "Primer" }],
-    };
-
-    return HttpResponse.json(response);
+    return HttpResponse.json(problem);
   },
 );
 
