@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { joinClasses } from "@/utils/common";
 import * as JudgeServiceModel from "@/models/service/judge";
 import BrandCPPIcon from "@/components/display/icons/tabler/BrandCPPIcon";
 import BrandPythonIcon from "@/components/display/icons/tabler/BrandPythonIcon";
-import { getGravatarUrl } from "@/utils/avatarURL";
-import { useTranslation } from "react-i18next";
 import { shortenString } from "@/utils/string";
+import UserAvatar from "./UserAvatar";
 
 export interface JudgeTableProps {
   data: JudgeServiceModel.JudgeInfo[];
@@ -20,7 +20,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
 
   return (
     <div className={props.className}>
-      <table className={joinClasses("table")} aria-label="Problem Table">
+      <table className="table" aria-label="Problem Table">
         <thead>
           <tr className="border-base-content/10">
             <th key="uid">{t("UID")}</th>
@@ -35,50 +35,38 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
         <tbody>
           {props.data.map((judge, idx) => (
             <tr
+              key={idx}
               className={joinClasses(
                 props.data.length > 1 ? "border-base-content/10" : "border-0",
-                props.enableRouting ? "hover cursor-pointer" : "",
+                props.enableRouting && "hover cursor-pointer",
               )}
               onClick={() => {
                 if (props.enableRouting) navigate(judge.UID);
               }}
-              key={idx}
             >
               <th>{shortenString(judge.UID, 8, false)}</th>
               <td>{judge.problem?.title}</td>
               <td className="flex items-center gap-3 py-2">
                 <div className="avatar">
                   <div className="w-8 rounded-full">
-                    <img
-                      src={getGravatarUrl(judge.user?.name)}
-                      alt={`avatar-${judge.user?.name}`}
+                    <UserAvatar
+                      alt={judge.user?.name}
+                      avatarUrl={judge.user?.avatarUrl}
                     />
                   </div>
                 </div>
                 <span>{judge.user?.name}</span>
               </td>
-              <td>{RenderLanguage(judge.language)}</td>
+              <td>
+                <div className="badge min-w-10 border-0 bg-base-300">
+                  <LanguageIcon language={judge.language} />
+                </div>
+              </td>
               <td>
                 <div
                   className={joinClasses(
                     "badge border-0 font-semibold",
-                    judge.status === "finished" && judge.verdict === "Accepted"
-                      ? "bg-success/10 text-success"
-                      : "",
-                    judge.status === "finished" &&
-                      judge.verdict === "WrongAnswer"
-                      ? "bg-error/10 text-error"
-                      : "",
-                    judge.status === "finished" &&
-                      judge.verdict === "CompileError"
-                      ? "bg-warning/10 text-warning"
-                      : "",
-                    judge.status === "pending"
-                      ? "bg-primary/10 text-primary"
-                      : "",
-                    judge.status === "running"
-                      ? "bg-secondary/10 text-secondary"
-                      : "",
+                    getStatusBadageClass(judge.status, judge.verdict),
                   )}
                 >
                   {judge.status === "finished" ? judge.verdict : judge.status}
@@ -94,29 +82,35 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
   );
 };
 
-function RenderLanguage(language: string) {
+const LanguageIcon: React.FC<{ language: string }> = ({ language }) => {
   if (language.toLowerCase() === "cpp") {
-    return (
-      <div className="badge min-w-10 border-0 bg-base-300">
-        <BrandCPPIcon className="h-4 w-4 stroke-base-content" />
-      </div>
-    );
+    return <BrandCPPIcon className="h-4 w-4 stroke-base-content" />;
   }
   if (language.toLowerCase() === "python") {
-    return (
-      <div className="badge min-w-10 border-0 bg-base-300">
-        <BrandPythonIcon className="h-4 w-4 stroke-base-content" />
-      </div>
-    );
+    return <BrandPythonIcon className="h-4 w-4 stroke-base-content" />;
   }
-
   return (
-    <div className="badge min-w-10 border-0 bg-base-300">
-      <span className="text-[10px] font-semibold">
-        {language.toUpperCase()}
-      </span>
-    </div>
+    <span className="text-[10px] font-semibold">{language.toUpperCase()}</span>
   );
+};
+
+function getStatusBadageClass(status: string, verdict: string): string {
+  if (status === "finished" && verdict === "Accepted") {
+    return "bg-success/10 text-success";
+  }
+  if (status === "finished" && verdict === "WrongAnswer") {
+    return "bg-error/10 text-error";
+  }
+  if (status === "finished" && verdict === "CompileError") {
+    return "bg-warning/10 text-warning";
+  }
+  if (status === "pending") {
+    return "bg-primary/10 text-primary";
+  }
+  if (status === "running") {
+    return "bg-secondary/10 text-secondary";
+  }
+  return "";
 }
 
 export default JudgeTable;

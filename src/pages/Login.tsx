@@ -1,7 +1,8 @@
 import React from "react";
 import { redirectToOAuthGitHub, postLogin } from "@/apis/auth";
 import GitHubIcon from "@/components/display/icons/GitHubIcon";
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import EyeIcon from "@/components/display/icons/tabler/EyeIcon";
+import EyeClosedIcon from "@/components/display/icons/tabler/EyeClosedIcon";
 
 const background = `${import.meta.env.BASE_URL}images/loginBackground.webp`;
 
@@ -60,7 +61,7 @@ const Login: React.FC = () => {
               {showPassaword ? (
                 <EyeIcon className="h-6 w-6" />
               ) : (
-                <EyeSlashIcon className="h-6 w-6" />
+                <EyeClosedIcon className="h-6 w-6" />
               )}
             </button>
           </label>

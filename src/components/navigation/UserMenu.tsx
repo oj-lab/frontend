@@ -4,6 +4,8 @@ import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
 import { joinClasses } from "@/utils/common";
 import { userInfoSelector } from "@/store/selectors";
+import UserAvatar from "@/components/display/UserAvatar";
+import UserCircleIcon from "../display/icons/tabler/UserFilledIcon";
 
 export interface UserMenuAction {
   name: string;
@@ -54,17 +56,20 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         <div
           tabIndex={0}
           className={joinClasses(
-            "avatar btn btn-circle btn-ghost btn-md",
+            "btn btn-circle btn-ghost",
             open ? "z-[2]" : "z-[0]",
           )}
         >
-          <div className="w-10 rounded-full">
-            <img
-              className="h-8 w-8 rounded-full"
-              src={props.avatarUrl}
-              alt="avatar"
-            />
-          </div>
+          <UserAvatar
+            alt={isLogined ? userInfo?.name : "user"}
+            avatarUrl={userInfo?.avatarUrl}
+            fallbackElement={
+              !isLogined && (
+                <UserCircleIcon className="h-5 w-5 text-neutral-content" />
+              )
+            }
+            online={isLogined}
+          />
         </div>
         <ul
           tabIndex={0}

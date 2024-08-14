@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { PlusIcon } from "@heroicons/react/24/outline";
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import MarkdownRender from "@/components/display/MarkdownRender";
 import * as ProblemService from "@/apis/problem";
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import CircleCheckIcon from "@/components/display/icons/tabler/CircleCheckIcon";
+import CircleXIcon from "@/components/display/icons/tabler/CircleXIcon";
+import PlusIcon from "@/components/display/icons/tabler/PlusIcon";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
@@ -76,7 +77,7 @@ const CreateProblem: React.FC = () => {
                 description,
                 tags: tags.map((tag) => ({ name: tag })),
               }).then((_) => {
-                navigate("/admin/problem");
+                navigate("/admin/problems");
               });
             }}
           >
@@ -124,12 +125,12 @@ const CreateProblem: React.FC = () => {
                 </div>
               )}
               {isValidSlug && (
-                <CheckCircleIcon className="h-8 fill-green-500" />
+                <CircleCheckIcon className="h-8 fill-green-500 stroke-none" />
               )}
               {isValidSlug === false && (
                 <div className="flex items-center gap-2">
-                  <XCircleIcon
-                    className="h-8 fill-red-500"
+                  <CircleXIcon
+                    className="h-8 fill-red-500 stroke-none"
                     aria-label="Error"
                   />
                   <p className="text-sm ">{t("Slug is not valid.")}</p>
@@ -259,7 +260,7 @@ const CreateProblem: React.FC = () => {
                     }
                   }}
                 >
-                  <PlusIcon className="h-6 w-6" />
+                  <PlusIcon className="h-6 w-6 " />
                 </button>
               </div>
             </div>

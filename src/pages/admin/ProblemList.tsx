@@ -14,7 +14,7 @@ const ProblemList: React.FC = () => {
         <button
           className="btn btn-ghost m-4 h-10 min-h-10 rounded border border-base-content/10"
           onClick={() => {
-            navigate("/admin/problem/create");
+            navigate("/admin/problems/create");
           }}
         >
           <PlusIcon className="h-4 w-4" />

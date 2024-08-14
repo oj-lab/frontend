@@ -51,8 +51,9 @@ print(a - b)`,
   {
     UID: "e54456cc-313b-4af0-b836-22414d4571ae",
     user: {
-      account: "user-2",
-      name: "User 2",
+      account: "user-3",
+      name: "User 3",
+      avatarUrl: "https://www.gravatar.com/avatar/",
     },
     problem: {
       slug: "a-plus-b-problem",

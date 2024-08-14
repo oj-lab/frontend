@@ -6,7 +6,7 @@ export const getCurrentUser = http.get("/api/v1/user/current", (info) => {
   if (authToken && authToken.startsWith("mock-token")) {
     return new Response(
       JSON.stringify({
-        username: username,
+        name: username,
         roles: ["admin", "user"],
       }),
       {
