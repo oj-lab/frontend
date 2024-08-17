@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import MarkdownRender from "@/components/display/MarkdownRender";
 import * as ProblemService from "@/apis/problem";
@@ -9,15 +9,15 @@ import CircleXIcon from "@/components/display/icons/tabler/CircleXIcon";
 import PlusIcon from "@/components/display/icons/tabler/PlusIcon";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`.
+const descriptionPlaceholder = `Output a string with format: \`Hello! %s\`
 
 ## Input
 
-- The first line contains a string \`s\`.
+- The first line contains a string \`s\`
 
 ## Output
 
-- Output a string \`Hello! %s\`.
+- Output a string \`Hello! %s\`
 
 ## Example
 
@@ -53,6 +53,21 @@ const CreateProblem: React.FC = () => {
   const handleRemoveTag = (tagToRemove: string) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      // Included for legacy support, e.g. Chrome/Edge < 119
+      event.returnValue =
+        "You have unsaved changes. Are you sure you want to leave?";
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
 
   return (
     <>
