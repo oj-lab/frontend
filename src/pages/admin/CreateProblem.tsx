@@ -189,7 +189,7 @@ const CreateProblem: React.FC = () => {
               className="tab-content rounded-md border-base-300 bg-base-100 p-2"
             >
               <textarea
-                className="textarea m-0 h-64 w-full"
+                className="textarea m-0 h-96 w-full leading-5"
                 placeholder="write problem description here"
                 onChange={(e) => {
                   setDescription(e.target.value);
@@ -208,7 +208,7 @@ const CreateProblem: React.FC = () => {
               role="tabpanel"
               className="tab-content rounded-md border-base-300 bg-base-100 p-2"
             >
-              <div className="h-64 w-full overflow-auto p-4">
+              <div className="h-96 w-full overflow-auto p-4">
                 <MarkdownRender content={description} />
               </div>
             </div>

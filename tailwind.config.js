@@ -61,6 +61,23 @@ module.exports = {
     animation: {
       fadeOut: "fadeOut 0.2s ease-out forwards",
     },
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            margin: "0", // 设置全局 margin 为 0
+            "h1, h2, h3, h4, h5, h6": {
+              marginTop: theme("spacing.6"),
+              marginBottom: theme("spacing.4"),
+            },
+            p: {
+              marginTop: theme("spacing.2"),
+              marginBottom: theme("spacing.2"),
+            },
+          },
+        },
+      }),
+    },
   },
   darkMode: "class",
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
