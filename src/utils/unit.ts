@@ -23,3 +23,7 @@ export function formatBytes(bytes: number): string {
   }
   return `${(bytes / 1024 / 1024 / 1024).toFixed(2)} GB`;
 }
+
+export function formatPercent(percent: number): string {
+  return `${(percent * 100).toFixed(2)}%`;
+}

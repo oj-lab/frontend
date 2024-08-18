@@ -29,6 +29,7 @@ export async function getJudgeList() {
   }
   return res.data;
 }
+
 export async function getJudge(uid: string) {
   let res = await axiosClient.get<JudgeServiceModel.JudgeInfo>(
     `/api/v1/judge/${uid}`,

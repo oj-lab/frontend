@@ -12,6 +12,7 @@ export interface JudgeInfo {
   submitTime: string;
   finishedTime: string;
 }
+
 export interface RunJudgeRequest {
   code: string;
   language: string;

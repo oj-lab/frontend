@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "@/layouts/Layout";
+import RankList from "./pages/RankList";
 
 const Problem = lazy(() => import("@/pages/problem/Problem"));
 const AdminProblemList = lazy(() => import("@/pages/admin/ProblemList"));
@@ -26,7 +27,7 @@ const Router: React.FC = () => {
               <Route path="" element={<JudgeList />} />
               <Route path=":uid" element={<Judge />} />
             </Route>
-            <Route path="rank" element={<div>rank</div>} />
+            <Route path="rank" element={<RankList />} />
             <Route path="login" element={<Login />} />
             {/* Admin */}
             <Route path="admin">

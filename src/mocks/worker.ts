@@ -9,6 +9,7 @@ import {
   putProblemPackage,
 } from "./handlers/problem";
 import { getCurrentUser, postLogin, postSignOut } from "./handlers/user";
+import { getRankList } from "./handlers/rank";
 
 const restHandlers = [
   getCurrentUser,
@@ -23,6 +24,7 @@ const restHandlers = [
   putProblemPackage,
   deleteProblem,
   postJudge,
+  getRankList,
 ];
 
 export const mockServiceWorker = setupWorker(...restHandlers);
