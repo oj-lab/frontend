@@ -25,7 +25,6 @@ return 0;
     status: "finished",
     verdict: "Accepted",
     submitTime: "2021-09-01T00:00:00Z",
-    finishedTime: "2021-09-01T00:00:00Z",
   },
   {
     UID: "6d0355d3-cf5c-4615-a6cc-6973c948cacf",
@@ -46,7 +45,6 @@ print(a - b)`,
     status: "finished",
     verdict: "WrongAnswer",
     submitTime: "2021-09-01T00:00:00Z",
-    finishedTime: "2021-09-01T00:00:00Z",
   },
   {
     UID: "e54456cc-313b-4af0-b836-22414d4571ae",
@@ -71,6 +69,5 @@ const rl = readline.createInterface({
     status: "finished",
     verdict: "CompileError",
     submitTime: "2021-09-01T00:00:00Z",
-    finishedTime: "2021-09-01T00:00:00Z",
   },
 ];

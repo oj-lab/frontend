@@ -10,7 +10,6 @@ export interface JudgeInfo {
   status: string;
   verdict: string;
   submitTime: string;
-  finishedTime: string;
 }
 
 export interface RunJudgeRequest {

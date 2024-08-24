@@ -27,9 +27,8 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
             <th key="problemTitle">{t("Problem Title")}</th>
             <th key="user">{t("User")}</th>
             <th key="language">{t("Language")}</th>
-            <th key="status">{t("Status")}</th>
             <th key="submitTime">{t("Submit Time")}</th>
-            <th key="finishedTime">{t("Finished Time")}</th>
+            <th key="status">{t("Status")}</th>
           </tr>
         </thead>
         <tbody>
@@ -62,6 +61,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
                   <LanguageIcon language={judge.language} />
                 </div>
               </td>
+              <td>{new Date(judge.submitTime).toLocaleString()}</td>
               <td>
                 <div
                   className={joinClasses(
@@ -72,8 +72,6 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
                   {judge.status === "finished" ? judge.verdict : judge.status}
                 </div>
               </td>
-              <td>{new Date(judge.submitTime).toLocaleString()}</td>
-              <td>{new Date(judge.finishedTime).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
