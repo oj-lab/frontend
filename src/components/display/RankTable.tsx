@@ -20,6 +20,7 @@ const RankTable: React.FC<RankTableProps> = (props) => {
           <tr className="border-base-content/10">
             <th key="rank">{t("Rank")}</th>
             <th key="user">{t("User")}</th>
+            <th key="submit-count">{t("Submit Count")}</th>
             <th key="accept-count">{t("Accept Count")}</th>
             <th key="accept-rate">{t("Accept Rate")}</th>
           </tr>
@@ -44,6 +45,7 @@ const RankTable: React.FC<RankTableProps> = (props) => {
                 </div>
                 <span>{rank.user?.name}</span>
               </td>
+              <td>{rank.submitCount}</td>
               <td>{rank.acceptCount}</td>
               <td>{formatPercent(rank.acceptRate)}</td>
             </tr>
