@@ -7,6 +7,7 @@ import PencilIcon from "./icons/tabler/PencilIcon";
 import { joinClasses } from "@/utils/common";
 import ConfirmDialog from "../control/ConfirmDialog";
 import { useTranslation } from "react-i18next";
+import CircleCheckIcon from "./icons/tabler/CircleCheckIcon";
 
 export interface ProblemTableProps {
   data: ProblemServiceModel.ProblemInfo[];
@@ -27,6 +28,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         <table className="table" aria-label="Problem Table">
           <thead>
             <tr className="border-base-content/10">
+              <th key="accepted">{t("Accepted")}</th>
               <th key="title">{t("Title")}</th>
               <th key="tags">{t("Tags")}</th>
               <th key="difficulty">{t("Difficulty")}</th>
@@ -46,6 +48,11 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                   if (props.enableRouting) navigate(problemInfo.slug);
                 }}
               >
+                <td>
+                  {problemInfo.accepted && (
+                    <CircleCheckIcon className="w-6 fill-green-500 stroke-none" />
+                  )}
+                </td>
                 <th>{problemInfo.title}</th>
                 <td>
                   <ProblemTags tags={problemInfo.tags} />

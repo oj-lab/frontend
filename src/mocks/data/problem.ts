@@ -14,6 +14,7 @@ export const ProblemInfoList: ProblemServiceModel.ProblemInfo[] = [
     tags: [{ name: "Primer" }, { name: "Math" }],
     difficulty: "medium",
     passRate: 50.14,
+    accepted: true,
   },
 ];
 
