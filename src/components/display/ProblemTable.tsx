@@ -50,7 +50,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               >
                 <td>
                   {problemInfo.accepted && (
-                    <CircleCheckIcon className="w-6 fill-green-500 stroke-none" />
+                    <CircleCheckIcon className="ml-3.5 w-6 fill-green-500 stroke-none" />
                   )}
                 </td>
                 <th>{problemInfo.title}</th>
