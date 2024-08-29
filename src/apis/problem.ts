@@ -30,12 +30,16 @@ export async function putProblem(
 export async function getProblemInfoList(
   limit?: number,
   offset?: number,
+  title?: string,
+  difficulty?: string,
 ): Promise<{
   total: number;
   list: ProblemServiceModel.ProblemInfo[];
 }> {
   limit = limit || 10;
   offset = offset || 0;
+  title = title || "";
+  difficulty = difficulty || "all";
 
   let res = await axiosClient.get<{
     total: number;
@@ -44,6 +48,8 @@ export async function getProblemInfoList(
     params: {
       limit,
       offset,
+      title,
+      difficulty,
     },
   });
   if (res.status !== 200) {

@@ -37,6 +37,8 @@ export const useProblemInfoList = () => {
   const [total, setTotal] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
+  const [titleQuery, setTitleQuery] = useState<string>("");
+  const [difficultyQuery, setDifficultyQuery] = useState<string>("");
 
   useEffect(() => {
     ProblemService.getProblemInfoList(limit, offset)
@@ -47,7 +49,7 @@ export const useProblemInfoList = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [limit, offset]);
+  }, [limit, offset, titleQuery, difficultyQuery]);
 
   function getProblemInfoList() {
     return problemList;
@@ -62,5 +64,10 @@ export const useProblemInfoList = () => {
     setOffset(offset);
   }
 
-  return { getProblemInfoList, getPageCount, setPagenation };
+  function setSearch(titleQuery: string, difficultyQuery: string) {
+    setTitleQuery(titleQuery);
+    setDifficultyQuery(difficultyQuery);
+  }
+
+  return { getProblemInfoList, getPageCount, setPagenation, setSearch };
 };
