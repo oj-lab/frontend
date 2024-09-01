@@ -51,31 +51,40 @@ export const useRunJudge = (slug: string) => {
 };
 
 export const useJudgeList = () => {
+  const [total, setTotal] = useState<number>(0);
+  const [limit, setLimit] = useState<number>(10);
+  const [offset, setOffset] = useState<number>(0);
   const [judgeList, setJudgeList] = useState<JudgeServiceModel.JudgeInfo[]>([]);
 
-  useEffect(() => {
+  const getJudgeListFromServer = () => {
     JudgeService.getJudgeList()
       .then((res) => {
         setJudgeList(res.list);
+        setTotal(res.total);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+
+  useEffect(getJudgeListFromServer, [limit, offset]);
 
   function getJudgeList() {
     return judgeList;
   }
 
   function refreshJudgeList() {
-    JudgeService.getJudgeList()
-      .then((res) => {
-        setJudgeList(res.list);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    getJudgeListFromServer();
   }
 
-  return { getJudgeList, refreshJudgeList };
+  function getPageCount(limit: number) {
+    return Math.ceil(total / limit);
+  }
+
+  function setPagenation(limit: number, offset: number) {
+    setLimit(limit);
+    setOffset(offset);
+  }
+
+  return { getJudgeList, refreshJudgeList, getPageCount, setPagenation };
 };

@@ -19,11 +19,19 @@ export async function postJudge(slug: string, code: string, language: string) {
   return res.data;
 }
 
-export async function getJudgeList() {
+export async function getJudgeList(limit?: number, offset?: number) {
+  limit = limit || 10;
+  offset = offset || 0;
+
   let res = await axiosClient.get<{
     total: number;
     list: JudgeServiceModel.JudgeInfo[];
-  }>(`/api/v1/judge`);
+  }>(`/api/v1/judge`, {
+    params: {
+      limit,
+      offset,
+    },
+  });
   if (res.status !== 200) {
     throw Error("failed to get judge list");
   }
