@@ -19,8 +19,8 @@ export const Judges: JudgeServiceModel.JudgeInfo[] = [
 using namespace std;
 
 int main() {
-cout << "Hello, World!";
-return 0;
+  cout << "Hello, World!";
+  return 0;
 }`,
     status: "finished",
     verdict: "Accepted",
