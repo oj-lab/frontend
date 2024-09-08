@@ -3,7 +3,7 @@
 ![Codespace Supported](https://img.shields.io/badge/Codespace_Supported-000000?style=flat&logo=github)
 
 _See what we plan to do_ or _tell us your new idea_ in
-[Discussions](https://github.com/oj-lab/oj-lab-front/discussions).
+[Discussions](https://github.com/oj-lab/frontend/discussions).
 
 ## Development
 

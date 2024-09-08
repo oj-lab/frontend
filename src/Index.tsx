@@ -19,7 +19,7 @@ async function enableMockService() {
 
   let workerURL = "/mockServiceWorker.js";
   if (isGhPages()) {
-    workerURL = "/oj-lab-front/mockServiceWorker.js";
+    workerURL = "/frontend/mockServiceWorker.js";
   }
 
   return mockServiceWorker.start({

@@ -16,7 +16,7 @@ const viteConfig = ({ mode }) => {
         },
       },
     },
-    base: isGhPagesBuild ? "/oj-lab-front/" : "/",
+    base: isGhPagesBuild ? "/frontend/" : "/",
     build: {
       // https://stackoverflow.com/questions/76694615/module-level-directives-cause-errors-when-bundled-use-client-was-ignored-caus
       rollupOptions: {
