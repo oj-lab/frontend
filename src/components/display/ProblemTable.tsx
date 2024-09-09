@@ -62,7 +62,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                 </td>
                 <td>
                   <span className="text-xs">
-                    {problemInfo.passRate.toFixed(2)}%
+                    {problemInfo.passRate?.toFixed(2)}%
                   </span>
                 </td>
                 {props.showActions && (

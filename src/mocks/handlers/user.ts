@@ -19,7 +19,7 @@ export const getCurrentUser = http.get("/api/v1/user/current", (info) => {
   });
 });
 
-export const postLogin = http.post("/api/v1/user/login", async (info) => {
+export const postPasswordLogin = http.post("/auth/password", async (info) => {
   const body = await info.request.json();
   const { account } = body?.valueOf() as {
     account: string;

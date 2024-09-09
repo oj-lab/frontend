@@ -1,5 +1,5 @@
 import React from "react";
-import { redirectToOAuthGitHub, postLogin } from "@/apis/auth";
+import { redirectToOAuthGitHub, postPasswordLogin } from "@/apis/auth";
 import GitHubIcon from "@/components/display/icons/GitHubIcon";
 import EyeIcon from "@/components/display/icons/tabler/EyeIcon";
 import EyeClosedIcon from "@/components/display/icons/tabler/EyeClosedIcon";
@@ -85,7 +85,7 @@ const Login: React.FC = () => {
           className="btn btn-neutral btn-active btn-block"
           type="submit"
           onClick={() => {
-            postLogin(account, password).then((res) => {
+            postPasswordLogin(account, password).then((res) => {
               console.log(res);
               window.location.href = import.meta.env.BASE_URL;
             });

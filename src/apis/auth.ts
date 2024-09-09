@@ -1,8 +1,8 @@
 import * as UserServiceModel from "@/models/service/user";
 import { axiosClient } from "@/utils/axiosClient";
 
-export async function postLogin(account: string, password: string) {
-  let res = await axiosClient.post<void>("/api/v1/user/login", {
+export async function postPasswordLogin(account: string, password: string) {
+  let res = await axiosClient.post<void>("/auth/password", {
     account: account,
     password: password,
   });
@@ -31,5 +31,5 @@ export async function getCurrentUser(): Promise<UserServiceModel.UserInfo> {
 }
 
 export function redirectToOAuthGitHub() {
-  window.location.href = "/api/v1/oauth/github";
+  window.location.href = "/auth/github";
 }

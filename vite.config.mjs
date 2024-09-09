@@ -14,6 +14,11 @@ const viteConfig = ({ mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/v1/, ""),
         },
+        "/auth": {
+          target: "http://localhost:8080/auth",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/auth/, ""),
+        },
       },
     },
     base: isGhPagesBuild ? "/frontend/" : "/",

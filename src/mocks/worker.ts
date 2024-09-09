@@ -8,12 +8,16 @@ import {
   deleteProblem,
   putProblemPackage,
 } from "./handlers/problem";
-import { getCurrentUser, postLogin, postSignOut } from "./handlers/user";
+import {
+  getCurrentUser,
+  postPasswordLogin,
+  postSignOut,
+} from "./handlers/user";
 import { getRankList } from "./handlers/rank";
 
 const restHandlers = [
   getCurrentUser,
-  postLogin,
+  postPasswordLogin,
   postSignOut,
   putProblem,
   getProblemInfo,
