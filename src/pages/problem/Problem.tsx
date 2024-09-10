@@ -28,7 +28,7 @@ const Problem: React.FC = () => {
     useRunJudge(slug);
 
   useEffect(() => {
-    setSrcLanguage("cpp");
+    setSrcLanguage("Cpp");
   }, [setSrcLanguage]);
 
   return (
@@ -56,8 +56,8 @@ const Problem: React.FC = () => {
           setSrcLanguage(e.target.value);
         }}
       >
-        <option value={"cpp"}>C++</option>
-        <option value={"python"}>Python</option>
+        <option value={"Cpp"}>C++</option>
+        <option value={"Python"}>Python</option>
       </select>
       <div className="flex h-72 flex-col gap-4 rounded border border-base-content/10">
         <CodeEditor

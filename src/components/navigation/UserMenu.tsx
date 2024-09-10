@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
+import { postSignOut } from "@/apis/auth";
 import { useCookies } from "react-cookie";
 import { useSelector } from "react-redux";
 import { joinClasses } from "@/utils/common";
@@ -81,6 +82,9 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
                 className="rounded"
                 onClick={(e) => {
                   e.preventDefault();
+                  postSignOut().then((res) => {
+                    console.log(res);
+                  });
                   removeCookie("auth-token");
                   window.location.href = import.meta.env.BASE_URL;
                 }}
