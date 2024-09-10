@@ -19,7 +19,7 @@ export const getCurrentUser = http.get("/api/v1/user/current", (info) => {
   });
 });
 
-export const postLogin = http.post("/api/v1/user/login", async (info) => {
+export const postLogin = http.post("/api/v1/auth/password", async (info) => {
   const body = await info.request.json();
   const { account } = body?.valueOf() as {
     account: string;
@@ -33,7 +33,7 @@ export const postLogin = http.post("/api/v1/user/login", async (info) => {
   });
 });
 
-export const postSignOut = http.post("/api/v1/user/logout", async (info) => {
+export const postSignOut = http.post("/api/v1/auth/logout", async (info) => {
   return new HttpResponse(null, {
     status: 200,
     headers: {

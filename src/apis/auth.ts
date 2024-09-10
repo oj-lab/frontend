@@ -2,7 +2,7 @@ import * as UserServiceModel from "@/models/service/user";
 import { axiosClient } from "@/utils/axiosClient";
 
 export async function postLogin(account: string, password: string) {
-  let res = await axiosClient.post<void>("/api/v1/user/login", {
+  let res = await axiosClient.post<void>("/api/v1/auth/password", {
     account: account,
     password: password,
   });
@@ -13,7 +13,7 @@ export async function postLogin(account: string, password: string) {
 }
 
 export async function postSignOut() {
-  let res = await axiosClient.post<void>("/api/v1/user/logout");
+  let res = await axiosClient.post<void>("/api/v1/auth/logout");
   if (res.status !== 200) {
     throw Error("failed to sign out");
   }
@@ -31,5 +31,5 @@ export async function getCurrentUser(): Promise<UserServiceModel.UserInfo> {
 }
 
 export function redirectToOAuthGitHub() {
-  window.location.href = "/api/v1/oauth/github";
+  window.location.href = "/api/v1/auth/github";
 }
