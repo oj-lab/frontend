@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "node-terminal",
+            "name": "Run Script: start",
+            "request": "launch",
+            "command": "npm run start",
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Run Script: start:mock",
+            "request": "launch",
+            "command": "npm run start:mock",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}
