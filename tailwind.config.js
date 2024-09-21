@@ -11,44 +11,32 @@ module.exports = {
         light: {
           ...require("daisyui/src/theming/themes")["light"],
           "--content-background": "#f2f5f8",
+          ".bg-light-success": {
+            backgroundColor: "#cceedd",
+          },
+          ".bg-light-warning": {
+            backgroundColor: "#ffeecc",
+          },
+          ".bg-light-error": {
+            backgroundColor: "#ffdddd",
+          },
         },
       },
       {
         dark: {
           ...require("daisyui/src/theming/themes")["dark"],
           "--content-background": "#1a202c",
+          ".bg-light-success": {
+            backgroundColor: "#003300",
+          },
+          ".bg-light-warning": {
+            backgroundColor: "#554400",
+          },
+          ".bg-light-error": {
+            backgroundColor: "#552233",
+          },
         },
       },
-      "cupcake",
-      "bumblebee",
-      "emerald",
-      "corporate",
-      "synthwave",
-      "retro",
-      "cyberpunk",
-      "valentine",
-      "halloween",
-      "garden",
-      "forest",
-      "aqua",
-      "lofi",
-      "pastel",
-      "fantasy",
-      "wireframe",
-      "black",
-      "luxury",
-      "dracula",
-      "cmyk",
-      "autumn",
-      "business",
-      "acid",
-      "lemonade",
-      "night",
-      "coffee",
-      "winter",
-      "dim",
-      "nord",
-      "sunset",
     ],
   },
   theme: {
@@ -65,7 +53,7 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            margin: "0", // 设置全局 margin 为 0
+            margin: "0", // Set global `margin` to 0
             "h1, h2, h3, h4, h5, h6": {
               marginTop: theme("spacing.6"),
               marginBottom: theme("spacing.4"),
@@ -77,6 +65,11 @@ module.exports = {
           },
         },
       }),
+      colors: {
+        "light-success": "#cceedd",
+        "light-warning": "#ffeecc",
+        "light-error": "#ffdddd",
+      },
     },
   },
   darkMode: "class",

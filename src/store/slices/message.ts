@@ -5,6 +5,8 @@ export interface Message {
   content: string;
   exiting?: boolean;
   duration: number;
+  level?: "info" | "success" | "warning" | "error";
+  err?: string;
 }
 
 export interface MessageState {

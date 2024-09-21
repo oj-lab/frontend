@@ -11,12 +11,14 @@ import {
 } from "@/store/sagas/message";
 import { messageMapSelector } from "@/store/selectors";
 import { joinClasses } from "@/utils/common";
+import { useTranslation } from "react-i18next";
 
 export interface LayoutProps {
   children?: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
+  let { t } = useTranslation();
   let dispatch = useDispatch();
   let messageMap = useSelector(messageMapSelector);
 
@@ -24,33 +26,9 @@ const Layout: React.FC<LayoutProps> = (props) => {
     dispatch({
       type: AddMessageSagaPattern,
       payload: {
-        id: "welcome-1",
-        content: "🥰 Welcome to OJ Lab! 1",
+        id: "welcome",
+        content: "🥰 Welcome to OJ Lab!",
         duration: 3000,
-      },
-    });
-    dispatch({
-      type: AddMessageSagaPattern,
-      payload: {
-        id: "welcome-2",
-        content: "🥰 Welcome to OJ Lab! 2",
-        duration: 4000,
-      },
-    });
-    dispatch({
-      type: AddMessageSagaPattern,
-      payload: {
-        id: "welcome-3",
-        content: "🥰 Welcome to OJ Lab! 3",
-        duration: 5000,
-      },
-    });
-    dispatch({
-      type: AddMessageSagaPattern,
-      payload: {
-        id: "welcome-4",
-        content: "🥰 Welcome to OJ Lab! 4",
-        duration: 6000,
       },
     });
   }, [dispatch]);
@@ -74,13 +52,20 @@ const Layout: React.FC<LayoutProps> = (props) => {
             {Object.keys(messageMap).map((key, idx) => {
               if (idx >= 3) return null;
               let message = messageMap[key];
+              console.log("message", message);
+
               return (
                 <div
                   key={key}
                   className={joinClasses(
-                    "rounded border border-base-content/10 bg-base-100 px-2 py-1 text-sm font-semibold shadow-sm",
-                    "hover:cursor-pointer hover:bg-base-200",
-                    message.exiting ? "fade-out" : "",
+                    "text-wrap rounded border border-base-content/10 px-2 py-1 text-sm font-semibold shadow-sm",
+                    "hover:cursor-pointer hover:shadow-md",
+                    (message.level === "info" || !message.level) &&
+                      "bg-base-100",
+                    message.level === "success" && "bg-light-success",
+                    message.level === "warning" && "bg-light-warning",
+                    message.level === "error" && "bg-light-error",
+                    message.exiting && "fade-out",
                   )}
                   onClick={() => {
                     dispatch({
@@ -89,7 +74,11 @@ const Layout: React.FC<LayoutProps> = (props) => {
                     });
                   }}
                 >
-                  <span>{message.content}</span>
+                  <span>{t(message.content)}</span>
+                  <br />
+                  <span className="text-xs font-normal">
+                    {message.err?.toString()}
+                  </span>
                 </div>
               );
             })}

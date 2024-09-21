@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import * as ProblemServiceModel from "@/models/service/problem";
 import * as ProblemService from "@/apis/problem";
+import { useDispatch } from "react-redux";
+import { AddMessageSagaPattern } from "@/store/sagas/message";
 
 export const useProblem = (slug: string, fallback?: () => void) => {
   const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
     null,
   );
   const fallbackRef = useRef(fallback);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fallbackRef.current = fallback;
@@ -18,9 +21,18 @@ export const useProblem = (slug: string, fallback?: () => void) => {
         setProblem(res);
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: AddMessageSagaPattern,
+          payload: {
+            id: "problem-fetch-error",
+            content: "Failed to fetch problem",
+            duration: 3000,
+            err: err.toString(),
+          },
+        });
         fallbackRef.current?.();
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [slug]);
 
   function getProblem() {
