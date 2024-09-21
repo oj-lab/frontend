@@ -25,7 +25,7 @@ export const PageMenu: FC<PageMenuProps> = (props) => {
   return (
     <ul className="menu w-60 gap-1 bg-base-100 p-2 text-base-content">
       {props.sections.map((section) => (
-        <>
+        <div key={section.title}>
           <li key={section.title} className="menu-title">
             {t(section.title)}
           </li>
@@ -40,7 +40,7 @@ export const PageMenu: FC<PageMenuProps> = (props) => {
               </div>
             </li>
           ))}
-        </>
+        </div>
       ))}
     </ul>
   );

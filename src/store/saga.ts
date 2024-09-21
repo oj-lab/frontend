@@ -1,9 +1,9 @@
 import { all, call, spawn } from "redux-saga/effects";
-import { watchAddMessage } from "./sagas/message";
+import { watchAddMessage, watchRemoveMessage } from "./sagas/message";
 import { watchGetUserInfo } from "./sagas/user";
 
 export default function* rootSaga() {
-  let sagas = [watchAddMessage, watchGetUserInfo];
+  let sagas = [watchAddMessage, watchRemoveMessage, watchGetUserInfo];
 
   // Spawn a detached generater for each 'watcher' saga, that is meant to stay alive for the entire app life-time
   // Will catch any otherwise uncaught errors in sagas, and restart those crashed sagas.
