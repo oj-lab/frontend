@@ -6,15 +6,15 @@ export const ProblemInfoList: ProblemServiceModel.ProblemInfo[] = [
     title: "Hello World",
     tags: [{ name: "Primer" }],
     difficulty: "easy",
-    passRate: 90.97,
+    passRate: 0.9097,
   },
   {
     slug: "a-plus-b-problem",
     title: "A+B Problem",
     tags: [{ name: "Primer" }, { name: "Math" }],
     difficulty: "medium",
-    passRate: 50.14,
-    accepted: true,
+    passRate: 0.5014,
+    solved: true,
   },
 ];
 

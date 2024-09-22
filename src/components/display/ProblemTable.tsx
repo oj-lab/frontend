@@ -8,6 +8,7 @@ import { joinClasses } from "@/utils/common";
 import ConfirmDialog from "../control/ConfirmDialog";
 import { useTranslation } from "react-i18next";
 import CircleCheckIcon from "./icons/tabler/CircleCheckIcon";
+import { formatPercent } from "@/utils/unit";
 
 export interface ProblemTableProps {
   data: ProblemServiceModel.ProblemInfo[];
@@ -49,7 +50,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                 }}
               >
                 <td>
-                  {problemInfo.accepted && (
+                  {problemInfo.solved && (
                     <CircleCheckIcon className="ml-3.5 w-6 fill-green-500 stroke-none" />
                   )}
                 </td>
@@ -62,7 +63,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                 </td>
                 <td>
                   <span className="text-xs">
-                    {problemInfo.passRate?.toFixed(2)}%
+                    {formatPercent(problemInfo.passRate)}
                   </span>
                 </td>
                 {props.showActions && (

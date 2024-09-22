@@ -12,7 +12,7 @@ export const Judges: JudgeServiceModel.JudgeInfo[] = [
       title: "Hello World",
       tags: [{ name: "Primer" }],
       difficulty: "easy",
-      passRate: 90.97,
+      passRate: 0.9097,
     },
     language: "Cpp",
     code: `#include <bits/stdc++.h>
@@ -37,7 +37,7 @@ int main() {
       title: "A + B Problem",
       tags: [{ name: "Primer" }, { name: "Math" }],
       difficulty: "medium",
-      passRate: 50.14,
+      passRate: 0.5014,
     },
     language: "Python",
     code: `a, b = map(int, input().split())
@@ -58,7 +58,7 @@ print(a - b)`,
       title: "A + B Problem",
       tags: [{ name: "Primer" }, { name: "Math" }],
       difficulty: "medium",
-      passRate: 50.14,
+      passRate: 0.5014,
     },
     language: "Javascript",
     code: `const readline = require('readline')

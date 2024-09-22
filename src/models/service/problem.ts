@@ -11,5 +11,5 @@ export interface ProblemInfo {
   tags: { name: string }[];
   difficulty: string;
   passRate: number;
-  accepted?: boolean;
+  solved?: boolean;
 }
