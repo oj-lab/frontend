@@ -20,6 +20,7 @@ const Problem: React.FC = () => {
   const navigate = useNavigate();
   const slug = useParams().slug as string;
   const [toggleToast, setToggleToast] = React.useState<boolean>(false);
+  const codeEditorContainer = React.useRef<HTMLDivElement | null>(null);
 
   const { getProblem } = useProblem(slug, () => {
     navigate("/problem");
@@ -59,7 +60,10 @@ const Problem: React.FC = () => {
         <option value={"cpp"}>C++</option>
         <option value={"python"}>Python</option>
       </select>
-      <div className="flex h-72 flex-col gap-4 rounded border border-base-content/10">
+      <div
+        className="flex h-96 flex-col gap-4 rounded border border-base-content/10"
+        ref={codeEditorContainer}
+      >
         <CodeEditor
           className="h-full overflow-hidden rounded"
           value={defaultCode}
@@ -67,7 +71,7 @@ const Problem: React.FC = () => {
             setSrc(value);
           }}
           language={getSrcLanguage()}
-          parent={document.body}
+          parent={codeEditorContainer.current}
         />
       </div>
       <div className="relative">

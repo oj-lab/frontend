@@ -9,7 +9,7 @@ export interface CodeEditorProps {
   className?: string;
   language?: string;
   onChange: (value: string) => void;
-  parent: HTMLElement;
+  parent: HTMLElement | null;
 }
 
 const CodeEditor: React.FC<CodeEditorProps> = (props) => {
@@ -30,9 +30,6 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
           theme: isLightMode ? "vs" : "vs-dark",
           automaticLayout: true,
           scrollBeyondLastLine: false,
-          scrollbar: {
-            vertical: "auto",
-          },
         });
 
         props.onChange(editor!.getValue());
@@ -69,11 +66,12 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
         // wait for next frame to ensure last layout finished
         window.requestAnimationFrame(() => {
           // get the parent dimensions and re-layout the editor
-          const rect = props.parent.getBoundingClientRect();
+          const rect = props.parent?.getBoundingClientRect();
+          if (!rect) return;
           if (isDrawerOpen && window.innerWidth >= 1024) {
             editor.layout({
-              width: rect.width - 352,
-              height: window.innerHeight,
+              width: rect.width,
+              height: rect.height,
             });
           } else {
             const currentWidth = editor.getLayoutInfo().width;
@@ -81,12 +79,12 @@ const CodeEditor: React.FC<CodeEditorProps> = (props) => {
             if (currentWidth < rect.width - 112) {
               editor.layout({
                 width: currentWidth + 1,
-                height: window.innerHeight,
+                height: rect.height,
               });
             } else {
               editor.layout({
-                width: rect.width - 112,
-                height: window.innerHeight,
+                width: rect.width,
+                height: rect.height,
               });
             }
           }
