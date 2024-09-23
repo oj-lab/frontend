@@ -57,7 +57,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
         <div
           tabIndex={0}
           className={joinClasses(
-            "btn btn-circle btn-ghost",
+            "btn btn-ghost px-2",
             open ? "z-[2]" : "z-[0]",
           )}
         >
@@ -71,6 +71,18 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
             }
             online={isLogined}
           />
+          {isLogined && (
+            <div className="flex flex-col items-start">
+              <span>{userInfo?.name}</span>
+              <span className="text-xs font-thin">Welcome!</span>
+            </div>
+          )}
+          {!isLogined && (
+            <div className="flex flex-col items-start">
+              <span>Login</span>
+              <span className="text-xs font-thin">or Register</span>
+            </div>
+          )}
         </div>
         <ul
           tabIndex={0}

@@ -31,13 +31,13 @@ const UserAvatar: React.FC<UserAvatarProps> = (props): JSX.Element => {
         (!props.online || !props.avatarUrl) && "placeholder",
       )}
     >
-      <div className="w-8 rounded-full bg-neutral text-neutral-content">
+      <div className="mask mask-squircle w-8 bg-neutral text-neutral-content">
         {props.avatarUrl ? (
           <img src={props.avatarUrl} alt={props.alt} />
         ) : props.fallbackElement ? (
           props.fallbackElement
         ) : (
-          <span className=" text-lg font-semibold">
+          <span className="text-lg font-semibold">
             {props.alt[0].toUpperCase()}
           </span>
         )}
