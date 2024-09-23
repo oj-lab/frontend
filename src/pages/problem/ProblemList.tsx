@@ -41,7 +41,7 @@ const ProblemList: React.FC = () => {
           />
           <ProblemTable
             data={getProblemInfoList()}
-            showActions={false}
+            showAccepted={true}
             enableRouting
             className={
               getProblemInfoList().length === 1

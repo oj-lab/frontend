@@ -12,6 +12,7 @@ import { formatPercent } from "@/utils/unit";
 
 export interface ProblemTableProps {
   data: ProblemServiceModel.ProblemInfo[];
+  showAccepted?: boolean;
   showActions?: boolean;
   className?: string;
   enableRouting?: boolean;
@@ -29,7 +30,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         <table className="table" aria-label="Problem Table">
           <thead>
             <tr className="border-base-content/10">
-              <th key="accepted">{t("Accepted")}</th>
+              {props.showAccepted && <th key="accepted">{t("Accepted")}</th>}
               <th key="title">{t("Title")}</th>
               <th key="tags">{t("Tags")}</th>
               <th key="difficulty">{t("Difficulty")}</th>
@@ -49,11 +50,13 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
                   if (props.enableRouting) navigate(problemInfo.slug);
                 }}
               >
-                <td>
-                  {problemInfo.solved && (
-                    <CircleCheckIcon className="ml-3.5 w-6 fill-green-500 stroke-none" />
-                  )}
-                </td>
+                {props.showAccepted && (
+                  <td>
+                    {problemInfo.solved && (
+                      <CircleCheckIcon className="ml-3.5 w-6 fill-green-500 stroke-none" />
+                    )}
+                  </td>
+                )}
                 <th>{problemInfo.title}</th>
                 <td>
                   <ProblemTags tags={problemInfo.tags} />
