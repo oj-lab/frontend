@@ -12,11 +12,13 @@ import {
   getCurrentUser,
   postPasswordLogin,
   postSignOut,
+  getUserInfoList,
 } from "./handlers/user";
 import { getRankList } from "./handlers/rank";
 
 const restHandlers = [
   getCurrentUser,
+  getUserInfoList,
   postPasswordLogin,
   postSignOut,
   putProblem,

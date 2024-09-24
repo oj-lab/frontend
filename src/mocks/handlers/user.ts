@@ -1,4 +1,5 @@
 import { HttpResponse, http } from "msw";
+import * as UserMockData from "../data/user";
 
 export const getCurrentUser = http.get("/api/v1/user/current", (info) => {
   const authToken = info.cookies["auth-token"];
@@ -40,4 +41,23 @@ export const postSignOut = http.post("/api/v1/user/logout", async (info) => {
       "Set-Cookie": `auth-token=; Max-Age=0`,
     },
   });
+});
+
+export const getUserInfoList = http.get("/api/v1/user", (info) => {
+  const url = new URL(info.request.url);
+  const limit = url.searchParams.get("limit");
+  const offset = url.searchParams.get("offset");
+
+  let userInfoList = UserMockData.UserInfoList.slice(
+    Number(offset),
+    Number(offset) + Number(limit),
+  );
+
+  return new Response(
+    JSON.stringify({
+      total: UserMockData.UserInfoList.length,
+      list: userInfoList,
+    }),
+    { status: 200 },
+  );
 });

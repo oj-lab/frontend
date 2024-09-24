@@ -15,8 +15,8 @@ export const getProblemInfo = http.get(
   },
 );
 
-export const getProblemInfoList = http.get("/api/v1/problem", ({ request }) => {
-  const url = new URL(request.url);
+export const getProblemInfoList = http.get("/api/v1/problem", (info) => {
+  const url = new URL(info.request.url);
 
   const limit = url.searchParams.get("limit");
   const offset = url.searchParams.get("offset");

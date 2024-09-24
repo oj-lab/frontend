@@ -82,7 +82,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         </table>
       </div>
       <ConfirmDialog
-        id="delete_confirm_modal"
+        id="problem_delete_confirm_modal"
         title="Confirm"
         message="Are you sure to delete this problem?"
         onClickConfirm={() => {
@@ -136,7 +136,7 @@ const ProblemActions: React.FC<ActionsProps> = (props) => {
 
     props.onClickDelete();
     const modal = document.getElementById(
-      "delete_confirm_modal",
+      "problem_delete_confirm_modal",
     ) as HTMLDialogElement;
     modal?.showModal();
   };

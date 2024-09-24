@@ -6,6 +6,7 @@ import RankList from "./pages/RankList";
 const Problem = lazy(() => import("@/pages/problem/Problem"));
 const AdminProblemList = lazy(() => import("@/pages/admin/ProblemList"));
 const AdminCreateProblem = lazy(() => import("@/pages/admin/CreateProblem"));
+const AdminUserList = lazy(() => import("@/pages/admin/UserList"));
 const ProblemList = lazy(() => import("@/pages/problem/ProblemList"));
 const JudgeList = lazy(() => import("@/pages//judge/JudgeList"));
 const Judge = lazy(() => import("@/pages/judge/Judge"));
@@ -37,7 +38,7 @@ const Router: React.FC = () => {
               />
               <Route path="problems" element={<AdminProblemList />} />
               <Route path="problems/create" element={<AdminCreateProblem />} />
-              <Route path="users" element={<div>user</div>} />
+              <Route path="users" element={<AdminUserList />} />
             </Route>
           </Route>
         </Routes>

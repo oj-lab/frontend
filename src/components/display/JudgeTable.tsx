@@ -47,12 +47,10 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               <td>{judge.problem?.title}</td>
               <td className="flex items-center gap-3 py-2">
                 <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <UserAvatar
-                      alt={judge.user?.name}
-                      avatarUrl={judge.user?.avatarUrl}
-                    />
-                  </div>
+                  <UserAvatar
+                    alt={judge.user?.name}
+                    avatarUrl={judge.user?.avatarUrl}
+                  />
                 </div>
                 <span>{judge.user?.name}</span>
               </td>

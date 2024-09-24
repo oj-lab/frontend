@@ -36,12 +36,10 @@ const RankTable: React.FC<RankTableProps> = (props) => {
               <th>{rank.rank}</th>
               <td className="flex items-center gap-3 py-2">
                 <div className="avatar">
-                  <div className="w-8 rounded-full">
-                    <UserAvatar
-                      alt={rank.user?.name}
-                      avatarUrl={rank.user?.avatarUrl}
-                    />
-                  </div>
+                  <UserAvatar
+                    alt={rank.user?.name}
+                    avatarUrl={rank.user?.avatarUrl}
+                  />
                 </div>
                 <span>{rank.user?.name}</span>
               </td>
