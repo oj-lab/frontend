@@ -3,101 +3,113 @@ import { redirectToOAuthGitHub, postPasswordLogin } from "@/apis/auth";
 import GitHubIcon from "@/components/display/icons/GitHubIcon";
 import EyeIcon from "@/components/display/icons/tabler/EyeIcon";
 import EyeClosedIcon from "@/components/display/icons/tabler/EyeClosedIcon";
-
-const background = `${import.meta.env.BASE_URL}images/loginBackground.webp`;
+import OJLabIcon from "@/components/display/icons/OJLabIcon";
+import PasswordIcon from "@/components/display/icons/tabler/PasswordIcon";
+import OAuthIcon from "@/components/display/icons/tabler/OauthIcon";
 
 const Login: React.FC = () => {
   const [showPassaword, setShowPassword] = React.useState<boolean>(false);
   const [account, setAccount] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
+  const [loginMode, setLoginMode] = React.useState<"oauth" | "password">(
+    "oauth",
+  );
 
   const toggleShowPassword = () => {
     setShowPassword(!showPassaword);
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4">
-      <div className="max-w-sm">
-        <img src={background} alt="BackgroundImage" />
+    <div className="flex flex-col items-center justify-center gap-4 bg-base-100 p-12">
+      <div className="flex flex-col">
+        <OJLabIcon className="h-48 w-auto" />
+        <h1 className="mb-4 mt-[-24px] self-center text-2xl font-bold">
+          Welcome to OJ LAB!
+        </h1>
       </div>
 
-      <div className="flex w-1/3 max-w-sm flex-col gap-4">
-        <div className="flex items-center justify-center gap-4">
-          <label className="font-semibold">Sign in with</label>
-          <button
-            type="button"
-            className="centermx-1 h-9 w-9 rounded-full hover:shadow-[0_0px_24px_-4px_#999999]"
-            onClick={redirectToOAuthGitHub}
-          >
-            <GitHubIcon className="fill-base-content" />
+      <div className="flex max-w-sm flex-col gap-4">
+        {loginMode === "oauth" ? (
+          <button className="btn btn-outline" onClick={redirectToOAuthGitHub}>
+            <GitHubIcon className="w-8 fill-current" />
+            Sign in with GitHub
           </button>
-        </div>
-
-        <div className="flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-neutral-300 after:mt-0.5 after:flex-1 after:border-t after:border-neutral-300">
-          <p className="mx-4 text-center font-semibold text-slate-500">Or</p>
-        </div>
-
-        <div className="flex flex-col gap-2">
-          <label className="input input-bordered flex items-center gap-2">
-            <input
-              className="grow"
-              type="text"
-              placeholder="Username"
-              onChange={(e) => setAccount(e.target.value)}
-            />
-          </label>
-          <label className="input input-bordered flex items-center gap-2">
-            <input
-              className="grow"
-              type={showPassaword ? "text" : "password"}
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="current-password"
-            />
+        ) : (
+          <>
+            <label className="input input-sm input-bordered flex items-center gap-2">
+              <input
+                className="grow"
+                type="text"
+                placeholder="Username"
+                onChange={(e) => setAccount(e.target.value)}
+              />
+            </label>
+            <label className="input input-sm input-bordered flex items-center gap-2">
+              <input
+                className="grow"
+                type={showPassaword ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="current-password"
+              />
+              <button
+                className="btn btn-circle btn-ghost btn-xs"
+                onClick={toggleShowPassword}
+              >
+                {showPassaword ? (
+                  <EyeIcon className="h-4 w-4" />
+                ) : (
+                  <EyeClosedIcon className="h-4 w-4" />
+                )}
+              </button>
+            </label>
             <button
-              className="btn btn-circle btn-ghost btn-sm"
-              onClick={toggleShowPassword}
+              className="btn btn-neutral btn-active btn-sm btn-block"
+              type="submit"
+              onClick={() => {
+                postPasswordLogin(account, password).then((res) => {
+                  console.log(res);
+                  window.location.href = import.meta.env.BASE_URL;
+                });
+              }}
             >
-              {showPassaword ? (
-                <EyeIcon className="h-6 w-6" />
-              ) : (
-                <EyeClosedIcon className="h-6 w-6" />
-              )}
+              Login
             </button>
-          </label>
-        </div>
+          </>
+        )}
 
-        <div className="flex justify-between text-sm font-semibold">
-          <label className="flex cursor-pointer items-center gap-1 text-slate-500 hover:text-slate-600">
-            <input
-              type="checkbox"
-              defaultChecked
-              className="checkbox checkbox-xs"
-            />
-            <span className="select-none">Remember Me</span>
-          </label>
-          <button className="btn btn-link h-6 min-h-6 p-0 ">
-            Forgot Password?
-          </button>
-        </div>
-
-        <button
-          className="btn btn-neutral btn-active btn-block"
-          type="submit"
-          onClick={() => {
-            postPasswordLogin(account, password).then((res) => {
-              console.log(res);
-              window.location.href = import.meta.env.BASE_URL;
-            });
-          }}
-        >
-          Login
-        </button>
-
-        <div className="text-left text-sm font-semibold text-slate-500">
-          Don&apos;t have an account?{" "}
-          <button className="btn btn-link h-6 min-h-6 p-0 text-error">
-            Register
+        <div className="mt-2 flex flex-col gap-2">
+          <button
+            className="btn btn-ghost btn-xs flex flex-col content-start gap-2 p-1 text-sm"
+            onClick={() => {
+              if (loginMode === "oauth") {
+                setLoginMode("password");
+              }
+              if (loginMode === "password") {
+                setLoginMode("oauth");
+              }
+            }}
+          >
+            {loginMode === "oauth" ? (
+              <>
+                <PasswordIcon className="h-4 w-auto text-slate-500" />
+                <div>
+                  <span className="!text-xs !font-normal text-slate-500">
+                    Password Login
+                  </span>
+                  <span className="!text-xs !font-normal text-slate-400">
+                    &ensp;(Internal)
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                <OAuthIcon className="h-4 w-auto text-slate-500" />
+                <span className="text-start !text-xs !font-normal text-slate-500">
+                  OAuth Login
+                </span>
+              </>
+            )}
           </button>
         </div>
       </div>

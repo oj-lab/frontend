@@ -114,7 +114,7 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
         />
         <div className="h-full border-r border-base-content/10 bg-base-100">
           <div className="flex flex-row px-6 py-2">
-            <OJLabIcon />
+            <OJLabIcon className="mr-2 h-12 w-auto gap-4" />
             <h1 className="ml-2 self-center text-xl font-bold">OJ LAB</h1>
           </div>
           <PageMenu sections={getPageMenuSections(isAdmin)} />
