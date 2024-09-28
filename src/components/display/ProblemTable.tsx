@@ -30,7 +30,11 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
         <table className="table" aria-label="Problem Table">
           <thead>
             <tr className="border-base-content/10">
-              {props.showAccepted && <th key="accepted">{t("Accepted")}</th>}
+              {props.showAccepted && (
+                <th key="accepted" className="w-1/12">
+                  {t("Accepted")}
+                </th>
+              )}
               <th key="title">{t("Title")}</th>
               <th key="tags">{t("Tags")}</th>
               <th key="difficulty">{t("Difficulty")}</th>
@@ -43,7 +47,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
               <tr
                 key={problemInfo.slug}
                 className={joinClasses(
-                  "border-base-content/10",
+                  "w-1/6 border-base-content/10",
                   props.enableRouting && "hover cursor-pointer",
                 )}
                 onClick={() => {
