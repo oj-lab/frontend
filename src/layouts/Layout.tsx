@@ -12,6 +12,7 @@ import {
 import { messageMapSelector } from "@/store/selectors";
 import { joinClasses } from "@/utils/common";
 import { useTranslation } from "react-i18next";
+import Footer from "./Footer";
 
 export interface LayoutProps {
   children?: React.ReactNode;
@@ -47,6 +48,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
             <PageBreadcrumbs />
             {props.children}
             {!props.children && <Outlet />}
+            <Footer />
           </main>
           <div className="toast toast-center toast-top w-1/3 gap-1">
             {Object.keys(messageMap).map((key, idx) => {

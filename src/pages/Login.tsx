@@ -92,13 +92,14 @@ const Login: React.FC = () => {
           >
             {loginMode === "oauth" ? (
               <>
-                <PasswordIcon className="h-4 w-auto text-slate-500" />
+                <PasswordIcon className="h-4 w-auto text-base-content/80" />
                 <div>
-                  <span className="!text-xs !font-normal text-slate-500">
+                  <span className="!text-xs !font-normal text-base-content/80">
                     Password Login
                   </span>
-                  <span className="!text-xs !font-normal text-slate-400">
-                    &ensp;(Internal)
+                  <span className="!text-xs !font-normal text-base-content/60">
+                    {" "}
+                    (Internal)
                   </span>
                 </div>
               </>
