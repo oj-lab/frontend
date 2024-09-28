@@ -3,7 +3,6 @@ import * as ProblemServiceModel from "@/models/service/problem";
 import * as ProblemService from "@/apis/problem";
 import { useDispatch } from "react-redux";
 import { AddMessageSagaPattern } from "@/store/sagas/message";
-import { TrimMarkdownTitlePipe } from "@/pipes/problem";
 
 export const useProblem = (slug: string, fallback?: () => void) => {
   const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
@@ -19,7 +18,6 @@ export const useProblem = (slug: string, fallback?: () => void) => {
   useEffect(() => {
     ProblemService.getProblem(slug)
       .then((res) => {
-        res.description = TrimMarkdownTitlePipe(res.description);
         setProblem(res);
       })
       .catch((err) => {
