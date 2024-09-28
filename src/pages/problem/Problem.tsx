@@ -43,11 +43,10 @@ const Problem: React.FC = () => {
       )}
 
       <div className="h-fit rounded border border-base-content/10 bg-base-100 p-6">
-        <h1 className="mb-8 text-4xl font-bold">{getProblem()?.title}</h1>
-        <MarkdownRender
-          content={getProblem()?.description || ""}
-          rehypePlugin="rehypeKatex"
-        />
+        <h1 className="mb-8 text-center text-4xl font-bold">
+          {getProblem()?.title}
+        </h1>
+        <MarkdownRender content={getProblem()?.description || ""} />
       </div>
 
       <p className="text-lg font-bold">Your Solution</p>

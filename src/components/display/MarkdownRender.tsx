@@ -6,10 +6,10 @@ import copy from "copy-to-clipboard";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeReact from "rehype-react";
 import { joinClasses } from "@/utils/common";
+import rehypeRaw from "rehype-raw";
 
 interface MarkdownRenderProps {
   content: string;
-  rehypePlugin?: "rehypeKatex" | "rehypeReact";
 }
 
 const SyntaxHighlighter = lazy(() =>
@@ -19,19 +19,12 @@ const SyntaxHighlighter = lazy(() =>
 );
 
 const MarkdownRender: React.FC<MarkdownRenderProps> = (props) => {
-  const getRehypePlugins = () =>
-    props.rehypePlugin === undefined
-      ? []
-      : props.rehypePlugin === "rehypeKatex"
-        ? [rehypeKatex]
-        : [rehypeReact];
-
   return (
     <ReactMarkdown
       className="prose h-full max-w-full"
       children={props.content}
       remarkPlugins={[remarkMath]}
-      rehypePlugins={getRehypePlugins()}
+      rehypePlugins={[rehypeKatex, rehypeRaw, rehypeReact]}
       components={{
         code(props) {
           const match = /language-(\w+)/.exec(props.className || "");
@@ -44,6 +37,9 @@ const MarkdownRender: React.FC<MarkdownRenderProps> = (props) => {
               {props.children}
             </code>
           );
+        },
+        hr() {
+          return <hr className="my-4" />;
         },
       }}
     />
