@@ -8,7 +8,9 @@ export const useRankList = () => {
   useEffect(() => {
     RankService.getRankList()
       .then((res) => {
-        setRankList(res.list);
+        if (res.list) {
+          setRankList(res.list);
+        }
       })
       .catch((err) => {
         console.log(err);
