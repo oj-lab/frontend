@@ -59,7 +59,7 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
                   <LanguageIcon language={judge.language} />
                 </div>
               </td>
-              <td>{new Date(judge.submitTime).toLocaleString()}</td>
+              <td>{new Date(judge.createAt).toLocaleString()}</td>
               <td>
                 <div
                   className={joinClasses(
