@@ -9,8 +9,13 @@ import ProblemSearch, {
 const countPerPageSelections = [10, 25, 50];
 
 const ProblemList: React.FC = () => {
-  const { getProblemInfoList, getPageCount, setPagenation } =
-    useProblemInfoList();
+  const {
+    getProblemInfoList,
+    getPageCount,
+    setPagenation,
+    setSearch,
+    refreshProblemInfoList,
+  } = useProblemInfoList();
   const [countPerPage, setCountPerPage] = React.useState(
     countPerPageSelections[0],
   );
@@ -21,8 +26,7 @@ const ProblemList: React.FC = () => {
 
   useEffect(() => {
     setPagenation(countPerPage, page * countPerPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countPerPage, page]);
+  }, [countPerPage, page, setPagenation]);
 
   return (
     <div className="flex w-full flex-auto flex-col gap-8 sm:flex-row">
@@ -35,7 +39,10 @@ const ProblemList: React.FC = () => {
             onChangeDifficulty={(d) => {
               setSearchingDifficulty(d);
             }}
-            onSearch={() => {}}
+            onSearch={() => {
+              setSearch(searchingTitle, searchingDifficulty);
+              refreshProblemInfoList();
+            }}
             title={searchingTitle}
             difficulty={searchingDifficulty}
           />

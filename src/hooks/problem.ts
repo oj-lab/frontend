@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import * as ProblemServiceModel from "@/models/service/problem";
 import * as ProblemService from "@/apis/problem";
 import { useDispatch } from "react-redux";
@@ -52,8 +52,13 @@ export const useProblemInfoList = () => {
   const [titleQuery, setTitleQuery] = useState<string>("");
   const [difficultyQuery, setDifficultyQuery] = useState<string>("");
 
-  useEffect(() => {
-    ProblemService.getProblemInfoList(limit, offset)
+  const getProblemInfoListFromServer = useCallback(() => {
+    ProblemService.getProblemInfoList(
+      limit,
+      offset,
+      titleQuery,
+      difficultyQuery,
+    )
       .then((res) => {
         setProblemList(res.list);
         setTotal(res.total);
@@ -62,6 +67,16 @@ export const useProblemInfoList = () => {
         console.log(err);
       });
   }, [limit, offset, titleQuery, difficultyQuery]);
+
+  useEffect(() => {
+    getProblemInfoListFromServer();
+  }, [
+    limit,
+    offset,
+    titleQuery,
+    difficultyQuery,
+    getProblemInfoListFromServer,
+  ]);
 
   function getProblemInfoList() {
     return problemList;
@@ -81,5 +96,15 @@ export const useProblemInfoList = () => {
     setDifficultyQuery(difficultyQuery);
   }
 
-  return { getProblemInfoList, getPageCount, setPagenation, setSearch };
+  function refreshProblemInfoList() {
+    getProblemInfoListFromServer();
+  }
+
+  return {
+    getProblemInfoList,
+    getPageCount,
+    setPagenation,
+    setSearch,
+    refreshProblemInfoList,
+  };
 };

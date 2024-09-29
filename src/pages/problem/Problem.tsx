@@ -5,8 +5,9 @@ import CodeEditor from "@/components/input/CodeEditor";
 import MarkdownRender from "@/components/display/MarkdownRender";
 import { useProblem } from "@/hooks/problem";
 import { useRunJudge } from "@/hooks/judge";
+import { isGhPages, isMock } from "@/utils/environment";
 
-const defaultCode = `#include <iostream>
+const mockDefaultCode = `#include <iostream>
 using namespace std;
 
 int main() {
@@ -65,7 +66,7 @@ const Problem: React.FC = () => {
       >
         <CodeEditor
           className="h-full overflow-hidden rounded"
-          value={defaultCode}
+          value={isMock() || isGhPages() ? mockDefaultCode : ""}
           onChange={(value: string) => {
             setSrc(value);
           }}
