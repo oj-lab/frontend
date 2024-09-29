@@ -35,7 +35,7 @@ const ProblemSearch: React.FC<ProblemSearchProps> = (props): JSX.Element => {
         <div>
           <input
             className="input input-sm join-item border-base-content/10"
-            placeholder={t("Input Title")}
+            placeholder={t("input title")}
             value={props.title}
             onChange={(e) => props.onChangeTitle(e.target.value)}
           />

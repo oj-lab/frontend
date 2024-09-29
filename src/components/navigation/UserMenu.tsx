@@ -7,6 +7,7 @@ import { joinClasses } from "@/utils/common";
 import { userInfoSelector } from "@/store/selectors";
 import UserAvatar from "@/components/display/UserAvatar";
 import UserCircleIcon from "../display/icons/tabler/UserFilledIcon";
+import { useTranslation } from "react-i18next";
 
 export interface UserMenuAction {
   name: string;
@@ -25,6 +26,7 @@ export interface UserMenuProps {
  */
 const UserMenu: React.FC<UserMenuProps> = (props) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [, , removeCookie] = useCookies(["auth-token"]);
   const [open, setOpen] = React.useState(false);
   const userInfo = useSelector(userInfoSelector);
@@ -74,13 +76,13 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
           {isLogined && (
             <div className="flex flex-col items-start">
               <span>{userInfo?.name}</span>
-              <span className="text-xs font-thin">Welcome!</span>
+              <span className="text-xs font-thin">{t("Welcome!")}</span>
             </div>
           )}
           {!isLogined && (
             <div className="flex flex-col items-start">
-              <span>Login</span>
-              <span className="text-xs font-thin">or Register</span>
+              <span>{t("Login")}</span>
+              <span className="text-xs font-thin">{t("or Register")}</span>
             </div>
           )}
         </div>
@@ -101,7 +103,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
                   window.location.href = import.meta.env.BASE_URL;
                 }}
               >
-                Logout
+                {t("Logout")}
               </span>
             </li>
           )}
@@ -114,7 +116,7 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
                   navigate("/login");
                 }}
               >
-                Login
+                {t("Login")}
               </span>
             </li>
           )}

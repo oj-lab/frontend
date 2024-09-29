@@ -13,6 +13,19 @@ const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
 
+  // Get translation language setting from local storage
+  React.useEffect(() => {
+    const language = localStorage.getItem("i18nextLng");
+    if (language)
+      LANGUAGE_SELECTIONS.some((item) => {
+        if (item.value === language) {
+          changeLanguage(language);
+          return true;
+        }
+        return false;
+      });
+  }, []);
+
   React.useEffect(() => {
     document?.activeElement instanceof HTMLElement &&
       document.activeElement.blur();
@@ -57,6 +70,7 @@ const LanguageMenu: React.FC<LanguageMenuProps> = (props) => {
                 className="rounded"
                 onClick={() => {
                   changeLanguage(item.value);
+                  localStorage.setItem("i18nextLng", item.value);
                   setOpen(false);
                 }}
               >
