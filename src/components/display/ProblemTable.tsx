@@ -88,7 +88,7 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
       <ConfirmDialog
         id="problem_delete_confirm_modal"
         title="Confirm"
-        message="Are you sure to delete this problem?"
+        message={t("Are you sure to delete this problem?")}
         onClickConfirm={() => {
           ProblemService.deleteProblem(deletingSlug).then((_) => {
             window.location.reload();
@@ -100,14 +100,16 @@ const ProblemTable: React.FC<ProblemTableProps> = (props) => {
 };
 
 const ProblemTags: React.FC<{ tags: { name: string }[] }> = (props) => {
+  const { t } = useTranslation();
+
   return (
-    <div className="space-x-2">
+    <div>
       {props.tags.map((tag) => (
         <div
           key={tag.name}
-          className="badge border-0 bg-base-300 font-semibold text-base-content/80"
+          className="badge m-1 border-0 bg-base-300 font-semibold text-base-content/80"
         >
-          {tag.name}
+          {t(tag.name)}
         </div>
       ))}
     </div>
@@ -115,6 +117,8 @@ const ProblemTags: React.FC<{ tags: { name: string }[] }> = (props) => {
 };
 
 const DifficultyBadge: React.FC<{ difficulty: string }> = (props) => {
+  const { t } = useTranslation();
+
   return (
     <div
       className={joinClasses(
@@ -124,7 +128,7 @@ const DifficultyBadge: React.FC<{ difficulty: string }> = (props) => {
         props.difficulty === "hard" && "bg-error/10 text-error",
       )}
     >
-      {props.difficulty}
+      {t(props.difficulty)}
     </div>
   );
 };

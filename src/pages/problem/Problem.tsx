@@ -11,6 +11,7 @@ import { AddMessageSagaPattern } from "@/store/sagas/message";
 import { userInfoSelector } from "@/store/selectors";
 import { joinClasses } from "@/utils/common";
 import { t } from "i18next";
+import ConfirmDialog from "@/components/control/ConfirmDialog";
 
 const mockDefaultCode = `#include <iostream>
 using namespace std;
@@ -55,7 +56,7 @@ const Problem: React.FC = () => {
         }}
       >
         <option value={"cpp"}>C++</option>
-        <option value={"python"}>Python</option>
+        {/* <option value={"python"}>Python</option> */}
       </select>
       <div
         className="flex h-96 flex-col gap-4 rounded border border-base-content/10"
@@ -85,25 +86,39 @@ const Problem: React.FC = () => {
               "btn btn-primary btn-sm rounded",
               userInfo ? "" : "btn-disabled",
             )}
-            onClick={() => {
-              runJudge((judgeInfo) => {
-                dispatch({
-                  type: AddMessageSagaPattern,
-                  payload: {
-                    id: `judge-submitted-${judgeInfo.UID}`,
-                    content:
-                      t("Judge") + " " + judgeInfo.UID + " " + t("submitted"),
-                    duration: 3000,
-                    level: "success",
-                  },
-                });
-              });
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+
+              const modal = document.getElementById(
+                "judge_submit_confirm_modal",
+              ) as HTMLDialogElement;
+              modal?.showModal();
             }}
           >
             {t("Submit")}
           </button>
         </div>
       </div>
+      <ConfirmDialog
+        id="judge_submit_confirm_modal"
+        title="Confirm"
+        message={t("Are you ready for submission?")}
+        onClickConfirm={() => {
+          runJudge((judgeInfo) => {
+            dispatch({
+              type: AddMessageSagaPattern,
+              payload: {
+                id: `judge-submitted-${judgeInfo.UID}`,
+                content:
+                  t("Judge") + " " + judgeInfo.UID + " " + t("submitted"),
+                duration: 3000,
+                level: "success",
+              },
+            });
+          });
+        }}
+      />
     </div>
   );
 };

@@ -50,7 +50,7 @@ const ProblemSearch: React.FC<ProblemSearchProps> = (props): JSX.Element => {
           )
         }
       >
-        <option value="all">{t("all")}</option>
+        <option value="all">{t("all difficulty")}</option>
         <option value="easy">{t("easy")}</option>
         <option value="medium">{t("medium")}</option>
         <option value="hard">{t("hard")}</option>

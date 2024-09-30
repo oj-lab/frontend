@@ -6,8 +6,13 @@ import EyeClosedIcon from "@/components/display/icons/tabler/EyeClosedIcon";
 import OJLabIcon from "@/components/display/icons/OJLabIcon";
 import PasswordIcon from "@/components/display/icons/tabler/PasswordIcon";
 import OAuthIcon from "@/components/display/icons/tabler/OauthIcon";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { AddMessageSagaPattern } from "@/store/sagas/message";
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [showPassaword, setShowPassword] = React.useState<boolean>(false);
   const [account, setAccount] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
@@ -20,11 +25,11 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 bg-base-100 p-12">
+    <div className="flex flex-auto flex-col items-center justify-center gap-4 bg-base-100 p-12">
       <div className="flex flex-col">
         <OJLabIcon className="h-48 w-auto" />
         <h1 className="mb-4 mt-[-24px] self-center text-2xl font-bold">
-          Welcome to OJ LAB!
+          {t("Welcome to OJ LAB!")}
         </h1>
       </div>
 
@@ -32,7 +37,7 @@ const Login: React.FC = () => {
         {loginMode === "oauth" ? (
           <button className="btn btn-outline" onClick={redirectToOAuthGitHub}>
             <GitHubIcon className="w-8 fill-current" />
-            Sign in with GitHub
+            {t("Sign in with GitHub")}
           </button>
         ) : (
           <>
@@ -40,7 +45,7 @@ const Login: React.FC = () => {
               <input
                 className="grow"
                 type="text"
-                placeholder="Username"
+                placeholder={t("Account")}
                 onChange={(e) => setAccount(e.target.value)}
               />
             </label>
@@ -48,7 +53,7 @@ const Login: React.FC = () => {
               <input
                 className="grow"
                 type={showPassaword ? "text" : "password"}
-                placeholder="Password"
+                placeholder={t("Password")}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
               />
@@ -67,13 +72,38 @@ const Login: React.FC = () => {
               className="btn btn-neutral btn-active btn-sm btn-block"
               type="submit"
               onClick={() => {
-                postPasswordLogin(account, password).then((res) => {
-                  console.log(res);
-                  window.location.href = import.meta.env.BASE_URL;
-                });
+                if (!account) {
+                  dispatch({
+                    type: AddMessageSagaPattern,
+                    payload: {
+                      id: "login-error",
+                      content: `${t("Please input your account")}`,
+                      duration: 3000,
+                      level: "warning",
+                    },
+                  });
+                  return;
+                }
+                postPasswordLogin(account, password)
+                  .then((res) => {
+                    console.log(res);
+                    window.location.href = import.meta.env.BASE_URL;
+                  })
+                  .catch((err) => {
+                    dispatch({
+                      type: AddMessageSagaPattern,
+                      payload: {
+                        id: "login-error",
+                        content: `${t("Failed login with password")}`,
+                        duration: 3000,
+                        level: "error",
+                        err: err.toString(),
+                      },
+                    });
+                  });
               }}
             >
-              Login
+              {t("Login")}
             </button>
           </>
         )}
@@ -95,11 +125,10 @@ const Login: React.FC = () => {
                 <PasswordIcon className="h-4 w-auto text-base-content/80" />
                 <div>
                   <span className="!text-xs !font-normal text-base-content/80">
-                    Password Login
-                  </span>
+                    {t("Password Login")}
+                  </span>{" "}
                   <span className="!text-xs !font-normal text-base-content/60">
-                    {" "}
-                    (Internal)
+                    {`(${t("Internal")})`}
                   </span>
                 </div>
               </>
@@ -107,7 +136,7 @@ const Login: React.FC = () => {
               <>
                 <OAuthIcon className="h-4 w-auto text-slate-500" />
                 <span className="text-start !text-xs !font-normal text-slate-500">
-                  OAuth Login
+                  {t("OAuth Login")}
                 </span>
               </>
             )}

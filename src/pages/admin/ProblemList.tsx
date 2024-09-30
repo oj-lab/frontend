@@ -29,7 +29,7 @@ const ProblemList: React.FC = () => {
 
   return (
     <div className="card card-bordered flex w-full flex-col rounded border-base-content/10 bg-base-100">
-      <div className="flex flex-row items-center justify-between">
+      <div className="flex flex-row items-center justify-between ">
         <ProblemSearch
           onChangeTitle={(t) => {
             setSearchingTitle(t);
