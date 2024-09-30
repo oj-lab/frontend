@@ -18,6 +18,9 @@ const ZH_CN_TRANSLATIONS: Resource = {
     Search: "搜索",
     Login: "登录",
     Logout: "登出",
+    Submit: "提交",
+    Copy: "复制",
+
     "or Register": "或注册",
     "Welcome!": "欢迎！",
     "input title": "输入标题",
@@ -26,7 +29,10 @@ const ZH_CN_TRANSLATIONS: Resource = {
     "Submit Time": "提交时间",
     "Accept Count": "通过数",
     "Accept Rate": "通过率",
+    "Your solution": "你的解答",
     "Just look at yourself": "只看自己",
+    "Click and confirm submission": "点击并确认提交",
+    "Please login first": "请先登录",
 
     Theme: "主题",
 

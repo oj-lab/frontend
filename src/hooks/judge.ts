@@ -24,30 +24,24 @@ export const useJudge = (uid: string) => {
 export const useRunJudge = (slug: string) => {
   const [src, setSrc] = useState<string>("");
   const [src_language, setSrcLanguage] = useState<string>("");
-  const [verdicts, setVerdicts] = useState<JudgeServiceModel.JudgeVerdict[]>(
-    [],
-  );
 
-  function runJudge(postJudge: () => void) {
+  function runJudge(
+    afterJudgePosted: (judgeInfo: JudgeServiceModel.JudgeInfo) => void,
+  ) {
     JudgeService.postJudge(slug, src, src_language)
       .then((res) => {
-        setVerdicts(res);
-        postJudge();
+        afterJudgePosted(res);
       })
       .catch((err) => {
         console.log(err);
       });
   }
 
-  function getVerdicts() {
-    return verdicts;
-  }
-
   function getSrcLanguage() {
     return src_language;
   }
 
-  return { runJudge, getVerdicts, setSrc, setSrcLanguage, getSrcLanguage };
+  return { runJudge, setSrc, setSrcLanguage, getSrcLanguage };
 };
 
 export const useJudgeList = () => {

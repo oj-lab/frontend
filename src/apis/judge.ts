@@ -8,7 +8,7 @@ export async function postJudge(slug: string, code: string, language: string) {
   };
   let data = JSON.stringify(body);
 
-  let res = await axiosClient.post<JudgeServiceModel.JudgeVerdict[]>(
+  let res = await axiosClient.post<JudgeServiceModel.JudgeInfo>(
     `/api/v1/problem/${slug}/judge`,
     data,
   );

@@ -7,6 +7,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeReact from "rehype-react";
 import { joinClasses } from "@/utils/common";
 import rehypeRaw from "rehype-raw";
+import { useTranslation } from "react-i18next";
 
 interface MarkdownRenderProps {
   content: string;
@@ -53,6 +54,8 @@ interface CodeBlockProps {
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = (props) => {
+  const { t } = useTranslation();
+
   const handleCopy = () => {
     copy(props.value);
   };
@@ -63,7 +66,7 @@ const CodeBlock: React.FC<CodeBlockProps> = (props) => {
         onClick={handleCopy}
         className="btn btn-xs absolute right-0 top-[-1.25px] rounded"
       >
-        Copy
+        {t("Copy")}
       </button>
       {props.language === "text" ? (
         <code>{props.value}</code>

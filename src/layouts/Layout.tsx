@@ -5,10 +5,7 @@ import PageBreadcrumbs from "@/components/navigation/PageBreadcrumbs";
 import { useEffect } from "react";
 import { getCurrentUserAction } from "@/store/sagas/user";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  AddMessageSagaPattern,
-  RemoveMessageSagaPattern,
-} from "@/store/sagas/message";
+import { RemoveMessageSagaPattern } from "@/store/sagas/message";
 import { messageMapSelector } from "@/store/selectors";
 import { joinClasses } from "@/utils/common";
 import { useTranslation } from "react-i18next";
@@ -22,17 +19,6 @@ const Layout: React.FC<LayoutProps> = (props) => {
   let { t } = useTranslation();
   let dispatch = useDispatch();
   let messageMap = useSelector(messageMapSelector);
-
-  useEffect(() => {
-    dispatch({
-      type: AddMessageSagaPattern,
-      payload: {
-        id: "welcome",
-        content: "🥰 Welcome to OJ Lab!",
-        duration: 3000,
-      },
-    });
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(getCurrentUserAction);
