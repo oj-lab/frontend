@@ -14,8 +14,7 @@ const UserList: React.FC = () => {
 
   useEffect(() => {
     setPagenation(countPerPage, page * countPerPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countPerPage, page]);
+  }, [countPerPage, page, setPagenation]);
 
   return (
     <div className="card card-bordered flex w-full flex-col rounded border-base-content/10 bg-base-100">

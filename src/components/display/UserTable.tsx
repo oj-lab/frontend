@@ -6,6 +6,9 @@ import ConfirmDialog from "../control/ConfirmDialog";
 import TrashIcon from "./icons/tabler/TrashIcon";
 import { joinClasses } from "@/utils/common";
 import UserCogIcon from "./icons/tabler/UserCogIcon";
+import * as UserService from "@/apis/user";
+import { useSelector } from "react-redux";
+import { userInfoSelector } from "@/store/selectors";
 
 export interface UserTableProps {
   data: UserServiceModel.UserInfo[];
@@ -15,6 +18,9 @@ export interface UserTableProps {
 
 const UserTable: React.FC<UserTableProps> = (props) => {
   const { t } = useTranslation();
+  const [deletingAccount, setDeletingAccount] = React.useState<string | null>(
+    null,
+  );
 
   return (
     <>
@@ -47,7 +53,12 @@ const UserTable: React.FC<UserTableProps> = (props) => {
                 </td>
                 {props.showActions && (
                   <td className="p-2">
-                    <UserActions userInfo={userInfo} onClickDelete={() => {}} />
+                    <UserActions
+                      userInfo={userInfo}
+                      onClickDelete={() => {
+                        setDeletingAccount(userInfo.account);
+                      }}
+                    />
                   </td>
                 )}
               </tr>
@@ -58,9 +69,17 @@ const UserTable: React.FC<UserTableProps> = (props) => {
       <ConfirmDialog
         id="user_delete_confirm_modal"
         title="Confirm"
-        message="Are you sure to delete this user?"
+        message={t("Are you sure to delete this user?")}
         onClickConfirm={() => {
-          window.location.reload();
+          if (deletingAccount) {
+            UserService.deleteUser(deletingAccount)
+              .then(() => {
+                window.location.reload();
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          }
         }}
       />
     </>
@@ -92,24 +111,50 @@ interface ActionsProps {
 }
 
 const UserActions: React.FC<ActionsProps> = (props) => {
+  const userInfo = useSelector(userInfoSelector);
+
   const onClickDelete = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
     props.onClickDelete();
     const modal = document.getElementById(
-      "delete_confirm_modal",
+      "user_delete_confirm_modal",
     ) as HTMLDialogElement;
     modal?.showModal();
   };
 
   return (
     <div className="flex space-x-1">
-      <button className="btn btn-square btn-ghost btn-sm rounded">
+      <button
+        className={joinClasses(
+          "btn btn-square btn-ghost btn-sm rounded",
+          (props.userInfo.roles?.includes("super") ||
+            props.userInfo.account === userInfo?.account) &&
+            "btn-disabled",
+        )}
+        onClick={() => {
+          if (props.userInfo.roles?.includes("admin")) {
+            UserService.revokeUserRole(props.userInfo.account, "admin").catch(
+              (err) => {
+                console.error(err);
+              },
+            );
+          } else if (!props.userInfo.roles?.includes("super")) {
+            UserService.grantUserRole(props.userInfo.account, "admin").catch(
+              (err) => {
+                console.error(err);
+              },
+            );
+          }
+          window.location.reload();
+        }}
+      >
         <UserCogIcon
           className={joinClasses(
             "h-5 w-5",
-            props.userInfo.roles?.includes("admin")
+            props.userInfo.roles?.includes("admin") ||
+              props.userInfo.roles?.includes("super")
               ? "text-success"
               : "text-base-content",
           )}

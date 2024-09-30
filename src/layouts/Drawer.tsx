@@ -36,7 +36,7 @@ const APPNavigation: PageMenuItem[] = [
 
 const AdminNavigation: PageMenuItem[] = [
   {
-    name: "Problem Packages",
+    name: "Problem Management",
     href: "/admin/problems",
     icon: <PackageIcon className="h-6 w-6 shrink-0" />,
   },
@@ -72,12 +72,14 @@ export const Drawer: React.FC<DrawerProps> = (props) => {
   const dispatch = useDispatch();
   const [open, setOpen] = React.useState<boolean>(true);
   const userInfo = useSelector(userInfoSelector);
-  const isAdmin = userInfo?.roles?.includes("admin") ?? false;
+  const isAdmin =
+    (userInfo?.roles?.includes("admin") ||
+      userInfo?.roles?.includes("super")) ??
+    false;
 
   useEffect(() => {
     dispatch(setIsDrawerOpen(open));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
+  }, [dispatch, open]);
 
   return (
     <div

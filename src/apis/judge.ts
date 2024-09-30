@@ -19,9 +19,14 @@ export async function postJudge(slug: string, code: string, language: string) {
   return res.data;
 }
 
-export async function getJudgeList(limit?: number, offset?: number) {
+export async function getJudgeList(
+  limit?: number,
+  offset?: number,
+  selfOnly?: boolean,
+) {
   limit = limit || 10;
   offset = offset || 0;
+  selfOnly = selfOnly || false;
 
   let res = await axiosClient.get<{
     total: number;
@@ -30,6 +35,7 @@ export async function getJudgeList(limit?: number, offset?: number) {
     params: {
       limit,
       offset,
+      self_only: selfOnly,
     },
   });
   if (res.status !== 200) {

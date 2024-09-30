@@ -7,8 +7,14 @@ import React, { useEffect } from "react";
 const countPerPageSelections = [10, 25, 50];
 
 const JudgeList: React.FC = () => {
-  const { getJudgeList, refreshJudgeList, getPageCount, setPagenation } =
-    useJudgeList();
+  const {
+    getJudgeList,
+    refreshJudgeList,
+    getPageCount,
+    setPagenation,
+    getSelfOnly,
+    setSelfOnly,
+  } = useJudgeList();
   const { t } = useTranslation();
   // useEvent();
   const refreshSeconds = 5;
@@ -33,15 +39,26 @@ const JudgeList: React.FC = () => {
 
   useEffect(() => {
     setPagenation(countPerPage, page * countPerPage);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [countPerPage, page]);
+  }, [countPerPage, page, setPagenation]);
 
   return (
-    <div className="flex w-full flex-auto flex-col gap-8 sm:flex-row">
+    <div className="flex w-full flex-auto flex-col gap-2">
+      <div>
+        <p className="text-xs">
+          {t(
+            "If you finish more than 10 problems, an additional badge will be given.",
+          )}
+        </p>
+      </div>
       <div className="h-fit w-full overflow-auto rounded border border-base-content/10 bg-base-100">
         <div className="flex items-center justify-between gap-2 px-4 pb-2 pt-4">
           <label className="label cursor-pointer p-0">
-            <input type="checkbox" className="toggle toggle-sm" />
+            <input
+              type="checkbox"
+              className="toggle toggle-sm"
+              checked={getSelfOnly()}
+              onChange={(e) => setSelfOnly(e.target.checked)}
+            />
             <span className="label-text ml-2">
               {t("Just look at yourself")}
             </span>

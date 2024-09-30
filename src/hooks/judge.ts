@@ -64,10 +64,11 @@ export const useJudgeList = () => {
   const [total, setTotal] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
+  const [selfOnly, setSelfOnly] = useState<boolean>(false);
   const [judgeList, setJudgeList] = useState<JudgeServiceModel.JudgeInfo[]>([]);
 
   const getJudgeListFromServer = () => {
-    JudgeService.getJudgeList()
+    JudgeService.getJudgeList(limit, offset, selfOnly)
       .then((res) => {
         setJudgeList(res.list);
         setTotal(res.total);
@@ -86,7 +87,7 @@ export const useJudgeList = () => {
       });
   };
 
-  useEffect(getJudgeListFromServer, [dispatch, limit, offset, t]);
+  useEffect(getJudgeListFromServer, [dispatch, limit, offset, t, selfOnly]);
 
   function getJudgeList() {
     return judgeList;
@@ -105,5 +106,16 @@ export const useJudgeList = () => {
     setOffset(offset);
   }
 
-  return { getJudgeList, refreshJudgeList, getPageCount, setPagenation };
+  function getSelfOnly() {
+    return selfOnly;
+  }
+
+  return {
+    getJudgeList,
+    refreshJudgeList,
+    getPageCount,
+    setPagenation,
+    getSelfOnly,
+    setSelfOnly,
+  };
 };
