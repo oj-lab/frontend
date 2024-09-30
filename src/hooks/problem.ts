@@ -3,13 +3,15 @@ import * as ProblemServiceModel from "@/models/service/problem";
 import * as ProblemService from "@/apis/problem";
 import { useDispatch } from "react-redux";
 import { AddMessageSagaPattern } from "@/store/sagas/message";
+import { useTranslation } from "react-i18next";
 
 export const useProblem = (slug: string, fallback?: () => void) => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [problem, setProblem] = useState<ProblemServiceModel.Problem | null>(
     null,
   );
   const fallbackRef = useRef(fallback);
-  const dispatch = useDispatch();
 
   useEffect(() => {
     fallbackRef.current = fallback;
@@ -25,9 +27,10 @@ export const useProblem = (slug: string, fallback?: () => void) => {
           type: AddMessageSagaPattern,
           payload: {
             id: "problem-fetch-error",
-            content: "Failed to fetch problem",
+            content: `${t("Failed to fetch problem")}`,
             duration: 3000,
             err: err.toString(),
+            level: "error",
           },
         });
         fallbackRef.current?.();
@@ -43,6 +46,8 @@ export const useProblem = (slug: string, fallback?: () => void) => {
 };
 
 export const useProblemInfoList = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [problemList, setProblemList] = useState<
     ProblemServiceModel.ProblemInfo[]
   >([]);
@@ -64,9 +69,18 @@ export const useProblemInfoList = () => {
         setTotal(res.total);
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: AddMessageSagaPattern,
+          payload: {
+            id: "problem-list-fetch-error",
+            content: `${t("Failed to fetch problem list")}`,
+            duration: 3000,
+            level: "error",
+            err: err.toString(),
+          },
+        });
       });
-  }, [limit, offset, titleQuery, difficultyQuery]);
+  }, [limit, offset, titleQuery, difficultyQuery, dispatch, t]);
 
   useEffect(() => {
     getProblemInfoListFromServer();

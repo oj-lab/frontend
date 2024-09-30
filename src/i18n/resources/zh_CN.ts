@@ -20,6 +20,9 @@ const ZH_CN_TRANSLATIONS: Resource = {
     Logout: "登出",
     Submit: "提交",
     Copy: "复制",
+    Theme: "主题",
+    Create: "创建",
+    Cancel: "取消",
 
     "or Register": "或注册",
     "Welcome!": "欢迎！",
@@ -34,11 +37,13 @@ const ZH_CN_TRANSLATIONS: Resource = {
     "Click and confirm submission": "点击并确认提交",
     "Please login first": "请先登录",
 
-    Theme: "主题",
+    "Failed to fetch rank list": "获取排名列表失败",
+    "Failed to fetch user list": "获取用户列表失败",
+    "Failed to fetch problem list": "获取题目列表失败",
+    "Failed to fetch problem": "获取题目失败",
+    "Failed to fetch judge list": "获取评测列表失败",
+    "Failed to fetch judge": "获取评测失败",
 
-    Create: "创建",
-    Cancel: "取消",
-    "Sign out": "登出",
     "Show actions": "显示操作",
 
     Raw: "原始",

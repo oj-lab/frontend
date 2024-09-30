@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import * as JudgeServiceModel from "@/models/service/judge";
 import * as JudgeService from "@/apis/judge";
+import { useDispatch } from "react-redux";
+import { AddMessageSagaPattern } from "@/store/sagas/message";
+import { useTranslation } from "react-i18next";
 
 export const useJudge = (uid: string) => {
   const [judge, setJudge] = useState<JudgeServiceModel.JudgeInfo>();
@@ -22,6 +25,8 @@ export const useJudge = (uid: string) => {
 };
 
 export const useRunJudge = (slug: string) => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [src, setSrc] = useState<string>("");
   const [src_language, setSrcLanguage] = useState<string>("");
 
@@ -33,7 +38,16 @@ export const useRunJudge = (slug: string) => {
         afterJudgePosted(res);
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: AddMessageSagaPattern,
+          payload: {
+            id: "judge-fetch-error",
+            content: `${t("Failed to fetch judge")}`,
+            duration: 3000,
+            level: "error",
+            err: err.toString(),
+          },
+        });
       });
   }
 
@@ -45,6 +59,8 @@ export const useRunJudge = (slug: string) => {
 };
 
 export const useJudgeList = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [total, setTotal] = useState<number>(0);
   const [limit, setLimit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
@@ -57,11 +73,20 @@ export const useJudgeList = () => {
         setTotal(res.total);
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: AddMessageSagaPattern,
+          payload: {
+            id: "judge-list-fetch-error",
+            content: `${t("Failed to fetch judge list")}`,
+            duration: 3000,
+            level: "error",
+            err: err.toString(),
+          },
+        });
       });
   };
 
-  useEffect(getJudgeListFromServer, [limit, offset]);
+  useEffect(getJudgeListFromServer, [dispatch, limit, offset, t]);
 
   function getJudgeList() {
     return judgeList;

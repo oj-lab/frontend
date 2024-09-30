@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import * as RankServiceModel from "@/models/service/rank";
 import * as RankService from "@/apis/rank";
+import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { AddMessageSagaPattern } from "@/store/sagas/message";
 
 export const useRankList = () => {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
   const [rankList, setRankList] = useState<RankServiceModel.RankInfo[]>([]);
 
   useEffect(() => {
@@ -13,11 +18,18 @@ export const useRankList = () => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: AddMessageSagaPattern,
+          payload: {
+            id: "rank-fetch-error",
+            content: `${t("Failed to fetch rank list")}`,
+            duration: 3000,
+            level: "error",
+            err: err.toString(),
+          },
+        });
       });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch, t]);
 
   function getRankList() {
     return rankList;
