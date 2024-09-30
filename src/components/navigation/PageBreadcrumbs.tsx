@@ -7,7 +7,7 @@ const PageBreadcrumbs: React.FC = () => {
   let paths = location.pathname.split("/").filter((x) => x);
 
   return (
-    <div className="breadcrumbs overflow-visible text-sm">
+    <div className="breadcrumbs overflow-visible p-0 text-sm">
       <ul>
         {paths.map((path, index) => {
           const url = `/${paths.slice(0, index + 1).join("/")}`;

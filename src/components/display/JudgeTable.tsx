@@ -7,6 +7,8 @@ import BrandCPPIcon from "@/components/display/icons/tabler/BrandCPPIcon";
 import BrandPythonIcon from "@/components/display/icons/tabler/BrandPythonIcon";
 import { shortenString } from "@/utils/string";
 import UserAvatar from "./UserAvatar";
+import { useSelector } from "react-redux";
+import { userInfoSelector } from "@/store/selectors";
 
 export interface JudgeTableProps {
   data: JudgeServiceModel.JudgeInfo[];
@@ -17,6 +19,7 @@ export interface JudgeTableProps {
 const JudgeTable: React.FC<JudgeTableProps> = (props) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const userInfo = useSelector(userInfoSelector);
 
   return (
     <div className={props.className}>
@@ -37,10 +40,19 @@ const JudgeTable: React.FC<JudgeTableProps> = (props) => {
               key={idx}
               className={joinClasses(
                 props.data.length > 1 ? "border-base-content/10" : "border-0",
-                props.enableRouting && "hover cursor-pointer",
+                ((props.enableRouting && userInfo?.roles?.includes("admin")) ||
+                  userInfo?.roles?.includes("super") ||
+                  userInfo?.account === judge.user?.account) &&
+                  "hover cursor-pointer",
               )}
               onClick={() => {
-                if (props.enableRouting) navigate(judge.UID);
+                if (
+                  (props.enableRouting && userInfo?.roles?.includes("admin")) ||
+                  userInfo?.roles?.includes("super") ||
+                  userInfo?.account === judge.user?.account
+                ) {
+                  navigate(`/judges/${judge.UID}`);
+                }
               }}
             >
               <th>{shortenString(judge.UID, 8, false)}</th>
@@ -94,11 +106,11 @@ function getStatusBadageClass(status: string, verdict: string): string {
   if (status === "finished" && verdict === "Accepted") {
     return "bg-success/10 text-success";
   }
-  if (status === "finished" && verdict === "WrongAnswer") {
-    return "bg-error/10 text-error";
-  }
   if (status === "finished" && verdict === "CompileError") {
     return "bg-warning/10 text-warning";
+  }
+  if (status === "finished") {
+    return "bg-error/10 text-error";
   }
   if (status === "pending") {
     return "bg-primary/10 text-primary";

@@ -18,8 +18,8 @@ export const useUserInfoList = () => {
   useEffect(() => {
     UserService.getUserInfoList(limit, offset)
       .then((res) => {
-        setUserInfoList(res.list);
-        setTotal(res.total);
+        if (res.list) setUserInfoList(res.list);
+        if (res.total) setTotal(res.total);
       })
       .catch((err) => {
         dispatch({

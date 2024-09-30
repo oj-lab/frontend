@@ -6,8 +6,10 @@ import EyeClosedIcon from "@/components/display/icons/tabler/EyeClosedIcon";
 import OJLabIcon from "@/components/display/icons/OJLabIcon";
 import PasswordIcon from "@/components/display/icons/tabler/PasswordIcon";
 import OAuthIcon from "@/components/display/icons/tabler/OauthIcon";
+import { useTranslation } from "react-i18next";
 
 const Login: React.FC = () => {
+  const { t } = useTranslation();
   const [showPassaword, setShowPassword] = React.useState<boolean>(false);
   const [account, setAccount] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
@@ -20,11 +22,11 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 bg-base-100 p-12">
+    <div className="flex flex-auto flex-col items-center justify-center gap-4 bg-base-100 p-12">
       <div className="flex flex-col">
         <OJLabIcon className="h-48 w-auto" />
         <h1 className="mb-4 mt-[-24px] self-center text-2xl font-bold">
-          Welcome to OJ LAB!
+          {t("Welcome to OJ LAB!")}
         </h1>
       </div>
 
@@ -32,7 +34,7 @@ const Login: React.FC = () => {
         {loginMode === "oauth" ? (
           <button className="btn btn-outline" onClick={redirectToOAuthGitHub}>
             <GitHubIcon className="w-8 fill-current" />
-            Sign in with GitHub
+            {t("Sign in with GitHub")}
           </button>
         ) : (
           <>
@@ -95,11 +97,10 @@ const Login: React.FC = () => {
                 <PasswordIcon className="h-4 w-auto text-base-content/80" />
                 <div>
                   <span className="!text-xs !font-normal text-base-content/80">
-                    Password Login
-                  </span>
+                    {t("Password Login")}
+                  </span>{" "}
                   <span className="!text-xs !font-normal text-base-content/60">
-                    {" "}
-                    (Internal)
+                    {`(${t("Internal")})`}
                   </span>
                 </div>
               </>
@@ -107,7 +108,7 @@ const Login: React.FC = () => {
               <>
                 <OAuthIcon className="h-4 w-auto text-slate-500" />
                 <span className="text-start !text-xs !font-normal text-slate-500">
-                  OAuth Login
+                  {t("OAuth Login")}
                 </span>
               </>
             )}
