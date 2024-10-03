@@ -56,7 +56,7 @@ const Problem: React.FC = () => {
         }}
       >
         <option value={"cpp"}>C++</option>
-        {/* <option value={"python"}>Python</option> */}
+        <option value={"python"}>Python</option>
       </select>
       <div
         className="flex h-96 flex-col gap-4 rounded border border-base-content/10"
