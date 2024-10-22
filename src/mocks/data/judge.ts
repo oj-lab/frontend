@@ -14,7 +14,7 @@ export const Judges: JudgeServiceModel.JudgeInfo[] = [
       difficulty: "easy",
       passRate: 0.9097,
     },
-    language: "Cpp",
+    language: "cpp",
     code: `#include <bits/stdc++.h>
 using namespace std;
 
@@ -39,7 +39,7 @@ int main() {
       difficulty: "medium",
       passRate: 0.5014,
     },
-    language: "Python",
+    language: "python",
     code: `a, b = map(int, input().split())
 print(a - b)`,
     status: "finished",
@@ -60,7 +60,7 @@ print(a - b)`,
       difficulty: "medium",
       passRate: 0.5014,
     },
-    language: "Javascript",
+    language: "javascript",
     code: `const readline = require('readline')
 const rl = readline.createInterface({
   input: process.stdin,
