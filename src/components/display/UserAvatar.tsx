@@ -1,7 +1,7 @@
 import { joinClasses } from "@/utils/common";
 
 export interface UserAvatarProps {
-  alt: string;
+  alt: string | undefined;
   avatarUrl?: string;
   fallbackElement?: boolean | JSX.Element;
   online?: boolean;
@@ -20,7 +20,7 @@ export interface UserAvatarProps {
  * <UserAvatar alt="user" avatarUrl="https://gravatar.com/avatar/1" online={true} logined={true} />
  */
 const UserAvatar: React.FC<UserAvatarProps> = (props): JSX.Element => {
-  if (props.alt === "") props.alt = "user";
+  if (!props.alt) props.alt = "user-avatar";
 
   return (
     <div

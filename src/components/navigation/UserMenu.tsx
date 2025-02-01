@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { postSignOut } from "@/apis/auth";
 import { useCookies } from "react-cookie";
-import { useSelector } from "react-redux";
 import { joinClasses } from "@/utils/common";
-import { userInfoSelector } from "@/store/selectors";
 import UserAvatar from "@/components/display/UserAvatar";
 import UserCircleIcon from "../display/icons/tabler/UserFilledIcon";
 import { useTranslation } from "react-i18next";
+import { Session } from "@supabase/supabase-js";
+import { supabase } from "@/utils/supabaseClient";
 
 export interface UserMenuAction {
   name: string;
@@ -29,8 +29,15 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
   const { t } = useTranslation();
   const [, , removeCookie] = useCookies(["auth-token"]);
   const [open, setOpen] = React.useState(false);
-  const userInfo = useSelector(userInfoSelector);
-  const isLogined = userInfo !== undefined;
+  const [session, setSession] = useState<Session | null>(null);
+  const isLogined = session !== null;
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      setSession(data.session);
+    })();
+  }, []);
 
   React.useEffect(() => {
     document?.activeElement instanceof HTMLElement &&
@@ -64,8 +71,8 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
           )}
         >
           <UserAvatar
-            alt={isLogined ? userInfo?.name : "user"}
-            avatarUrl={userInfo?.avatarUrl}
+            alt={isLogined ? session?.user?.email : "user"}
+            avatarUrl={session?.user?.user_metadata?.avatar_url}
             fallbackElement={
               !isLogined && (
                 <UserCircleIcon className="h-5 w-5 text-neutral-content" />
@@ -74,13 +81,13 @@ const UserMenu: React.FC<UserMenuProps> = (props) => {
             online={isLogined}
           />
           {isLogined && (
-            <div className="flex flex-col items-start">
-              <span>{userInfo?.name}</span>
+            <div className="flex flex-col items-start gap-1">
+              <span>{session?.user?.user_metadata?.full_name}</span>
               <span className="text-xs font-thin">{t("Welcome!")}</span>
             </div>
           )}
           {!isLogined && (
-            <div className="flex flex-col items-start">
+            <div className="flex flex-col items-start gap-1">
               <span>{t("Login")}</span>
               <span className="text-xs font-thin">{t("or Register")}</span>
             </div>

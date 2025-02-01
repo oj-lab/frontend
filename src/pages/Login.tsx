@@ -1,5 +1,5 @@
 import React from "react";
-import { redirectToOAuthGitHub, postPasswordLogin } from "@/apis/auth";
+import { postPasswordLogin } from "@/apis/auth";
 import GitHubIcon from "@/components/display/icons/GitHubIcon";
 import EyeIcon from "@/components/display/icons/tabler/EyeIcon";
 import EyeClosedIcon from "@/components/display/icons/tabler/EyeClosedIcon";
@@ -9,6 +9,7 @@ import OAuthIcon from "@/components/display/icons/tabler/OauthIcon";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { AddMessageSagaPattern } from "@/store/sagas/message";
+import { supabase } from "@/utils/supabaseClient";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,23 @@ const Login: React.FC = () => {
     setShowPassword(!showPassaword);
   };
 
+  const handleGitHubSignIn = async (
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    event.preventDefault();
+
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${window.location.origin}/problems`,
+      },
+    });
+
+    if (error) {
+      console.error("GitHub OAuth error:", error);
+    }
+  };
+
   return (
     <div className="flex flex-auto flex-col items-center justify-center gap-4 bg-base-100 p-12">
       <div className="flex flex-col">
@@ -35,7 +53,10 @@ const Login: React.FC = () => {
 
       <div className="flex max-w-sm flex-col gap-4">
         {loginMode === "oauth" ? (
-          <button className="btn btn-outline" onClick={redirectToOAuthGitHub}>
+          <button
+            className="btn btn-outline"
+            onClick={(e) => handleGitHubSignIn(e)}
+          >
             <GitHubIcon className="w-8 fill-current" />
             {t("Sign in with GitHub")}
           </button>
